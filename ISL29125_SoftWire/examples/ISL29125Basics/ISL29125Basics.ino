@@ -1,3 +1,5 @@
+#include <ISL29125_SoftWire.h>
+
 /******************************************************************************
 ISL29125_basics.ino
 Simple example for using the ISL29125 RGB sensor library.
@@ -23,9 +25,6 @@ This code is beerware.
 Distributed as-is; no warranty is given. 
 ******************************************************************************/
 
-#include <SoftwareWire.h>
-#include "ISL29125_SoftWire.h"
-
 // Declare sensor object
 ISL29125_SOFT RGB_sensor;
 
@@ -38,6 +37,9 @@ void setup()
   if (RGB_sensor.init(2,3)) 
   {
     Serial.println("Sensor Initialization Successful\n\r");
+  }
+  else{
+    Serial.println("Sensor Initialization Failed\n");
   }
 }
 
