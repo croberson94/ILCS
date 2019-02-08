@@ -39,7 +39,7 @@ InfineonRGB LEDS;  // Create Object
  * 600 = 1 hour
  * 14,400 = 24 hours
  */
-    float time_multiplier;
+    float time_multiplier1;
 
 /*
  * dimming values will be placed in an array, this array may be prestored during  
@@ -133,7 +133,7 @@ void loop() {
 //    Serial.println(local_day[1]);
 //    Serial.println(local_day[2]);
 //    Serial.println(local_day[3]);
-    delay(300*time_multiplier);
+    delay(300*time_multiplier1);
   }
   for (int i= 9;i>1;i--)
   { 
@@ -142,7 +142,7 @@ void loop() {
     Serial.print("The Brightness is ");
     Serial.println(percent_array[i-1]);
     Serial.println(dimming_array[i-1]);
-    delay(300*time_multiplier);
+    delay(300*time_multiplier1);
   }
   
 
