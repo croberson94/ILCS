@@ -15,8 +15,8 @@
 //#define SSID        "4DSystems"        // Set the SSID of the local AP (your router)
 //#define PASSWORD    "0123456789"       // Set the Password of the Router used
 
-#define SSID        "Aztech5068_0CD03"        // Set the SSID of the local AP (your router)
-#define PASSWORD    "D035335E08"       // Set the Password of the Router used
+#define SSID        "SS8"        // Set the SSID of the local AP (your router)
+#define PASSWORD    "SeniorDesign19"       // Set the Password of the Router used
 
 
 
@@ -451,6 +451,7 @@ void DrawHand(int length, int angle, int colour, int size)
 void loop()
 {
   // put your main code here, to run repeatedly:
+  Serial.println("Entering loop()");
   if (millis() > NTPSyncTime)
   {
     NTPSyncTime = millis() + 1000; // 1 second from now, this should occur again
@@ -466,8 +467,8 @@ void loop()
     Display.txt_MoveCursor(7, 0);
     // Print out NZ Time
     Display.txt_FGcolour(ORANGE) ;
-    Display.print("New Zealand Time: ");
-    String temp1 = NTPTime(13);
+    Display.print("Pacific Standard Time: ");
+    String temp1 = NTPTime(-8);
     Display.txt_FGcolour(LIME) ;
     Display.println(temp1);
     // Print out Ausi Time
@@ -490,5 +491,3 @@ void loop()
     Display.gfx_CircleFilled( xc, yc, 5, ORANGE );
   }
 }
-
-

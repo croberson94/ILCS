@@ -10,6 +10,7 @@ Options
     ResponseSize                 2
     Multidrop                    No
     Destination                  0
+    DestBank                     0
     MainForm                     0
     SndBuf                       0
     ButtonDisable                No
