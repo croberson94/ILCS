@@ -451,7 +451,6 @@ void DrawHand(int length, int angle, int colour, int size)
 void loop()
 {
   // put your main code here, to run repeatedly:
-  Serial.println("Entering loop()");
   if (millis() > NTPSyncTime)
   {
     NTPSyncTime = millis() + 1000; // 1 second from now, this should occur again
@@ -484,10 +483,11 @@ void loop()
 
     seconds = sec_NTP*6 ;                                       // save current for later 'undraw'
     minutes = min_NTP*6+sec_NTP/10 ;
-    hours   = hour_NTP*30+(min_NTP>>1) ;
-    DrawHand(r-20, seconds, SECONDSCOLOUR, 3);         // redraw the second hand
+    hours   = hour_NTP*30+(min_NTP>>1) ;    DrawHand(r-20, seconds, SECONDSCOLOUR, 3);         // redraw the second hand
     DrawHand(r-35, minutes, MINUTESCOLOUR, 5);         // redraw the minute hand
     DrawHand(r-50, hours,   HOURSCOLOUR,   7);         // redraw the hour hand
     Display.gfx_CircleFilled( xc, yc, 5, ORANGE );
   }
 }
+
+
