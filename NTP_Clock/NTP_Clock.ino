@@ -15,8 +15,8 @@
 //#define SSID        "4DSystems"        // Set the SSID of the local AP (your router)
 //#define PASSWORD    "0123456789"       // Set the Password of the Router used
 
-#define SSID        "Aztech5068_0CD03"        // Set the SSID of the local AP (your router)
-#define PASSWORD    "D035335E08"       // Set the Password of the Router used
+#define SSID        "SS8"        // Set the SSID of the local AP (your router)
+#define PASSWORD    "SeniorDesign19"       // Set the Password of the Router used
 
 
 
@@ -466,8 +466,8 @@ void loop()
     Display.txt_MoveCursor(7, 0);
     // Print out NZ Time
     Display.txt_FGcolour(ORANGE) ;
-    Display.print("New Zealand Time: ");
-    String temp1 = NTPTime(13);
+    Display.print("Pacific Standard Time: ");
+    String temp1 = NTPTime(-8);
     Display.txt_FGcolour(LIME) ;
     Display.println(temp1);
     // Print out Ausi Time
@@ -483,8 +483,7 @@ void loop()
 
     seconds = sec_NTP*6 ;                                       // save current for later 'undraw'
     minutes = min_NTP*6+sec_NTP/10 ;
-    hours   = hour_NTP*30+(min_NTP>>1) ;
-    DrawHand(r-20, seconds, SECONDSCOLOUR, 3);         // redraw the second hand
+    hours   = hour_NTP*30+(min_NTP>>1) ;    DrawHand(r-20, seconds, SECONDSCOLOUR, 3);         // redraw the second hand
     DrawHand(r-35, minutes, MINUTESCOLOUR, 5);         // redraw the minute hand
     DrawHand(r-50, hours,   HOURSCOLOUR,   7);         // redraw the hour hand
     Display.gfx_CircleFilled( xc, yc, 5, ORANGE );
