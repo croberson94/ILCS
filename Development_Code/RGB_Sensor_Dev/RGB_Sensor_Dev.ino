@@ -1,28 +1,18 @@
 #include <ISL29125_SoftWire.h>
 
 /******************************************************************************
+This code based on:
 ISL29125_basics.ino
 Simple example for using the ISL29125 RGB sensor library.
 Originally by Jordan McConnell @ SparkFun Electronics, modified by Christos Koutsouradis
 28 Oct 2016
 https://github.com/christosku/ISL29125_SoftWire
 
-This example declares an SFE_ISL29125 object called RGB_sensor. The 
-object/sensor is initialized with a basic configuration so that it continuously
-samples the light intensity of red, green and blue spectrums. These values are
-read from the sensor every 2 seconds and printed to the Serial monitor.
+RGB_Sensor_Dev.ino
+We have modified the original code listed above to accommodate 4 different sensors, there
+is one sensor per quadrant. These sensors will provide feedback to the user and autocorrection 
+of light degradation due to yellowing lense, 
 
-Developed/Tested with:
-Arduino Uno
-Arduino IDE 1.6.12
-
-Requires:
-ISL29125_SoftWire Library (https://github.com/christosku/ISL29125_SoftWire)
-SoftwareWire Library (https://github.com/Fire7/SoftwareWire)
-
-
-This code is beerware.
-Distributed as-is; no warranty is given. 
 ******************************************************************************/
 
 // Declare sensor object

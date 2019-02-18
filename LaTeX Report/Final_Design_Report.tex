@@ -1,0 +1,103 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{blindtext}
+\usepackage{graphicx}
+\renewcommand{\thesection}{\arabic{section}}
+
+\begin{document}
+\begin{titlepage}
+
+	\centering
+	\includegraphics[width=0.3\textwidth]{uttseal.png}\par\vspace{0.1cm}
+	{\scshape\LARGE The University of Texas at Tyler\par}
+	\vspace{0.1cm}
+	{\scshape\LARGE College of Engineering\par}
+	\vspace{1cm}
+	{\scshape\Large EENG 4315 - Senior Design II\par}
+	\vspace{1cm}
+	{\huge\bfseries Intelligent Lighting Control System\par}
+	\vspace{2cm}
+	\textsc{Griggs Hutaff},  \textit{Co-Leader}\\
+	\textsc{Charles Roberson},  \textit{Co-Leader}\\
+	\textsc{Chad Dawili},  \textit{Financial Officer}\\
+	\textsc{Ezequiel Fuentes},  \textit{Archivist}\\
+	\textsc{Oscar Suram},  \textit{Acquisition Manager}
+	\vfill
+
+% Bottom of the page
+	{\large \today\par}
+\end{titlepage}
+\section*{Executive Summary}
+\blindtext
+\newpage
+\tableofcontents
+\listoffigures
+\listoftables
+\newpage
+\section{Project Description}
+The goal of this project is provide a lighting system which can meet the demands and aid the progression of long-term space fight. Although we have been able to overcome the immediate dangers of short range space flight we must further develop novel solutions to the issues of long-term confinement in artificial environments. Along with water and food, sleep is among the basic necessities for long term human survival. \\
+\cite{nasapatent}
+
+The Intelligent Lighting Control System is comprised of two interconnected parts, control system and lighting modules. Our control system includes the Arduino UNO R3 for I/O, 4DUINO development board for GUI, AC to DC conversion power supply, light and temperature sensors. The light modules include 3 LEDs, aluminum heat shield, Infineon RGB driver, and 3D printed housing for all parts.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.25\textwidth]{uttseal.png}\par\vspace{0.1cm}
+	\caption{This is the first Figure}
+\end{figure}
+
+\section{Final Design Specifications}
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|}
+	\hline 
+	This is & the first table \\ 
+	\hline 
+	the first table & this is \\ 
+	\hline 
+	\end{tabular}
+	\caption{The First Table} 
+\end{table}
+\blindtext
+\section{Design Solution}
+\blindtext
+\section{Prototype Design and Fabrication}
+\blindtext
+\section{Testing and Validation}
+\blindtext
+\section{Manufacturing Methods}
+\blindtext
+\section{Broader Impacts of the Project}
+\blindtext
+\section{Conclusions}
+\blindtext
+\section{References}
+\bibliographystyle{plain}
+\bibliography{SeniorDesign.bib} 
+
+\section{Appendices}
+\blindtext
+%Include materials that could not be included in the main body of the report without disrupting its continuity or extending its length to unreasonable limits.  List all of the appendices by title in the table of contents.  
+
+%The first page of each appendix is numbered <appendix letter>1, (e.g., 
+
+\subsection{Appendix A: Test Protocols}
+Include written test protocols used for all testing.  The protocols should be given descriptive names. The protocols should include descriptions of how the testing is to be performed and what data are to be collected, and should include sample data collection sheets.\\
+If the "testing" is to be performed with computer simulation, test protocols must describe such things as a description of the model used in the simulation, the parameters to be varied and their ranges, and the boundary or other environmental conditions applied.\\
+
+
+\subsection{Appendix B: Test Results}
+Summarize, tabulate, or chart the results of all testing. Results must reference the appropriate test protocols.  All test results must include the name(s) of the person(s) responsible for conducting the tests.\\
+
+\subsection{Appendix B: Codes, Standards, Constraints}
+Use the same table as included in the PDD but now cite the specific Codes and Standards that applied by name and number and state in which sections of the report they were applied.  The blank table is reproduced below.  An entry is required in Table C for each consideration or constraint.  Justifications must be provided for any constraint that is judged to be not applicable.\\
+
+\subsection{Appendix (-ices) D -} 
+Include materials that could not be included in the main body of the report without disrupting its continuity or extending its length to unreasonable limits.  Do not copy manufacturers' entire datasheets to appendices.  
+
+
+
+\end{document}
