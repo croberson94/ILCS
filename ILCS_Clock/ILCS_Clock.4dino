@@ -1,0 +1,72 @@
+// Filename: ILCS_Clock.4Dino
+// Description: GUI Clock Routine for the ILCS Senior Design Project
+//
+//
+
+// You may need to open Serial Terminal to Update Clock Continously
+
+// WI-FI DEFINITIONS
+#define SSID "SSID" // Set the SSID of the local AP (your router)
+#define PASSWORD "PASSWORD" // Set the Password of the Router used
+
+// CLOCK DEFINITIONS
+#define xc 120
+#define yc 200
+#define r 120
+#define FACECOLOR DARKGREEN
+#define SECONDSCOLOUR RED
+#define MINUTESCOLOUR LIME
+#define HOURSCOLOUR YELLOW
+unsigned long epoch, hour_NTP, min_NTP, sec_NTP;
+unsigned long NTPSyncTime;
+unsigned long NTPCalcTime;
+uint16_t seconds, minutes, hours;
+
+// SERIAL PACKET DEFINITIONS
+const int NTP_PACKET_SIZE = 48; // NTP time stamp is in the first 48 bytes of msg
+byte packetBuffer[NTP_PACKET_SIZE]; // buffer to hold i/o packets
+String ATresponse; // response from the last AT command, w/o "OK" or "ERROR"
+
+// Define LOG_MESSAGES to a serial port to send SPE errors messages to. 
+Serial port as SPE
+#define LOG_MESSAGES Serial
+
+// DISPLAY INITIALIZATION
+%%Display%%.DefineResetLine;
+%%Display%%.DefineDisplaySerialx;
+%%Display%%.IncludeSerial_4DLib;
+%%Display%%.IncludeSerial_Const4D;
+
+// ESP8266 CONNECTION
+#define ESPRESET 17
+#include <SoftwareSerial.h>
+#define ESPserial SerialS
+SoftwareSerial SerialS(8,9);
+
+// SERIAL ERROR HANDLING
+void mycallback(int ErrCode, unsigned char Errorbyte)
+{
+#ifdef LOG_MESSAGES
+	const char *Error4DText[] = {"OK\0", "Timeout\0", "NAK\0, "Lenght\0",
+	"Invalid\0"};
+	LOG_MESSAGES.print(F("Serial 4D Library reports error"));
+	LOG_MESSAGES.print(Error4DText[ErrCode]);
+	if (ErrCode = Err4D_NAK)
+	{
+		LOG_MESSAGES.print(F(" returned data= "));
+		LOG_MESSAGES.println(Errorbyte);
+	}
+	else
+		LOG_MESSAGES.println(F(""));
+	while (1); // you can return here, or you can loop
+	{
+		digitalWrite(led,HIGH); // turn the LED on
+		delay(200); // wait for a second
+		digitalWrite(led,LOW); // turn the LED off by making the voltage low
+		delay(200); // wait for a second
+	}
+#endif
+}
+
+// AT RESPONSES
+
