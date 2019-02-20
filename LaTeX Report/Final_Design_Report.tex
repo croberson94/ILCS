@@ -1,11 +1,18 @@
 \documentclass[12pt,a4paper]{report}
 \usepackage[latin1]{inputenc}
+\usepackage[margin=1in,left=1.25in]{geometry}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{blindtext}
 \usepackage{graphicx}
+\usepackage{float}
+\usepackage{biblatex}
+\addbibresource{SeniorDesign.bib}
 \renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\figurename}{Fig.}
+
+\addbibresource{SeniorDesign.bib}
 
 \begin{document}
 \begin{titlepage}
@@ -20,6 +27,8 @@
 	\vspace{1cm}
 	{\huge\bfseries Intelligent Lighting Control System\par}
 	\vspace{2cm}
+	\textsc{a circadian based lighting system for space flight}\\
+	\vspace{1cm}
 	\textsc{Griggs Hutaff},  \textit{Co-Leader}\\
 	\textsc{Charles Roberson},  \textit{Co-Leader}\\
 	\textsc{Chad Dawili},  \textit{Financial Officer}\\
@@ -31,37 +40,44 @@
 	{\large \today\par}
 \end{titlepage}
 \section*{Executive Summary}
+\thispagestyle{empty}
 \blindtext
 \newpage
 \tableofcontents
+\thispagestyle{empty}
 \listoffigures
+\thispagestyle{empty}
 \listoftables
+\thispagestyle{empty}
 \newpage
+\setcounter{page}{1}
 \section{Project Description}
-The goal of this project is provide a lighting system which can meet the demands and aid the progression of long-term space fight. Although we have been able to overcome the immediate dangers of short range space flight we must further develop novel solutions to the issues of long-term confinement in artificial environments. Along with water and food, sleep is among the basic necessities for long term human survival. \\
-\cite{nasapatent}
+The goal of this project is to provide a lighting system which can meet the demands and aid the progression of long-term space fight. Although engineers have been able to overcome the immediate dangers of short range space flight we must further develop novel solutions to the issues of long-term confinement in artificial environments. Along with water and food, sleep is among the basic necessities for long term human survival. For this reason, NASA developed the Lighting System to Improve Circadian Rhythm Control to be used on the International Space Station (ISS). \cite{nasapatent} This modular lighting assembly uses a micro controller with power relay to adjust color temperature and perceived intensity.\\\linebreak
+Future spacecrafts will require new and innovative light control methods to improve reliability such as compensating for degrading lighting sources and maintaining the crew's circadian rhythms. Our Intelligent Lighting Control System, centrally controlled with sensor feedback and visual status display, is a complete solution for future spacecraft. Our system features an automatic light compensation algorithm, single communication bus capable of addressing each light fixture, and touchscreen user interface for customized sleep cycles. 
 
-The Intelligent Lighting Control System is comprised of two interconnected parts, control system and lighting modules. Our control system includes the Arduino UNO R3 for I/O, 4DUINO development board for GUI, AC to DC conversion power supply, light and temperature sensors. The light modules include 3 LEDs, aluminum heat shield, Infineon RGB driver, and 3D printed housing for all parts.
-\begin{figure}
+
+
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=0.25\textwidth]{uttseal.png}\par\vspace{0.1cm}
-	\caption{This is the first Figure}
+	\includegraphics[width=0.5\textwidth]{"High Level Design Overview".png}\par\vspace{0.1cm}
+	\caption{High Level System Overview}
 \end{figure}
 
 \section{Final Design Specifications}
 
-\begin{table}
-	\centering
-	\begin{tabular}{|c|c|}
-	\hline 
-	This is & the first table \\ 
-	\hline 
-	the first table & this is \\ 
-	\hline 
-	\end{tabular}
-	\caption{The First Table} 
-\end{table}
-\blindtext
+%\begin{table}
+%	\centering
+%	\begin{tabular}{|c|c|}
+%	\hline 
+%	This is & the first table \\ 
+%	\hline 
+%	the first table & this is \\ 
+%	\hline 
+%	\end{tabular}
+%	\caption{The First Table} 
+%\end{table}
+The Intelligent Lighting Control System is comprised of two interconnected parts, control system and lighting modules. Our control system includes the Arduino UNO R3 for I/O, 4DUINO development board for GUI, AC to DC conversion power supply, light and temperature sensors. The light modules include 3 LEDs, aluminum heat shield, Infineon RGB driver, and 3D printed housing for all parts.\\
+Our control system features a light compensation algorithm which will account for light degradation. The main issue identified by NASA engineers is light degradation due to yellowing of the light covers. Our sensors will 
 \section{Design Solution}
 \blindtext
 \section{Prototype Design and Fabrication}
@@ -75,8 +91,8 @@ The Intelligent Lighting Control System is comprised of two interconnected parts
 \section{Conclusions}
 \blindtext
 \section{References}
-\bibliographystyle{plain}
-\bibliography{SeniorDesign.bib} 
+\printbibliography[heading=none]
+ 
 
 \section{Appendices}
 \blindtext
