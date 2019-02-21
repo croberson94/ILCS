@@ -7,18 +7,18 @@
 \usepackage{blindtext}
 \usepackage{graphicx}
 \usepackage{float}
-\usepackage{biblatex}
-\addbibresource{SeniorDesign.bib}
+%\usepackage{biblatex}
+%\addbibresource{SeniorDesign.bib}
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\figurename}{Fig.}
 
-\addbibresource{SeniorDesign.bib}
+%\addbibresource{SeniorDesign.bib}
 
 \begin{document}
 \begin{titlepage}
 
 	\centering
-	\includegraphics[width=0.3\textwidth]{uttseal.png}\par\vspace{0.1cm}
+	\includegraphics[width=0.3\textwidth]{uttsealgray.png}\par\vspace{0.1cm}
 	{\scshape\LARGE The University of Texas at Tyler\par}
 	\vspace{0.1cm}
 	{\scshape\LARGE College of Engineering\par}
@@ -39,27 +39,30 @@
 % Bottom of the page
 	{\large \today\par}
 \end{titlepage}
-\section*{Executive Summary}
-\thispagestyle{empty}
-\blindtext
+%\section*{Executive Summary}
+%\thispagestyle{empty}
+%\blindtext
 \newpage
+\renewcommand{\thepage}{\roman{page}}
 \tableofcontents
-\thispagestyle{empty}
 \listoffigures
-\thispagestyle{empty}
 \listoftables
-\thispagestyle{empty}
 \newpage
+\renewcommand{\thepage}{\arabic{page}}
 \setcounter{page}{1}
 \section{Project Description}
 The goal of this project is to provide a lighting system which can meet the demands and aid the progression of long-term space fight. Although engineers have been able to overcome the immediate dangers of short range space flight we must further develop novel solutions to the issues of long-term confinement in artificial environments. Along with water and food, sleep is among the basic necessities for long term human survival. For this reason, NASA developed the Lighting System to Improve Circadian Rhythm Control to be used on the International Space Station (ISS). \cite{nasapatent} This modular lighting assembly uses a micro controller with power relay to adjust color temperature and perceived intensity.\\\linebreak
-Future spacecrafts will require new and innovative light control methods to improve reliability such as compensating for degrading lighting sources and maintaining the crew's circadian rhythms. Our Intelligent Lighting Control System, centrally controlled with sensor feedback and visual status display, is a complete solution for future spacecraft. Our system features an automatic light compensation algorithm, single communication bus capable of addressing each light fixture, and touchscreen user interface for customized sleep cycles. 
+Future spacecrafts will require new and innovative light control methods to improve reliability such as compensating for degrading lighting sources and maintaining the crew's circadian rhythms \cite{tsgc}. Our Intelligent Lighting Control System, centrally controlled with sensor feedback and visual status display, is a complete solution for future astronauts and their needs. Our system features an automatic light compensation algorithm, single communication bus capable of addressing each light fixture, and touchscreen user interface for customized sleep cycles. 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THE BLOCK BELOW DEMONSTRATES HOW TO INSERT A FIGURE
+% Simply place the .png file in the same directory as the .tex file
+% and replace the file name between the " "
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{"High Level Design Overview".png}\par\vspace{0.1cm}
+	\includegraphics[width=0.75\textwidth]{"High Level Design Overview gray".png}\par\vspace{0.1cm}
 	\caption{High Level System Overview}
 \end{figure}
 
@@ -77,42 +80,63 @@ Future spacecrafts will require new and innovative light control methods to impr
 %	\caption{The First Table} 
 %\end{table}
 The Intelligent Lighting Control System is comprised of two interconnected parts, control system and lighting modules. Our control system includes the Arduino UNO R3 for I/O, 4DUINO development board for GUI, AC to DC conversion power supply, light and temperature sensors. The light modules include 3 LEDs, aluminum heat shield, Infineon RGB driver, and 3D printed housing for all parts.\\
-Our control system features a light compensation algorithm which will account for light degradation. The main issue identified by NASA engineers is light degradation due to yellowing of the light covers. Our sensors will 
+Our control system features a light compensation algorithm which will account for light degradation. The main issue identified by NASA engineers is light degradation due to yellowing of the light covers. Our sensors will measure the amount of red, green, and blue light spectrum generated from our light fixtures. If at any time the light spectrum emitted does not match the light spectrum measured the algorithm will begin adjusting the output of the light driver until the spectrum is back to normal.\\
+The control system will also allow the user to input a custom circadian-based cycle on a touchscreen interface. The interface allows central control of all light fixtures
+
+
+
 \section{Design Solution}
 \blindtext
-\section{Prototype Design and Fabrication}
-\blindtext
-\section{Testing and Validation}
-\blindtext
-\section{Manufacturing Methods}
-\blindtext
-\section{Broader Impacts of the Project}
-\blindtext
-\section{Conclusions}
-\blindtext
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   DUE FEBRUARY 22nd!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+%\section{Prototype Design and Fabrication}
+%\blindtext
+%\section{Testing and Validation}
+%\blindtext
+%\section{Manufacturing Methods}
+%\blindtext
+%\section{Broader Impacts of the Project}
+%\blindtext
+%\section{Conclusions}
+%\blindtext
+\setcounter{section}{8}
 \section{References}
-\printbibliography[heading=none]
+\begingroup
+   \def\chapter*#1{}
+   \bibliography{SeniorDesign}
+	\bibliographystyle{plain}
+\endgroup	
+
  
 
-\section{Appendices}
-\blindtext
-%Include materials that could not be included in the main body of the report without disrupting its continuity or extending its length to unreasonable limits.  List all of the appendices by title in the table of contents.  
-
-%The first page of each appendix is numbered <appendix letter>1, (e.g., 
-
-\subsection{Appendix A: Test Protocols}
-Include written test protocols used for all testing.  The protocols should be given descriptive names. The protocols should include descriptions of how the testing is to be performed and what data are to be collected, and should include sample data collection sheets.\\
-If the "testing" is to be performed with computer simulation, test protocols must describe such things as a description of the model used in the simulation, the parameters to be varied and their ranges, and the boundary or other environmental conditions applied.\\
-
-
-\subsection{Appendix B: Test Results}
-Summarize, tabulate, or chart the results of all testing. Results must reference the appropriate test protocols.  All test results must include the name(s) of the person(s) responsible for conducting the tests.\\
-
-\subsection{Appendix B: Codes, Standards, Constraints}
-Use the same table as included in the PDD but now cite the specific Codes and Standards that applied by name and number and state in which sections of the report they were applied.  The blank table is reproduced below.  An entry is required in Table C for each consideration or constraint.  Justifications must be provided for any constraint that is judged to be not applicable.\\
-
-\subsection{Appendix (-ices) D -} 
-Include materials that could not be included in the main body of the report without disrupting its continuity or extending its length to unreasonable limits.  Do not copy manufacturers' entire datasheets to appendices.  
+%\section{Appendices}
+%\blindtext
+%%Include materials that could not be included in the main body of the report without disrupting its continuity or extending its length to unreasonable limits.  List all of the appendices by title in the table of contents.  
+%
+%%The first page of each appendix is numbered <appendix letter>1, (e.g., 
+%
+%\subsection{Appendix A: Test Protocols}
+%Include written test protocols used for all testing.  The protocols should be given descriptive names. The protocols should include descriptions of how the testing is to be performed and what data are to be collected, and should include sample data collection sheets.\\
+%If the "testing" is to be performed with computer simulation, test protocols must describe such things as a description of the model used in the simulation, the parameters to be varied and their ranges, and the boundary or other environmental conditions applied.\\
+%
+%
+%\subsection{Appendix B: Test Results}
+%Summarize, tabulate, or chart the results of all testing. Results must reference the appropriate test protocols.  All test results must include the name(s) of the person(s) responsible for conducting the tests.\\
+%
+%\subsection{Appendix B: Codes, Standards, Constraints}
+%Use the same table as included in the PDD but now cite the specific Codes and Standards that applied by name and number and state in which sections of the report they were applied.  The blank table is reproduced below.  An entry is required in Table C for each consideration or constraint.  Justifications must be provided for any constraint that is judged to be not applicable.\\
+%
+%\subsection{Appendix (-ices) D -} 
+%Include materials that could not be included in the main body of the report without disrupting its continuity or extending its length to unreasonable limits.  Do not copy manufacturers' entire datasheets to appendices.  
 
 
 
