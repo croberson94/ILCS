@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{indentfirst}
+\usepackage{url}
 %\usepackage{biblatex}
 %\addbibresource{SeniorDesign.bib}
 \renewcommand{\thesection}{\arabic{section}}
@@ -52,8 +53,9 @@
 \renewcommand{\thepage}{\arabic{page}}
 \setcounter{page}{1}
 \section{Project Description}
-The goal of this project is to provide a lighting system which can meet the demands and aid the progression of long-term space fight. Although engineers have been able to overcome the immediate dangers of short range space flight we must further develop novel solutions to the issues of long-term confinement in artificial environments. Along with water and food, sleep is among the basic necessities for long term human survival. For this reason, NASA developed the Lighting System to Improve Circadian Rhythm Control to be used on the International Space Station (ISS). \cite{nasapatent} This modular lighting assembly uses a micro controller with power relay to adjust color temperature and perceived intensity.\\\linebreak
-Future spacecrafts will require new and innovative light control methods to improve reliability such as compensating for degrading lighting sources and maintaining the crew's circadian rhythms \cite{tsgc}. Our Intelligent Lighting Control System, centrally controlled with sensor feedback and visual status display, is a complete solution for future astronauts and their needs. Our system features an automatic light compensation algorithm, single communication bus capable of addressing each light fixture, and touchscreen user interface for customized sleep cycles. 
+The goal of this project is to provide a lighting system which can meet the demands and aid the progression of long-term space fight. Although engineers have been able to overcome the immediate dangers of short range space flight we must further develop novel solutions to the issues of long-term confinement in artificial environments. Along with water and food, sleep is among the basic necessities for long term human survival. However, we know that astronauts suffer from sleep deprivation during flights. About half of everyone who flies to space relies on sleep medication and astronauts generally get about 6 hours of sleep in orbit despite being allowed 8.5.\cite{spacesleep}\\ \linebreak 
+For this reason, NASA developed the "Lighting System to Improve Circadian Rhythm Control" to be used on the International Space Station (ISS). \cite{nasapatent} This modular lighting assembly uses a micro controller with power relay to adjust color temperature and perceived intensity. Future spacecrafts will require new and innovative light control methods to improve reliability such as compensating for degrading lighting sources and maintaining the crew's circadian rhythms \cite{tsgc}. \\ \linebreak
+Our Intelligent Lighting Control System, centrally controlled with sensor feedback and visual status display, is a complete solution for future astronauts and their needs. Our system features an automatic light compensation algorithm, single communication bus capable of addressing each light fixture, and touchscreen user interface for customized sleep cycles. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % THE BLOCK BELOW DEMONSTRATES HOW TO INSERT A FIGURE
@@ -63,7 +65,7 @@ Future spacecrafts will require new and innovative light control methods to impr
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.75\textwidth]{"High Level Design Overview gray".png}\par\vspace{0.1cm}
+	\includegraphics[width=0.69\textwidth]{"High Level Design Overview gray".png}\par			\vspace{0.1cm}
 	\caption{High Level System Overview}
 \end{figure}
 
@@ -88,7 +90,33 @@ The lighting modules have a two-piece modular design. The top piece can be perma
 
 
 \section{Design Solution}
+
+\subsection{Lighting Modules}
+We set out to design a modular light fixture with interchangeable easy to replace parts. The lighting modules use Red-Blue-Green (RGB) light emitting diodes to produce a wide spectrum of light. Each lighting module features an independent current driver board with microprocessor which can communicate with our central microprocessor unit. The light fixture also features an interior aluminum heat shield and temperature sensor to manage excess heat and alert the control system of dangerous temperature levels. 
+ 
+\subsubsection{RGB Light Emitting Diodes}
+This will include specs on the modules we used as well as the heat shield
+
+\subsubsection{RBG LED Driver}
+Discuss the parts of the development board, the buck converter, the current limiter
+
+\subsubsection{Light Fixture Housing}
+Show drawings and discuss modular design of the pieces
+
+\subsection{Control System}
 \blindtext
+\subsubsection{Central Microprocessor Unit}
+Discuss Arduino, code, I2C protocol, Light Degradation Algorithm
+
+\subsubsection{Graphical User Interface}
+4duino, GMT clock, wifi?, display?
+
+\subsubsection{Sensors}
+Here we will discuss the temperature and light sensors
+
+\subsection{Display Model}
+Here we will talk about the wooden display model we built and make it clear that it is not part of the system, only for display
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   DUE FEBRUARY 22nd!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -115,7 +143,7 @@ The lighting modules have a two-piece modular design. The top piece can be perma
 \begingroup
    \def\chapter*#1{}
    \bibliography{SeniorDesign}
-	\bibliographystyle{plain}
+	\bibliographystyle{unsrt}
 \endgroup	
 
  
