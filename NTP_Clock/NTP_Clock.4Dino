@@ -11,8 +11,8 @@
 //#define SSID        "4DSystems"        // Set the SSID of the local AP (your router)
 //#define PASSWORD    "0123456789"       // Set the Password of the Router used
 
-#define SSID        "SS8"        // Set the SSID of the local AP (your router)
-#define PASSWORD    "SeniorDesign19"       // Set the Password of the Router used
+#define SSID        "Red Cloud"        // Set the SSID of the local AP (your router)
+#define PASSWORD    "Lawdog01"       // Set the Password of the Router used
 
 
 
