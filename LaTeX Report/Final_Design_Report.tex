@@ -7,6 +7,7 @@
 \usepackage{blindtext}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{indentfirst}
 %\usepackage{biblatex}
 %\addbibresource{SeniorDesign.bib}
 \renewcommand{\thesection}{\arabic{section}}
@@ -79,9 +80,10 @@ Future spacecrafts will require new and innovative light control methods to impr
 %	\end{tabular}
 %	\caption{The First Table} 
 %\end{table}
-The Intelligent Lighting Control System is comprised of two interconnected parts, control system and lighting modules. Our control system includes the Arduino UNO R3 for I/O, 4DUINO development board for GUI, AC to DC conversion power supply, light and temperature sensors. The light modules include 3 LEDs, aluminum heat shield, Infineon RGB driver, and 3D printed housing for all parts.\\
-Our control system features a light compensation algorithm which will account for light degradation. The main issue identified by NASA engineers is light degradation due to yellowing of the light covers. Our sensors will measure the amount of red, green, and blue light spectrum generated from our light fixtures. If at any time the light spectrum emitted does not match the light spectrum measured the algorithm will begin adjusting the output of the light driver until the spectrum is back to normal.\\
-The control system will also allow the user to input a custom circadian-based cycle on a touchscreen interface. The interface allows central control of all light fixtures
+The Intelligent Lighting Control System is comprised of two interconnected parts, the control system and lighting modules. Our control system includes the Arduino UNO R3 for analog/digital input and ouptut, 4DUINO development board for touchscreen graphical user interface (GUI), AC to DC conversion power supply, RGB light and temperature sensors. Each light module include 3 RGB LED's, aluminum heat shield, Infineon RGB driver, and 3D printed housing for all parts.\\ \linebreak
+Our control system features a light compensation algorithm which accounts for light degradation. The main issue identified by NASA engineers is light degradation due to yellowing of the light covers. Our sensors will measure the amount of red, green, and blue light spectrum generated from our light fixtures. If at any time the light spectrum emitted does not match the light spectrum measured the algorithm will begin adjusting the output of the light driver until the spectrum is back to normal.\\ \linebreak
+The control system also allows the user to input a custom circadian-based cycle on a touchscreen interface. The interface allows central control of all light fixtures so that each light can be set to a different cycle to allow for shift work. The I2C (pronounced "I squared C") communication protocol allows us to control individual devices on a single bus which reduces the amount of cabling needed in the system.\\ \linebreak
+The lighting modules have a two-piece modular design. The top piece can be permanently fixed to a ceiling or wall. The bottom piece which contains the LED's is screwed into the top piece with a threaded pattern on the outside which easily allows crew to replace LED's which have failed during flight. Each light module is equipped with heat shield and temperature sensor. In the event of overheating, the control system will trigger alarms to alert the crew of the issue.
 
 
 
