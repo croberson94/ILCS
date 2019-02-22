@@ -15,8 +15,8 @@
 //#define SSID        "4DSystems"        // Set the SSID of the local AP (your router)
 //#define PASSWORD    "0123456789"       // Set the Password of the Router used
 
-#define SSID        "SS8"        // Set the SSID of the local AP (your router)
-#define PASSWORD    "SeniorDesign19"       // Set the Password of the Router used
+#define SSID        "Red Cloud"        // Set the SSID of the local AP (your router)
+#define PASSWORD    "Lawdog01"       // Set the Password of the Router used
 
 
 
@@ -31,6 +31,7 @@ unsigned long epoch, hour_NTP, min_NTP, sec_NTP;
 unsigned long NTPSyncTime;
 unsigned long NTPCalcTime;
 uint16_t seconds, minutes, hours ;
+
 
 const int NTP_PACKET_SIZE = 48; // NTP time stamp is in the first 48 bytes of the message
 
@@ -489,5 +490,4 @@ void loop()
     Display.gfx_CircleFilled( xc, yc, 5, ORANGE );
   }
 }
-
 
