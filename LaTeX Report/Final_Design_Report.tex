@@ -9,12 +9,10 @@
 \usepackage{float}
 \usepackage{indentfirst}
 \usepackage{url}
-%\usepackage{biblatex}
-%\addbibresource{SeniorDesign.bib}
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\figurename}{Fig.}
 
-%\addbibresource{SeniorDesign.bib}
+
 
 \begin{document}
 \begin{titlepage}
@@ -95,7 +93,18 @@ The lighting modules have a two-piece modular design. The top piece can be perma
 We set out to design a modular light fixture with interchangeable easy to replace parts. The lighting modules use Red-Blue-Green (RGB) light emitting diodes to produce a wide spectrum of light. Each lighting module features an independent current driver board with microprocessor which can communicate with our central microprocessor unit. The light fixture also features an interior aluminum heat shield and temperature sensor to manage excess heat and alert the control system of dangerous temperature levels. 
  
 \subsubsection{RGB Light Emitting Diodes}
-Light Emitting Diodes (LED) have many advantages over filament or gas based lights. LEDs are cheaper, lighter, last longer, and dissipate less heat. These advantages make them ideal for space flight. One disadvantage of LEDs is that they are not linear devices and making them behave in a linear fashion in regards to light intensity and color spectrum is not a trivial matter. The goal of a circadian based lighting system is to not only control the intensity of light but also the amount of red and blue light spectrum to simulate daily solar cycle on earth. 
+Light Emitting Diodes (LED) have many advantages over filament or gas based lights. LEDs are cheaper, lighter, last longer, and dissipate less heat. These advantages make them ideal for space flight. One disadvantage of LEDs is that they are not linear devices and making them behave in a linear fashion in regards to light intensity and color spectrum is not a trivial matter. The goal of a circadian based lighting system is to not only control the intensity of light but also the amount of red and blue light spectrum to simulate daily solar cycle on earth. \\ \linebreak 
+To achieve these results we had to choose a solid state driver capable of controlling current in separate individual color channels. To insure rapid development we chose the Infineon RGB Lighting Shield as our LED driver. The heart of this boards functionality is the current controller using buck topology. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{"imgs/Buck".png}\par			
+	\vspace{0.1cm}
+	\caption{Buck Converter Current Controller}
+	\label{fig:Buck}
+\end{figure}
+
+In this configuration, see Fig.~\ref{fig:Buck}, the inductor is constantly charging and discharging inside the circuit. After proper configuration the result is a constant current which can be changed to give us various intensities on a linear scale. We configured an acceptable ripple current (see I in figure 3.) which will result in constant light intensity.  The higher the ratio between input voltage and forward voltage, the more difficult it will be to configure a small ripple [4]. We can lower the input/forward voltage ratio by using a voltage divider to lower the input voltage. 
 
 \subsubsection{RGB LED Driver}
 Discuss the parts of the development board, the buck converter, the current limiter
@@ -180,7 +189,7 @@ Here we will talk about the wooden display model we built and make it clear that
 \begingroup
    \def\chapter*#1{}
    \bibliography{SeniorDesign}
-	\bibliographystyle{unsrt}
+	
 \endgroup	
 
  
