@@ -1,14 +1,15 @@
-\contentsline {section}{\numberline {1}Project Description}{5}% 
-\contentsline {section}{\numberline {2}Final Design Specifications}{5}% 
-\contentsline {section}{\numberline {3}Design Solution}{6}% 
-\contentsline {section}{\numberline {4}Prototype Design and Fabrication}{6}% 
-\contentsline {section}{\numberline {5}Testing and Validation}{6}% 
-\contentsline {section}{\numberline {6}Manufacturing Methods}{7}% 
-\contentsline {section}{\numberline {7}Broader Impacts of the Project}{7}% 
-\contentsline {section}{\numberline {8}Conclusions}{7}% 
-\contentsline {section}{\numberline {9}References}{8}% 
-\contentsline {section}{\numberline {10}Appendices}{8}% 
-\contentsline {subsection}{\numberline {10.1}Appendix A: Test Protocols}{8}% 
-\contentsline {subsection}{\numberline {10.2}Appendix B: Test Results}{9}% 
-\contentsline {subsection}{\numberline {10.3}Appendix B: Codes, Standards, Constraints}{9}% 
-\contentsline {subsection}{\numberline {10.4}Appendix (-ices) D -}{9}% 
+\contentsline {section}{\numberline {1}Project Description}{1}% 
+\contentsline {section}{\numberline {2}Final Design Specifications}{1}% 
+\contentsline {section}{\numberline {3}Design Solution}{2}% 
+\contentsline {subsection}{\numberline {3.1}Lighting Modules}{2}% 
+\contentsline {subsubsection}{RGB Light Emitting Diodes}{3}% 
+\contentsline {subsubsection}{RGB LED Driver}{3}% 
+\contentsline {subsubsection}{Light Fixture Housing}{3}% 
+\contentsline {subsection}{\numberline {3.2}Control System}{3}% 
+\contentsline {subsubsection}{Central Microprocessor Unit}{3}% 
+\contentsline {subsubsection}{Graphical User Interface}{3}% 
+\contentsline {subsubsection}{Sensors}{4}% 
+\contentsline {subsubsection}{Power Supply}{4}% 
+\contentsline {subsection}{\numberline {3.3}Display Model}{4}% 
+\contentsline {subsection}{\numberline {3.4}System Schematics}{5}% 
+\contentsline {section}{\numberline {9}References}{10}% 
