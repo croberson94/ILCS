@@ -20,7 +20,7 @@
 \begin{titlepage}
 
 	\centering
-	\includegraphics[width=0.3\textwidth]{uttsealgray.png}\par\vspace{0.1cm}
+	\includegraphics[width=0.3\textwidth]{imgs/uttsealgray.png}\par\vspace{0.1cm}
 	{\scshape\LARGE The University of Texas at Tyler\par}
 	\vspace{0.1cm}
 	{\scshape\LARGE College of Engineering\par}
@@ -57,17 +57,7 @@ The goal of this project is to provide a lighting system which can meet the dema
 For this reason, NASA developed the "Lighting System to Improve Circadian Rhythm Control" to be used on the International Space Station (ISS). \cite{nasapatent} This modular lighting assembly uses a micro controller with power relay to adjust color temperature and perceived intensity. Future spacecrafts will require new and innovative light control methods to improve reliability such as compensating for degrading lighting sources and maintaining the crew's circadian rhythms \cite{tsgc}. \\ \linebreak
 Our Intelligent Lighting Control System, centrally controlled with sensor feedback and visual status display, is a complete solution for future astronauts and their needs. Our system features an automatic light compensation algorithm, single communication bus capable of addressing each light fixture, and touchscreen user interface for customized sleep cycles. 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% THE BLOCK BELOW DEMONSTRATES HOW TO INSERT A FIGURE
-% Simply place the .png file in the same directory as the .tex file
-% and replace the file name between the " "
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.69\textwidth]{"High Level Design Overview gray".png}\par			\vspace{0.1cm}
-	\caption{High Level System Overview}
-\end{figure}
 
 \section{Final Design Specifications}
 
@@ -90,12 +80,22 @@ The lighting modules have a two-piece modular design. The top piece can be perma
 
 
 \section{Design Solution}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THE BLOCK BELOW DEMONSTRATES HOW TO INSERT A FIGURE
+% Simply place the .png file in the same directory as the .tex file
+% and replace the file name between the " "
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{"imgs/High Level Design Overview gray".png}\par			\vspace{0.1cm}
+	\caption{High Level System Overview}
+\end{figure}
 \subsection{Lighting Modules}
 We set out to design a modular light fixture with interchangeable easy to replace parts. The lighting modules use Red-Blue-Green (RGB) light emitting diodes to produce a wide spectrum of light. Each lighting module features an independent current driver board with microprocessor which can communicate with our central microprocessor unit. The light fixture also features an interior aluminum heat shield and temperature sensor to manage excess heat and alert the control system of dangerous temperature levels. 
  
 \subsubsection{RGB Light Emitting Diodes}
-This will include specs on the modules we used as well as the heat shield
+Light Emitting Diodes (LED) have many advantages over filament or gas based lights. LEDs are cheaper, lighter, last longer, and dissipate less heat. These advantages make them ideal for space flight. One disadvantage of LEDs is that they are not linear devices and making them behave in a linear fashion in regards to light intensity and color spectrum is not a trivial matter. The goal of a circadian based lighting system is to not only control the intensity of light but also the amount of red and blue light spectrum to simulate daily solar cycle on earth. 
 
 \subsubsection{RBG LED Driver}
 Discuss the parts of the development board, the buck converter, the current limiter
@@ -114,8 +114,45 @@ Discuss Arduino, code, I2C protocol, Light Degradation Algorithm
 \subsubsection{Sensors}
 Here we will discuss the temperature and light sensors
 
+\subsubsection{Power Supply}
+Due to NASA specifications, we chose an AC/DC power supply. The DC power will supply to the RGB LEDs, GUI, and Programmable Logic Controller. After performing our calculations on our simulated RGB circuit, we realized that necessary current and not voltage would be the greatest design concern. Our new choice for a power supply is a 24-volt DC, we changed the power supply again so that we have a slight change in current and voltage. The power supply that he had before had no case and just came with the printed circuit board, we felt that when powering the power supply there would be no protection for our teammates and the system. We also made a small circuit to step down the voltage from 24 volts to 5 volts, that voltage will be used to power the GUI and Programmable Logic Controller. 
+
 \subsection{Display Model}
 Here we will talk about the wooden display model we built and make it clear that it is not part of the system, only for display
+\newpage
+\subsection{System Schematics}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth, angle = 90]{"imgs/Arduino".png}\par			\vspace{0.1cm}
+	\caption{Central Microprocessor Unit}
+\end{figure}
+\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth, angle = 90]{"imgs/4duino".png}\par			\vspace{0.1cm}
+	\caption{Graphical User Interface (Input)}
+\end{figure}
+\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth, angle = 90]{"imgs/Infineon".png}\par			\vspace{0.1cm}
+	\caption{Light Module (Single Unit)}
+\end{figure}
+\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth, angle = 90]{"imgs/LightSensor".png}\par			\vspace{0.1cm}
+	\caption{Light Sensor Network}
+\end{figure}
+\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth, angle = 90]{"imgs/PowerSupply".png}\par			\vspace{0.1cm}
+	\caption{Power Supply and DC Power Circuit}
+\end{figure}
+\newpage
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   DUE FEBRUARY 22nd!
