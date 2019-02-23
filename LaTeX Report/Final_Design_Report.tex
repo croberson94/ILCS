@@ -94,7 +94,10 @@ The lighting modules have a two-piece modular design. The top piece can be perma
 We set out to design a modular light fixture with interchangeable easy to replace parts. The lighting modules use Red-Blue-Green (RGB) light emitting diodes to produce a wide spectrum of light. Each lighting module features an independent current driver board with microprocessor which can communicate with our central microprocessor unit. The light fixture also features an interior aluminum heat shield and temperature sensor to manage excess heat and alert the control system of dangerous temperature levels. 
  
 \subsubsection{RGB Light Emitting Diodes}
-Light Emitting Diodes (LED) have many advantages over filament or gas based lights. LEDs are cheaper, lighter, last longer, and dissipate less heat. These advantages make them ideal for space flight. One disadvantage of LEDs is that they are not linear devices and making them behave in a linear fashion in regards to light intensity and color spectrum is not a trivial matter. The goal of a circadian based lighting system is to not only control the intensity of light but also the amount of red and blue light spectrum to simulate daily solar cycle on earth. \\ \linebreak 
+Light Emitting Diodes (LED) have many advantages over filament or gas based lights. LEDs are cheaper, lighter, last longer, and dissipate less heat. These advantages make them ideal for space flight.   
+
+\subsubsection{RGB LED Driver}
+One disadvantage of LEDs is that they are not linear devices and making them behave in a linear fashion in regards to light intensity and color spectrum is not a trivial matter. The goal of a circadian based lighting system is to not only control the intensity of light but also the amount of red and blue light spectrum to simulate daily solar cycle on earth. \\ \linebreak 
 To achieve these results we had to choose a solid state driver capable of controlling current in separate individual color channels. To insure rapid development we chose the Infineon RGB Lighting Shield as our LED driver. The heart of this boards functionality is the current controller using buck topology. 
 
 \begin{figure}[H]
@@ -105,10 +108,7 @@ To achieve these results we had to choose a solid state driver capable of contro
 	\label{fig:Buck}
 \end{figure}
 
-In this configuration, see Fig.~\ref{fig:Buck}, the inductor is constantly charging and discharging inside the circuit. After proper configuration the result is a constant current which can be changed to give us various intensities on a linear scale. We configured an acceptable ripple current (see I in figure 3.) which will result in constant light intensity.  The higher the ratio between input voltage and forward voltage, the more difficult it will be to configure a small ripple [4]. We can lower the input/forward voltage ratio by using a voltage divider to lower the input voltage. 
-
-\subsubsection{RGB LED Driver}
-Discuss the parts of the development board, the buck converter, the current limiter
+In this configuration, see Fig.~\ref{fig:Buck}, the inductor is constantly charging and discharging inside the circuit. After proper configuration the result is a constant current which can be changed to give us various intensities on a linear scale. This current controller is duplicated over 3 separate channels to control each color separately.
 
 \subsubsection{Light Fixture Housing}
 The following represents the model for the light fixtures (a total count of 4). This design is intended to highlight the project as whole and to house the important components such the LED bulbs and controller. The plate is to act as a mount for the LED bulbs. The cutoff was designed as a pathway for the wires connecting to the shield. The middle is designed to hold the plate, LED bulbs and the heat sink. A lip was created in the bottom to catch and hold the LED plate in place. There is a 10 mm wide thread that will be used to screw onto the top housing which in then will hold the microprocessor.
@@ -176,7 +176,6 @@ The following represents the model for the light fixtures (a total count of 4). 
 \label{fig:test}
 
 \end{figure}
-\newpage
 
 
 \subsection{Control System}
@@ -188,7 +187,26 @@ Discuss Arduino, code, I2C protocol, Light Degradation Algorithm
 The graphical user interface we used for the Intelligent Lighting Control System is the 4Duino, an Arduino compatible display with built in 240x320 resolution TFT LCD Display with Resistive Touche and Wi-Fi capabilities. The display requires a uSD card to load required images for the program. When connected to our power supply, the display resets its communications and intiializes its setup routine by connecting to wireless communications. In the scenario any errors occur, the Callback Error Handler function raises flags for errors associated with setup. The 4Duino then mounts the uSD Card images and loads the program file, and connects to the Arduino slave on the I2C bus. The desired touch-screen interface objects are displayed after setup and can be interacted with after short delay. The GMT is generated with a modified NTP\_Clock routine that sends signals to the Arduino Slave indicating the time of day. The User Profile setting button allows the user to customize the GMT standard time with offsets. Warnings that are received from I2C communications with the Arduino slave are displayed to a webpage.
 
 \subsubsection{Sensors}
-Here we will discuss the temperature and light sensors
+
+
+The ISL29125 digital RGB color light sensor board has a low power high sensitivity sensor with an I2C interface consisting of SDA (data) and SCL (clock) wires. The I2C defines any device that sends data onto the bus as a transmitter and receiving device as the receiver. This allows us to initialize a serial communication using an Arduino UNO and configure the RGB sensor. Now the ISL29125 sensor in combination with our Arduino library allows us to sense and record the light intensity of the RGB spectra of light visibility.\\ \linebreak
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.50\textwidth]{"imgs/lightsense".png}\par			
+	\vspace{0.1cm}
+	\caption{RGB Color Light Sensor}
+\end{figure} 
+To power the board we connected a 3.3 V and ground connections to the designated vias on the Arduino. The SDA and SCL connects to two digital pins on the Arduino mpu. The RGB sensor library used is ISL29125\_basics modified by Christos Koutsouradis [REFERENCE HERE]. With this library, we are able and have access to use several sets of individual pins to connect with. We then implemented this in order to print an unsigned int value for red, green and blue. Theses light spectrum values are read from the sensor every 2 seconds. The results on the serial monitor perfectly prints out a readings for a red, green and blue hexadecimal value. To compensate for light degradation, we implemented an auto correction algorithm for the sensors that will set an alarm. When the analog inputs reach a certain point, either with light degradation/temperature or both the alarms that we programmed will set and warn the user that it needs attention.  \\ \linebreak
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.50\textwidth]{"imgs/tempsense".png}\par			
+	\vspace{0.1cm}
+	\caption{Temperature Sensor}
+\end{figure}
+
+The LMT86 temperature sensor is very linear and its response does have a accurate linear approximation. The line can easily be calculated over the desired range from the table on the LMT86 table. The temp sensor is connected to the Arduino UNO by wiring the VDD to 3.3V reference voltage as ARef, instead of the 5V to get better precision. The selected output pin which we can designate easily using and the ground both. The analog voltage will range from 0V to 1.75 V and temperature range from -36 to 150 degrees Celsius. The sensor test sketch file allows us to convert the reading values into voltage, which is based off the reference voltage. [Reference the Tempsensor code] The temperature prints out as degrees Celsius and Fahrenheight
+
 
 \subsubsection{Power Supply}
 Due to NASA specifications, we chose an AC/DC power supply. The DC power will supply to the RGB LEDs, GUI, and Programmable Logic Controller. After performing our calculations on our simulated RGB circuit, we realized that necessary current and not voltage would be the greatest design concern. Our new choice for a power supply is a 24-volt DC, we changed the power supply again so that we have a slight change in current and voltage. The power supply that he had before had no case and just came with the printed circuit board, we felt that when powering the power supply there would be no protection for our teammates and the system. We also made a small circuit to step down the voltage from 24 volts to 5 volts, that voltage will be used to power the GUI and Programmable Logic Controller. 
