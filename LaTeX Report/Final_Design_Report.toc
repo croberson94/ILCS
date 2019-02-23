@@ -5,11 +5,11 @@
 \contentsline {subsubsection}{RGB Light Emitting Diodes}{3}% 
 \contentsline {subsubsection}{RGB LED Driver}{3}% 
 \contentsline {subsubsection}{Light Fixture Housing}{3}% 
-\contentsline {subsection}{\numberline {3.2}Control System}{4}% 
-\contentsline {subsubsection}{Central Microprocessor Unit}{4}% 
-\contentsline {subsubsection}{Graphical User Interface}{4}% 
-\contentsline {subsubsection}{Sensors}{4}% 
-\contentsline {subsubsection}{Power Supply}{4}% 
-\contentsline {subsection}{\numberline {3.3}Display Model}{5}% 
-\contentsline {subsection}{\numberline {3.4}System Schematics}{6}% 
-\contentsline {section}{\numberline {9}References}{11}% 
+\contentsline {subsection}{\numberline {3.2}Control System}{7}% 
+\contentsline {subsubsection}{Central Microprocessor Unit}{7}% 
+\contentsline {subsubsection}{Graphical User Interface}{7}% 
+\contentsline {subsubsection}{Sensors}{7}% 
+\contentsline {subsubsection}{Power Supply}{7}% 
+\contentsline {subsection}{\numberline {3.3}Display Model}{8}% 
+\contentsline {subsection}{\numberline {3.4}System Schematics}{10}% 
+\contentsline {section}{\numberline {9}References}{15}% 
