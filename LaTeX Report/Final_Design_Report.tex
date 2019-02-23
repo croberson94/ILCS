@@ -101,7 +101,73 @@ Light Emitting Diodes (LED) have many advantages over filament or gas based ligh
 Discuss the parts of the development board, the buck converter, the current limiter
 
 \subsubsection{Light Fixture Housing}
-Show drawings and discuss modular design of the pieces
+The following represents the model for the light fixtures (a total count of 4). This design is intended to highlight the project as whole and to house the important components such the LED bulbs and controller. The plate is to act as a mount for the LED bulbs. The cutoff was designed as a pathway for the wires connecting to the shield. The middle is designed to hold the plate, LED bulbs and the heat sink. A lip was created in the bottom to catch and hold the LED plate in place. There is a 10 mm wide thread that will be used to screw onto the top housing which in then will hold the microprocessor.
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{"display/Part1revised".png}
+  \caption{Solid model}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{"display/Part1revisedwire".png}
+  \caption{Wireframe with hidden edges}
+  \label{fig:sub2}
+\end{subfigure}
+\caption{3D CAD Model for LED plate}
+\label{fig:test}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.50\textwidth]{"display/ledplate".png}\par			
+	\vspace{0.1cm}
+	\caption{3D printed LED plate}
+\end{figure}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{"display/Part2revised".png}
+  \caption{Solid model}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{"display/Part2revisedwire".png}
+  \caption{Wireframe with hidden edges}
+  \label{fig:sub2}
+\end{subfigure}
+\caption{3D CAD Model for middle housing}
+\label{fig:test}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.50\textwidth]{"display/middle".png}\par			
+	\vspace{0.1cm}
+	\caption{3D printed middle housing}
+\end{figure}
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{"display/Part3revised".png}
+  \caption{Solid model}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{"display/Part3revisedwire".png}
+  \caption{Wireframe with hidden edges}
+  \label{fig:sub2}
+\end{subfigure}
+\caption{3D CAD Model for top housing}
+\label{fig:test}
+
+\end{figure}
+\newpage
+
 
 \subsection{Control System}
 \blindtext
@@ -118,8 +184,26 @@ Here we will discuss the temperature and light sensors
 Due to NASA specifications, we chose an AC/DC power supply. The DC power will supply to the RGB LEDs, GUI, and Programmable Logic Controller. After performing our calculations on our simulated RGB circuit, we realized that necessary current and not voltage would be the greatest design concern. Our new choice for a power supply is a 24-volt DC, we changed the power supply again so that we have a slight change in current and voltage. The power supply that he had before had no case and just came with the printed circuit board, we felt that when powering the power supply there would be no protection for our teammates and the system. We also made a small circuit to step down the voltage from 24 volts to 5 volts, that voltage will be used to power the GUI and Programmable Logic Controller. 
 
 \subsection{Display Model}
-Here we will talk about the wooden display model we built and make it clear that it is not part of the system, only for display
+Our original design model was to 3D print a display piece inspired by the Orion spacecraft by NASA. However, we were unable to locate reasonably priced 3D printing services that could accommodate the overall dimensions of our model schematic. A commercial printer, which would be appropriately sized for our model, is not an option as the cost is not within our budget. It was determined as a group that doing so would not be advisable due to time constraints or possible future errors if broken down in parts. As a result, it has been decided to have wood, which would be painted white, as the material used for the display model which will be cost-effective towards our budget.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.75\textwidth]{"display/display model".png}\par			
+	\vspace{0.1cm}
+	\caption{3D CAD Display Model}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.50\textwidth]{"display/model".png}\par			
+	\vspace{0.1cm}
+	\caption{Display Model}
+\end{figure}
+
+We determined that having an actual 3D printed light fixture would better suit our project, ultimately showcasing as one whole product. We discovered West Houston Institute's 3D printing services with their requirements being that the user is to provide their own materials such 3D filament, and to be a student currently enrolled to Houston Community College. We decided to utilize their services as this was the most cost-effective out of the services we had reached out to, and one of our members, Ezequiel, is a current HCC student.\\ \linebreak
+The process to 3D printing was a bit of a task as none of us were experienced with both drafting a model and the service itself. First, we used Inventor to draft our model and convert the files into .STL, as these are one of the accepted files for 3D-printing use. Second, we chose the Ultimaker 3 3D printer and uploaded our files into its print software, Cura. Essentially that's all Cura is, a way to get a digital file from your computer to the 3D printer in a format that the 3D printing hardware understands.\\ \linebreak
+This is when we ran into some complications. Our uploaded files were scaled down to 10 percent of its original size. We discovered that when converting our drawings into .STL files, we had to indicate and fix the settings with the units set to millimeters, not centimeters. Another obstacle was to pinpoint the fitting and sizes for the printouts as the final product tend to shrink when cooled down. After a few iterations, we have our fixtures printed.\\ \linebreak 
+
 \newpage
+
 \subsection{System Schematics}
 \begin{figure}[H]
 	\centering
