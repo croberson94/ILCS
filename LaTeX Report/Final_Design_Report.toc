@@ -14,10 +14,7 @@
 \contentsline {subsection}{\numberline {3.4}System Schematics}{12}% 
 \contentsline {section}{\numberline {4}Prototype Design and Fabrication}{17}% 
 \contentsline {subsection}{\numberline {4.1}Bill of Materials}{17}% 
-\contentsline {section}{\numberline {9}References}{18}% 
-\contentsline {section}{\numberline {10}Appendices}{18}% 
-\contentsline {subsection}{\numberline {10.1}Appendix A: Test Protocols}{18}% 
-\contentsline {subsection}{\numberline {10.2}Appendix B: Test Results}{19}% 
-\contentsline {subsection}{\numberline {10.3}Appendix C: Codes, Standards, Constraints}{19}% 
-\contentsline {subsection}{\numberline {10.4}Appendix D: 4Duino Code}{19}% 
-\contentsline {subsection}{\numberline {10.5}Appendix E: Arduino Code}{30}% 
+\contentsline {subsection}{\numberline {4.2}Assembly Drawings}{18}% 
+\contentsline {section}{\numberline {9}References}{20}% 
+\contentsline {subsection}{\numberline {9.1}Appendix D: 4Duino Code}{20}% 
+\contentsline {subsection}{\numberline {9.2}Appendix E: Arduino Code}{31}% 
