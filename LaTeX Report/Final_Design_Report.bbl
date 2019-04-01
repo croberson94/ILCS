@@ -1,0 +1,22 @@
+\begin{thebibliography}{1}
+
+\bibitem{spacesleep}
+Elizabeth Howell.
+\newblock Space station to get new insomnia-fighting light bulbs.
+\newblock {\em
+  \url{https://www.space.com/18917-astronauts-insomnia-light-bulbs.html}},
+  2012.
+
+\bibitem{nasapatent}
+Kurt~R. Kessel.
+\newblock Lighting system to improve circadian rhythm control.
+\newblock {\em \url{https://technology.nasa.gov/patent/KSC-TOPS-52}}, 2016.
+
+\bibitem{tsgc}
+EV/Human~Interface Branch.
+\newblock Intelligent lighting control system | topic - tdc-25-s19.
+\newblock {\em
+  \url{http://www.tsgc.utexas.edu/challenge/PDF/topics/Topic_TDC_25_S19.pdf}},
+  2016.
+
+\end{thebibliography}

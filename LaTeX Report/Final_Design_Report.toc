@@ -7,9 +7,14 @@
 \contentsline {subsubsection}{Light Fixture Housing}{3}% 
 \contentsline {subsection}{\numberline {3.2}Control System}{6}% 
 \contentsline {subsubsection}{Central Microprocessor Unit}{6}% 
-\contentsline {subsubsection}{Graphical User Interface}{6}% 
-\contentsline {subsubsection}{Sensors}{7}% 
-\contentsline {subsubsection}{Power Supply}{8}% 
-\contentsline {subsection}{\numberline {3.3}Display Model}{8}% 
-\contentsline {subsection}{\numberline {3.4}System Schematics}{11}% 
-\contentsline {section}{\numberline {9}References}{16}% 
+\contentsline {subsubsection}{Graphical User Interface}{7}% 
+\contentsline {subsubsection}{Sensors}{8}% 
+\contentsline {subsubsection}{Power Supply}{9}% 
+\contentsline {subsection}{\numberline {3.3}Display Model}{10}% 
+\contentsline {subsection}{\numberline {3.4}System Schematics}{12}% 
+\contentsline {section}{\numberline {4}Prototype Design and Fabrication}{17}% 
+\contentsline {subsection}{\numberline {4.1}Bill of Materials}{17}% 
+\contentsline {subsection}{\numberline {4.2}Assembly Drawings}{18}% 
+\contentsline {section}{\numberline {9}References}{20}% 
+\contentsline {subsection}{\numberline {9.1}Appendix D: 4Duino Code}{20}% 
+\contentsline {subsection}{\numberline {9.2}Appendix E: Arduino Code}{31}% 

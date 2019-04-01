@@ -77,7 +77,7 @@ Our Intelligent Lighting Control System, centrally controlled with sensor feedba
 %	\end{tabular}
 %	\caption{The First Table} 
 %\end{table}
-The Intelligent Lighting Control System is comprised of two interconnected parts, the control system and lighting modules. Our control system includes the Arduino UNO R3 for analog/digital input and ouptut, 4DUINO development board for touchscreen graphical user interface (GUI), AC to DC conversion power supply, RGB light and temperature sensors. Each light module include 3 RGB LED's, aluminum heat shield, Infineon RGB driver, and 3D printed housing for all parts.\\ \linebreak
+The Intelligent Lighting Control System is comprised of two interconnected parts, the control system and lighting modules. Our control system includes the Arduino MEGA 2560 for analog/digital input and ouptut, 4DUINO development board for touchscreen graphical user interface (GUI), AC to DC conversion power supply, RGB light and temperature sensors. Each light module include 3 RGB LED's, aluminum heat shield, Infineon RGB driver, and 3D printed housing for all parts.\\ \linebreak
 Our control system features a light compensation algorithm which accounts for light degradation. The main issue identified by NASA engineers is light degradation due to yellowing of the light covers. Our sensors will measure the amount of red, green, and blue light spectrum generated from our light fixtures. If at any time the light spectrum emitted does not match the light spectrum measured the algorithm will begin adjusting the output of the light driver until the spectrum is back to normal.\\ \linebreak
 The control system also allows the user to input a custom circadian-based cycle on a touchscreen interface. The interface allows central control of all light fixtures so that each light can be set to a different cycle to allow for shift work. The I2C (pronounced "I squared C") communication protocol allows us to control individual devices on a single bus which reduces the amount of cabling needed in the system.\\ \linebreak
 The lighting modules have a two-piece modular design. The top piece can be permanently fixed to a ceiling or wall. The bottom piece which contains the LED's is screwed into the top piece with a threaded pattern on the outside which easily allows crew to replace LED's which have failed during flight. Each light module is equipped with heat shield and temperature sensor. In the event of overheating, the control system will trigger alarms to alert the crew of the issue.
@@ -187,8 +187,734 @@ The following represents the model for the light fixtures (a total count of 4). 
 \subsection{Control System}
 The control system allows the user to implement customized cycles based on the desired work/sleep schedule. The user enters their parameters on the touch screen interface. Status and alarms are displayed on a separate display. 
 \subsubsection{Central Microprocessor Unit}
-The heart of our system is an Arduino UNO R3 development board which uses a ATmega328P microcontroller. This development board provides all of the input and output connections needed along with serial communication using I2C protocol. The arduino Integrated Development Environment (IDE) gives us many useful libraries while allowing us to use C++ code to customize our program. Understanding how the central microprocessor unit's (MPU) program functions is paramount to using the system correctly. The user should review the code before installing and using the system to ensure proper operation. 
+The heart of our system is an Arduino MEGA 2560 development board which uses a ATmega256 microcontroller. This development board provides all of the input and output connections needed along with serial communication using I2C protocol. The Arduino Integrated Development Environment (IDE) gives us many useful libraries while allowing us to use C++ code to customize our program. Understanding how the central microprocessor unit's (MPU) program functions is paramount to using the system correctly. The user should review the code before installing and using the system to ensure proper operation. 
 
+
+%Discuss Arduino, code, I2C protocol, Light Degradation Algorithm
+
+\subsubsection{Graphical User Interface}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.9\textwidth]{"imgs/ILCS_Flowchart".png}\par			
+	\vspace{0.1cm}
+	\caption{ILCS Communications}
+\end{figure} 
+The graphical user interface we used for the Intelligent Lighting Control System is the 4Duino, an Arduino compatible display with built in 240x320 resolution TFT LCD Display with Resistive Touche and Wi-Fi capabilities. The display requires a uSD card to load required images for the program. When connected to our power supply, the display resets its communications and intiializes its setup routine by connecting to wireless communications. In the scenario any errors occur, the Callback Error Handler function raises flags for errors associated with setup. The 4Duino then mounts the uSD Card images and loads the program file, and connects to the Arduino slave on the I2C bus. The desired touch-screen interface objects are displayed after setup and can be interacted with after short delay. The GMT is generated with a modified NTP\_Clock routine that sends signals to the Arduino Slave indicating the time of day. The User Profile setting button allows the user to customize the GMT standard time with offsets. Warnings that are received from I2C communications with the Arduino slave are displayed to a webpage.
+
+\subsubsection{Sensors}
+
+
+The ISL29125 digital RGB color light sensor board has a low power high sensitivity sensor with an I2C interface consisting of SDA (data) and SCL (clock) wires. The I2C defines any device that sends data onto the bus as a transmitter and receiving device as the receiver. This allows us to initialize a serial communication using an Arduino UNO and configure the RGB sensor. Now the ISL29125 sensor in combination with our Arduino library allows us to sense and record the light intensity of the RGB spectra of light visibility.\\ \linebreak
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.50\textwidth]{"imgs/lightsense".png}\par			
+	\vspace{0.1cm}
+	\caption{RGB Color Light Sensor}
+\end{figure} 
+To power the board we connected a 3.3 V and ground connections to the designated vias on the Arduino. The SDA and SCL connects to two digital pins on the Arduino mpu. The RGB sensor library used is ISL29125\_basics modified by Christos Koutsouradis [REFERENCE HERE]. With this library, we are able and have access to use several sets of individual pins to connect with. We then implemented this in order to print an unsigned int value for red, green and blue. Theses light spectrum values are read from the sensor every 2 seconds. The results on the serial monitor perfectly prints out a readings for a red, green and blue hexadecimal value. To compensate for light degradation, we implemented an auto correction algorithm for the sensors that will set an alarm. When the analog inputs reach a certain point, either with light degradation/temperature or both the alarms that we programmed will set and warn the user that it needs attention.  \\ \linebreak
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.50\textwidth]{"imgs/tempsense".png}\par			
+	\vspace{0.1cm}
+	\caption{Temperature Sensor}
+\end{figure}
+
+The LMT86 temperature sensor is very linear and its response does have a accurate linear approximation. The line can easily be calculated over the desired range from the table on the LMT86 table. The temp sensor is connected to the Arduino MEGA by wiring the VDD to 3.3V reference voltage as ARef, instead of the 5V to get better precision. The selected output pin which we can designate easily using and the ground both. The analog voltage will range from 0V to 1.75 V and temperature range from -36 to 150 degrees Celsius. The sensor test sketch file allows us to convert the reading values into voltage, which is based off the reference voltage. [Reference the Tempsensor code] The temperature prints out as degrees Celsius and Fahrenheight
+
+
+\subsubsection{Power Supply}
+Due to NASA specifications, we chose an AC/DC power supply. The DC power will supply to the RGB LEDs, GUI, and Programmable Logic Controller. After performing our calculations on our simulated RGB circuit, we realized that necessary current and not voltage would be the greatest design concern. Our new choice for a power supply is a 24-volt DC, we changed the power supply again so that we have a slight change in current and voltage. The power supply that he had before had no case and just came with the printed circuit board, we felt that when powering the power supply there would be no protection for our teammates and the system. We also made a small circuit to step down the voltage from 24 volts to 5 volts, that voltage will be used to power the GUI and Programmable Logic Controller. 
+
+\subsection{Display Model}
+Our original design model was to 3D print a display piece inspired by the Orion spacecraft by NASA. However, we were unable to locate reasonably priced 3D printing services that could accommodate the overall dimensions of our model schematic. A commercial printer, which would be appropriately sized for our model, is not an option as the cost is not within our budget. It was determined as a group that doing so would not be advisable due to time constraints or possible future errors if broken down in parts. As a result, it has been decided to have wood, which would be painted white, as the material used for the display model which will be cost-effective towards our budget.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.75\textwidth]{"display/display model".png}\par			
+	\vspace{0.1cm}
+	\caption{3D CAD Display Model}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.50\textwidth]{"display/model".png}\par			
+	\vspace{0.1cm}
+	\caption{Display Model}
+\end{figure}
+
+We determined that having an actual 3D printed light fixture would better suit our project, ultimately showcasing as one whole product. We discovered West Houston Institute's 3D printing services with their requirements being that the user is to provide their own materials such 3D filament, and to be a student currently enrolled to Houston Community College. We decided to utilize their services as this was the most cost-effective out of the services we had reached out to, and one of our members, Ezequiel, is a current HCC student.\\ \linebreak
+The process to 3D printing was a bit of a task as none of us were experienced with both drafting a model and the service itself. First, we used Inventor to draft our model and convert the files into .STL, as these are one of the accepted files for 3D-printing use. Second, we chose the Ultimaker 3 3D printer and uploaded our files into its print software, Cura. Essentially that's all Cura is, a way to get a digital file from your computer to the 3D printer in a format that the 3D printing hardware understands.\\ \linebreak
+This is when we ran into some complications. Our uploaded files were scaled down to 10 percent of its original size. We discovered that when converting our drawings into .STL files, we had to indicate and fix the settings with the units set to millimeters, not centimeters. Another obstacle was to pinpoint the fitting and sizes for the printouts as the final product tend to shrink when cooled down. After a few iterations, we have our fixtures printed.\\ \linebreak 
+
+\newpage
+
+\subsection{System Schematics}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth, angle = 90]{"imgs/Arduino".png}\par			\vspace{0.1cm}
+	\caption{Central Microprocessor Unit}
+\end{figure}
+\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth, angle = 90]{"imgs/4duino".png}\par			\vspace{0.1cm}
+	\caption{Graphical User Interface (Input)}
+\end{figure}
+\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth, angle = 90]{"imgs/Infineon".png}\par			\vspace{0.1cm}
+	\caption{Light Module (Single Unit)}
+\end{figure}
+\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth, angle = 90]{"imgs/LightSensor".png}\par			\vspace{0.1cm}
+	\caption{Light Sensor Network}
+\end{figure}
+\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.2\textwidth, angle = 90]{"imgs/PowerSupply".png}\par			\vspace{0.1cm}
+	\caption{Power Supply and DC Power Circuit}
+\end{figure}
+\newpage
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   DUE FEBRUARY 22nd!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+\section{Prototype Design and Fabrication}
+Our prototype was designed to be as cost effective as possible. This fast-prototyping approach will make it easy for other research groups who wish to recreate and improve our system. Furthermore, our design can also be scaled to a production level PCB which would combine all of the development board components into a single unit. \\
+\linebreak
+For those who want to recreate our prototype the general skills needed would be Embedded Systems programming (C, C++), Computer Aided Design (CAD), 3D printing, analog circuit design, as well as access to the hardware and software that support these activities. 
+\subsection{Bill of Materials}
+
+\begin{table}[H]
+
+\begin{center}
+\begin{tabular}{llll}
+\textbf{Product}              & \textbf{Purchased} & \textbf{Quantity} & \textbf{Price}    \\
+100' Hook-Up Wire (Red)       & ACE Electronics & 1        & \$13.40  \\
+100' Hook-Up Wire (Black)     & ACE Electronics & 1        & \$13.40  \\
+10 color wire kit 170 ft.     & ACE Electronics & 1        & \$12.88  \\
+Battery Holder for AA Cells   & ACE Electronics & 4        & \$2.98   \\
+24VDC Fan                     & ACE Electronics & 1        & \$13.53  \\
+Power Supply LRS Series       & ACE Electronics & 1        & \$75.72  \\
+PLA Filament 2.85mm           & MicroCenter     & 2        & \$29.18  \\
+ShurTech clear tape           & MicroCenter     & 1        & \$7.57   \\
+White Paint                   & Home Depot      & 1        & \$12.43  \\
+Hinge                         & Home Depot      & 2        & \$2.13   \\
+Magnetic Catch w/ Strike      & Home Depot      & 1        & \$0.94   \\
+15/32 2x2 Plywood             & Home Depot      & 3        & \$21.37  \\
+5.0mm 2x4 panel wood          & Home Depot      & 1        & \$7.57   \\
+Heatsink                      & Amazon          & 2        & \$18.60  \\
+Light Sensor                  & Digi-Key        & 4        & \$42.65  \\
+Infineon Microcontroller      & Mouser          & 4        & \$102.27 \\
+Color Sensor                  & Mouser          & 4        & \$8.83   \\
+Temperature Sensors           & Mouser          & 4        & \$4.11   \\
+RGB LED                       & Mouser          & 14       & \$44.71  \\
+Voltage Regulators            & Mouser          & 2        & \$3.31   \\
+100uF Electrolytic Capacitors & Mouser          & 4        & \$1.13   \\
+10uF Electrolytic Capacitors  & Mouser          & 4        & \$1.04   \\
+1uF Electrolytic Capacitors   & Mouser          & 10       & \$1.26   \\
+Terminal Blocks               & Supplied by member        & 2        & \$7.99   \\
+9 Position Panel Mount        & Supplied by member        & 3        & \$11.97  \\
+4Duino-2.4 Display            & Supplied by member        & 1        & \$99.99  \\
+Arduino Uno R3                & Supplied by member        & 1        & \$20.69 
+\end{tabular}
+\end{center}
+\caption {Bill of Materials}
+\label{tab:title}
+\end{table}
+\thispagestyle{empty}
+\newpage
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{lll}
+\textbf{Item}          & \textbf{Completion Time} & \textbf{Quantity} \\
+LED Plate     & 5h42m           & 4        \\
+Middle housing & 18h11m          & 4        \\
+Top housing   & 1d12h           & 4       
+\end{tabular}
+\end{center}
+\caption {Fabrication Timeline - 3D Printing}
+\label{tab:title}
+\end{table}
+
+\subsection{Assembly Drawings}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth, angle = 0]{"imgs/Part1curaBW".png}\par			\vspace{0.1cm}
+	\caption{LED plate - 3D Printer rendering in Cura}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth, angle = 0]{"imgs/Part2curaBW".png}\par			\vspace{0.1cm}
+	\caption{LED Housing Body - 3D Printer rendering in Cura}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth, angle = 0]{"imgs/Part3curaBW".png}\par			\vspace{0.1cm}
+	\caption{LED Threaded Mount - 3D Printer rendering in Cura}
+\end{figure}
+
+\subsection*{Prototype vs. Final Design Solution}
+
+%\section{Testing and Validation}
+%\blindtext
+%\section{Manufacturing Methods}
+%\blindtext
+%\section{Broader Impacts of the Project}
+%\blindtext
+%\section{Conclusions}
+%\blindtext
+\setcounter{section}{8}
+\section{References}
+\begingroup
+   \def\chapter*#1{}
+   \bibliography{SeniorDesign}
+	
+\endgroup	
+
+ 
+
+%\section{Appendices}
+%%\blindtext
+%Include materials that could not be included in the main body of the report without disrupting its continuity or extending its length to unreasonable limits.  List all of the appendices by title in the table of contents.  
+%%
+%The first page of each appendix is numbered <appendix letter>1, (e.g., 
+%%
+%\subsection{Appendix A: Test Protocols}
+%Include written test protocols used for all testing.  The protocols should be given descriptive names. The protocols should include descriptions of how the testing is to be performed and what data are to be collected, and should include sample data collection sheets.\\
+%If the "testing" is to be performed with computer simulation, test protocols must describe such things as a description of the model used in the simulation, the parameters to be varied and their ranges, and the boundary or other environmental conditions applied.\\
+%%
+%%
+%\subsection{Appendix B: Test Results}
+%Summarize, tabulate, or chart the results of all testing. Results must reference the appropriate test protocols.  All test results must include the name(s) of the person(s) responsible for conducting the tests.\\
+%%
+%\subsection{Appendix C: Codes, Standards, Constraints}
+%Use the same table as included in the PDD but now cite the specific Codes and Standards that applied by name and number and state in which sections of the report they were applied.  The blank table is reproduced below.  An entry is required in Table C for each consideration or constraint.  Justifications must be provided for any constraint that is judged to be not applicable.\\
+%
+
+\subsection{Appendix D: 4Duino Code}
+\begin{lstlisting}
+// Filename: ILCS.4Dino
+// Description: 4Duino Display Code
+//
+//
+
+// DECLARATIONS
+#define SSID "HCCpublic"
+#define PASSWORD ""
+unsigned long epoch, hour_NTP, min_NTP, sec_NTP;
+unsigned long NTPSyncTime;
+unsigned long NTPCalcTime;
+uint16_t seconds, minutes, hours ;
+const int NTP_PACKET_SIZE = 48;
+byte packetBuffer[NTP_PACKET_SIZE];
+String ATresponse ;
+word hndl ;
+int GMT0 = 0, GMT1 = 0, GMT2 = 0, GMT3 = 0, GMT4 = 0;
+int GMO1 = 0, GMO2 = 0, GMO3 = 0, GMO4 = 0, GMO5 = 0;
+int Wbs1, Wbs3to5;
+int iWinbutton1;
+
+// Define LOG_MESSAGES to a serial port to send SPE errors messages to. Do not use the same Serial port as SPE
+//#define LOG_MESSAGES Serial
+
+%%Display%%.DefineResetLine ;      // *Replaced* at compile time with define for reset line connected to the display
+%%Display%%.DefineDisplaySerialx ; // *Replaced* at compile time with define the Serial Port connected to the display
+
+#include "NTP2Const.h"
+
+%%Display%%.IncludeSerial_4DLib ;          // *Replaced* at compile time with an Include the Serial Library relevant to the display
+%%Display%%.IncludeSerial_Const4D ;        // *Replaced* at compile time with an Include the Constants file relevant to the display
+
+%%Display%%.AssignDisplaySerialtoLibrary ; // *Replaced* at compile time with an Assign of the correct Serial port to the correct library
+
+// Uncomment to use ESP8266
+#define ESPRESET 17
+#include <SoftwareSerial.h>
+#define ESPserial SerialS
+SoftwareSerial SerialS(8, 9) ;
+// Uncomment next 2 lines to use ESP8266 with ESP8266 library from https://github.com/itead/ITEADLIB_Arduino_WeeESP8266
+//#include "ESP8266.h"
+//ESP8266 wifi(SerialS,19200);
+
+// routine to handle Serial errors
+void mycallback(int ErrCode, unsigned char Errorbyte)
+{
+#ifdef LOG_MESSAGES
+  const char *Error4DText[] = {"OK\0", "Timeout\0", "NAK\0", "Length\0", "Invalid\0"} ;
+  LOG_MESSAGES.print(F("Serial 4D Library reports error ")) ;
+  LOG_MESSAGES.print(Error4DText[ErrCode]) ;
+  if (ErrCode == Err4D_NAK)
+  {
+    LOG_MESSAGES.print(F(" returned data= ")) ;
+    LOG_MESSAGES.println(Errorbyte) ;
+  }
+  else
+    LOG_MESSAGES.println(F("")) ;
+  while (1) ; // you can return here, or you can loop
+#else
+  // Pin 13 has an LED connected on most Arduino boards. Just give it a name
+#define led 13
+  while (1)
+  {
+    digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(200);                // wait for a second
+    digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
+    delay(200);                // wait for a second
+  }
+#endif
+}
+// end of routine to handle Serial errors
+
+bool ATcmdResp(String /*char * */ cmd, int tlimit)
+{
+  String str1 ;
+  ATresponse = "" ;
+#ifdef ESP_DEBUG
+  Serial.print(F("CMD>")) ;
+  Serial.println(cmd) ;
+#endif
+  ESPserial.print(cmd) ;
+  //  ESPserial.setTimeout(tlimit) ;              // this gives us no real advantage
+  unsigned long sttm = millis() ;
+  while (sttm + tlimit > millis())
+  {
+    str1 = ESPserial.readStringUntil(0x0a) ;    // note 0x0a will not be included!
+    if (str1 == "")                             // ignore null response
+    {
+    }
+    else if (str1 == "OK\r")                    // exit with ok response
+    {
+#ifdef ESP_DEBUG
+      Serial.println(F("OK>")) ;
+#endif
+      return 1 ;
+      break ;
+    }
+    else if (str1 == "ERROR\r")                 // exit with error response
+    {
+#ifdef ESP_DEBUG
+      Serial.println(F("ERROR>")) ;
+#endif
+      return 0 ;
+      break ;
+    }
+    else if (str1.endsWith("\r\r"))             // ignore original command echo
+    {
+#ifdef ESP_DEBUG
+      Serial.print(F("cmd>")) ;
+      Serial.println(str1) ;
+#endif
+    }
+    else                                        // otherwise concat into response string
+    {
+#ifdef ESP_DEBUG
+      Serial.print(F("IN>")) ;
+      Serial.println(str1) ;
+#endif
+      ATresponse += str1 ;
+      ATresponse += "\n" ;                    // because it was lost earlier
+    }
+  }
+#ifdef ESP_DEBUG
+  Serial.print(F("TIMEOUT>")) ;
+#endif
+  return 0 ;     // timeout
+}
+// End of routine to send command to the ESP8266 and wait for a response
+
+boolean connectWiFi()
+{
+  String cmd = F("AT+CWJAP=\"");  // use Flash constants to avoid using up all RAM
+  cmd += SSID;
+  cmd += F("\",\"");              // use Flash constants to avoid using up all RAM
+  cmd += PASSWORD;
+  cmd += F("\"\r\n");             // use Flash constants to avoid using up all RAM
+  //Display.print(F("Attempting Connection to WiFi\n"));  // use Flash constants to avoid using up all RAM
+
+  for (int z = 0; z < 5; z++)
+  {
+    // allow sufficient time for responses, otherwise we can end up 'busy'
+    // this command will return as soon as result is available, it will not always 'wait' max time
+    // this commaand also leaves the result in ATresponse, so errors can be printed
+    // it also allows diagnostics to be printed on the serial port
+    if (ATcmdResp(cmd, 7000))
+    {
+      Display.print("Connected to WiFi: ");
+      Display.print(SSID);
+      Display.print("\n");
+      return true;
+    }
+    else
+    {
+      Display.print(ATresponse);
+      Display.print(".");
+    }
+  }
+  return false;
+}
+
+String NTPTime(int GMT)
+{
+  String temp;
+
+  hour_NTP = (((epoch  % 86400L) / 3600) + GMT) %24 ;   // must %24 to ensure countries ahead don't end up more than 24 hours
+  min_NTP = (epoch  % 3600) / 60;
+  sec_NTP = epoch  % 60;
+
+  if (hour_NTP < 10)
+    temp = String(0) + String(hour_NTP);
+  else
+    temp = String(hour_NTP);
+  temp += ":";
+  if (min_NTP < 10)
+    temp += String(0) + String(min_NTP);
+  else
+    temp += String(min_NTP);
+  temp += ":";
+  if (sec_NTP < 10)
+    temp += String(0) + String(sec_NTP);
+  else
+    temp += String(sec_NTP);
+  temp += "    ";
+
+  return temp;
+}
+
+unsigned long GetTime()
+{
+  //130.102.128.23
+  //128.138.140.44
+  //24.56.178.140
+  String cmd = "AT+CIPSTART=\"UDP\",\"129.6.15.28\",123\r\n"; // NTP server
+
+  ESPserial.println(cmd);
+  delay(2000);
+
+  int counta = 0;
+  memset(packetBuffer, 0, NTP_PACKET_SIZE);
+  // Initialize values needed to form NTP request
+  // (see URL above for details on the packets)
+  packetBuffer[0] = 0b11100011;   // LI, Version, Mode
+  packetBuffer[1] = 0;     // Stratum, or type of clock
+  packetBuffer[2] = 6;     // Polling Interval
+  packetBuffer[3] = 0xEC;  // Peer Clock Precision
+  packetBuffer[12]  = 49;
+  packetBuffer[13]  = 0x4E;
+  packetBuffer[14]  = 49;
+  packetBuffer[15]  = 52;
+
+  ESPserial.print("AT+CIPSEND=");
+  ESPserial.println(NTP_PACKET_SIZE);
+  if (ESPserial.find(">"))
+  {
+    for (byte i = 0; i < NTP_PACKET_SIZE; i++)
+    {
+      ESPserial.write(packetBuffer[i]);
+      delay(5);
+    }
+  }
+  else
+  {
+    ESPserial.println("AT+CIPCLOSE");
+    return 0;
+  }
+  delay(50);
+  ESPserial.find("+IPD,48:");
+
+  memset(packetBuffer, 0, NTP_PACKET_SIZE);
+
+  Serial.println("Server answer : ");
+
+  int i = 0;
+  while (ESPserial.available() > 0)
+  {
+    byte ch = ESPserial.read();
+    if (i <= NTP_PACKET_SIZE)
+    {
+      packetBuffer[i] = ch;
+    }
+    if (ch < 0x10) Serial.print('0');
+    Serial.print(ch, HEX);
+    Serial.print(' ');
+    if ( (((i + 1) % 15) == 0) )
+    {
+      Serial.println();
+    }
+    delay(5);
+    i++;
+    if ( ( i < NTP_PACKET_SIZE ) && (ESPserial.available() == 0 ) )
+    {
+      while (ESPserial.available() == 0)  // you may have to wait for some bytes
+      {
+        counta += 1;
+        Serial.print("!");
+        delay(100);
+        if (counta == 15)
+        {
+          return 0;
+        }
+      }
+    }
+  }
+
+  Serial.println();
+  Serial.println();
+  Serial.print(i + 1);
+  Serial.println(" bytes received"); // will be more than 48
+
+  Serial.print(packetBuffer[40], HEX);
+  Serial.print(" ");
+  Serial.print(packetBuffer[41], HEX);
+  Serial.print(" ");
+  Serial.print(packetBuffer[42], HEX);
+  Serial.print(" ");
+  Serial.print(packetBuffer[43], HEX);
+  Serial.print(" = ");
+
+  unsigned long highWord = word(packetBuffer[40], packetBuffer[41]);
+  unsigned long lowWord = word(packetBuffer[42], packetBuffer[43]);
+
+  // combine the four bytes (two words) into a long integer
+  // this is NTP time (seconds since Jan 1 1900):
+  unsigned long secsSince1900 = highWord << 16 | lowWord;
+
+  Serial.print(secsSince1900, DEC);
+
+  // Unix time starts on Jan 1 1970. In seconds, that's 2208988800:
+  const unsigned long seventyYears  = 2208988800UL;
+  // subtract seventy years:
+  unsigned long epochCalc = secsSince1900 - seventyYears;
+
+  unsigned long DST = 60 * 60 * 2; // adjust to your GMT+DST
+
+  unsigned long timestamp = epoch + DST;
+
+  Serial.println();
+  Serial.print("Epoch: ");
+  Serial.println(epochCalc, DEC);
+
+
+  // print the hour, minute and second:
+  Serial.print("The UTC time is ");       // UTC is the time at Greenwich Meridian (GMT)
+  Serial.print((epochCalc  % 86400L) / 3600); // print the hour (86400 equals secs per day)
+  Serial.print(':');
+  if ( ((epochCalc % 3600) / 60) < 10 )
+  {
+    // In the first 10 minutes of each hour, we'll want a leading '0'
+    Serial.print('0');
+  }
+  Serial.print((epochCalc  % 3600) / 60); // print the minute (3600 equals secs per minute)
+  Serial.print(':');
+  if ( (epochCalc % 60) < 10 )
+  {
+    // In the first 10 seconds of each minute, we'll want a leading '0'
+    Serial.print('0');
+  }
+  Serial.println(epochCalc % 60); // print the second
+  return epochCalc;
+}
+
+void setup()
+{
+// Ucomment to use the Serial link to the PC for debugging
+    Serial.begin(115200) ;        // serial to USB port
+// Note! The next statement will stop the sketch from running until the serial monitor is started
+//       If it is not present the monitor will be missing the initial writes
+//    while (!Serial) ;             // wait for serial to be established
+
+  pinMode(RESETLINE, OUTPUT);       // Display reset pin
+%%Display%%.Toggle_Reset_On ;       // *Replaced* at compile time with correct rest on logic for the attached display
+  delay(100);                       // wait for it to be recognised
+%%Display%%.Toggle_Reset_Off ;      // *Replaced* at compile time with correct rest off logic for the attached display
+// Uncomment when using ESP8266
+  pinMode(ESPRESET, OUTPUT);        // ESP reset pin
+  digitalWrite(ESPRESET, 1);        // Reset ESP
+  delay(100);                       // wait for it t
+  digitalWrite(ESPRESET, 0);        // Release ESP reset
+  delay(3000) ;                     // give display time to startup
+
+  // now start display as Serial lines should have 'stabilised'
+  %%Display%%.DisplaySerial.Begin_Speed ; // *Replaced* at compile time with command to start the serial port at the correct speed
+  Display.TimeLimit4D = 5000 ;      // 5 second timeout on all commands
+  Display.Callback4D = mycallback ;
+
+// uncomment if using ESP8266
+    ESPserial.begin(115200) ;         // assume esp set to 115200 baud, it's default setting
+                                    // what we need to do is attempt to flip it to 19200
+                                    // the maximum baud rate at which software serial actually works
+                                    // if we run a program without resetting the ESP it will already be 19200
+                                    // and hence the next command will not be understood or executed
+  ESPserial.println("AT+UART_CUR=19200,8,1,0,0\r\n") ;
+  ESPserial.end() ;
+  delay(10) ;                         // Necessary to allow for baud rate changes
+  ESPserial.begin(19200) ;            // start again at a resonable baud rate
+  Display.gfx_ScreenMode(PORTRAIT) ; // change manually if orientation change
+  //Display.putstr("Mounting...\n");
+  if (!(Display.file_Mount()))
+  {
+    while(!(Display.file_Mount()))
+    {
+      Display.putstr("Drive not mounted...");
+      delay(200);
+      Display.gfx_Cls();
+      delay(200);
+    }
+  }
+//hFontn = Display.file_LoadImageControl("NoName2.dnn", "NoName2.gnn", 1); // Open handle to access uSD fonts, uncomment if required and change nn to font number
+//hstrings = Display.file_Open("NTP2~1.txf", 'r') ;                            // Open handle to access uSD strings, uncomment if required
+  hndl = Display.file_LoadImageControl("NTP2~1.dat", "NTP2~1.gci", 1);
+  // put your setup code here, to run once:
+
+  // Button Lineup
+  Wbs1 = 0; // up, set to non zero (specifically 2) when down
+  Display.img_SetWord(hndl, iWinbutton1, IMAGE_INDEX, 2); // Q1M where state is 0 for up and 1 for down
+  Display.img_ClearAttributes(hndl, iWinbutton1, I_TOUCH_DISABLE);
+  Display.img_Show(hndl,iWinbutton1) ;  // Q1M
+
+  Display.touch_Set(TOUCH_ENABLE); // enable the touch screen
+
+  // Beginning Text
+  Display.txt_FGcolour(BLUE) ;
+  Display.txt_FontID(FONT1) ;         // largest internal font
+  Display.putstr("ILCS Systems\n") ;
+
+  String temp1 = "User Network: ";
+  temp1 += SSID;
+  temp1 += "\r\n";
+  Display.print(temp1);
+  //Display.print("Connecting to Wifi AP: " + SSID + "\n") ;
+
+  ATcmdResp(F("AT+CWMODE_CUR=1\r\n"), 50);
+
+  //ESPserial.println("AT+CWDHCP_CUR=1,1\r\n") ;// Activate the DHCP of 4DUINO , try to uncomment if router is already allocating DHCP
+  //delay(1000);
+   ATcmdResp(F("AT+CWDHCP_CUR=1,1\r\n"), 5000);
+
+  //Only required if ESP doesnt have a MAC set, and AP uses Mac Filtering
+  //ATcmdResp(F("AT+CIPSTAMAC_CUR=\"18:aa:35:97:d4:7b\"\r\n"), 50);
+
+  if (connectWiFi()) // Attempt connection 5 times
+  {
+    Display.print("Wifi Connected\n");
+  }
+  else
+  {
+    Display.print("Wifi Disconnected\n");
+    Display.print("Check WiFi, Restart 4Duino\n");
+    while (1); // crash here
+  }
+
+  ATcmdResp(F("AT+CIFSR\r\n"), 100);
+  delay(250);
+  ATcmdResp(F("AT+CIPMUX=0\r\n"), 100); //if (!cipmux0()) hang("cipmux0 failed");
+  delay(250);
+  ATcmdResp(F("AT+CIPMODE=0\r\n"), 100); //if (!cipmode0()) hang("cipmode0 failed");
+  delay(250);
+  Display.img_ClearAttributes(hndl, iWinbutton1, I_TOUCH_DISABLE); // Q1M set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton1);  // Q1M show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton2, I_TOUCH_DISABLE); // Q1P set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton2);  // Q1P show button, only do this once
+} // end Setup **do not alter, remove or duplicate this line**
+
+void loop()
+{
+  int i, x, y, state, n;
+  state = Display.touch_Get(TOUCH_STATUS);
+  n = Display.img_Touched(hndl, -1);
+  // put your main code here, to run repeatedly:
+  if (millis() > NTPSyncTime){
+  NTPSyncTime = millis() + 5000;
+  epoch = GetTime();
+  }
+  if (millis() > NTPCalcTime){
+  NTPCalcTime = millis() + 5000;
+  Display.txt_FontID(FONT1);
+
+  // GMT Display Time
+  Display.txt_MoveCursor(9,0);
+  Display.txt_FGcolour(RED);
+  Display.print("GMT Time: ");
+  String temp0 = NTPTime(GMT0);
+  Display.txt_FGcolour(LIME);
+  Display.println(temp0);
+
+  // Quadrant 1 Display Time
+  Display.txt_MoveCursor(10,0);
+  Display.txt_FGcolour(YELLOW);
+  Display.print("Quad 1: ");
+  String temp1 = NTPTime(GMT1);
+  Display.txt_FGcolour(LIME);
+  Display.println(temp1);
+
+  // Quadrant 2 Display Time
+  Display.txt_MoveCursor(11,0);
+  Display.txt_FGcolour(YELLOW);
+  Display.print("Quad 2: ");
+  String temp2 = NTPTime(GMT2);
+  Display.txt_FGcolour(LIME);
+  Display.println(temp2);
+
+  // Quadrant 3 Display Time
+  Display.txt_MoveCursor(12,0);
+  Display.txt_FGcolour(YELLOW);
+  Display.print("Quad 3: ");
+  String temp3 = NTPTime(GMT3);
+  Display.txt_FGcolour(LIME);
+  Display.println(temp3);
+
+  // Quadrant 4 Display Time
+  Display.txt_MoveCursor(13,0);
+  Display.txt_FGcolour(YELLOW);
+  Display.print("Quad 4: ");
+  String temp4 = NTPTime(GMT4);
+  Display.txt_FGcolour(LIME);
+  Display.println(temp4);
+  }
+
+  // Touched a button?
+  if (state == TOUCH_PRESSED){
+  x = Display.touch_Get(TOUCH_GETX);
+  y = Display.touch_Get(TOUCH_GETY);
+  if (n == iWinbutton1){
+    Display.img_SetWord(hndl, iWinbutton1, IMAGE_INDEX, Wbs1+1);
+    Display.img_Show(hndl,iWinbutton1);
+  }
+  }
+
+  // Released a button?
+  if (state == TOUCH_RELEASED){
+  if (n == iWinbutton1){
+    if (Wbs1) // toggle status
+      Wbs1 = 0;
+    else
+      Wbs1 = 2;
+    Display.img_SetWord(hndl, iWinbutton1, IMAGE_INDEX, Wbs1);
+    Display.img_Show(hndl, iWinbutton1);
+
+  }
+  }
+}
+
+
+\end{lstlisting}
+
+\subsection{Appendix E: Arduino Code} 
 \begin{lstlisting}
 
 /*
@@ -513,142 +1239,8 @@ void requestEvent() {
 	
 	Wire.write(sendArray,6); 
 }
-\end{lstlisting}
-%Discuss Arduino, code, I2C protocol, Light Degradation Algorithm
+\end{lstlisting}  
 
-\subsubsection{Graphical User Interface}
-The graphical user interface we used for the Intelligent Lighting Control System is the 4Duino, an Arduino compatible display with built in 240x320 resolution TFT LCD Display with Resistive Touche and Wi-Fi capabilities. The display requires a uSD card to load required images for the program. When connected to our power supply, the display resets its communications and intiializes its setup routine by connecting to wireless communications. In the scenario any errors occur, the Callback Error Handler function raises flags for errors associated with setup. The 4Duino then mounts the uSD Card images and loads the program file, and connects to the Arduino slave on the I2C bus. The desired touch-screen interface objects are displayed after setup and can be interacted with after short delay. The GMT is generated with a modified NTP\_Clock routine that sends signals to the Arduino Slave indicating the time of day. The User Profile setting button allows the user to customize the GMT standard time with offsets. Warnings that are received from I2C communications with the Arduino slave are displayed to a webpage.
-
-\subsubsection{Sensors}
-
-
-The ISL29125 digital RGB color light sensor board has a low power high sensitivity sensor with an I2C interface consisting of SDA (data) and SCL (clock) wires. The I2C defines any device that sends data onto the bus as a transmitter and receiving device as the receiver. This allows us to initialize a serial communication using an Arduino UNO and configure the RGB sensor. Now the ISL29125 sensor in combination with our Arduino library allows us to sense and record the light intensity of the RGB spectra of light visibility.\\ \linebreak
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.50\textwidth]{"imgs/lightsense".png}\par			
-	\vspace{0.1cm}
-	\caption{RGB Color Light Sensor}
-\end{figure} 
-To power the board we connected a 3.3 V and ground connections to the designated vias on the Arduino. The SDA and SCL connects to two digital pins on the Arduino mpu. The RGB sensor library used is ISL29125\_basics modified by Christos Koutsouradis [REFERENCE HERE]. With this library, we are able and have access to use several sets of individual pins to connect with. We then implemented this in order to print an unsigned int value for red, green and blue. Theses light spectrum values are read from the sensor every 2 seconds. The results on the serial monitor perfectly prints out a readings for a red, green and blue hexadecimal value. To compensate for light degradation, we implemented an auto correction algorithm for the sensors that will set an alarm. When the analog inputs reach a certain point, either with light degradation/temperature or both the alarms that we programmed will set and warn the user that it needs attention.  \\ \linebreak
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.50\textwidth]{"imgs/tempsense".png}\par			
-	\vspace{0.1cm}
-	\caption{Temperature Sensor}
-\end{figure}
-
-The LMT86 temperature sensor is very linear and its response does have a accurate linear approximation. The line can easily be calculated over the desired range from the table on the LMT86 table. The temp sensor is connected to the Arduino UNO by wiring the VDD to 3.3V reference voltage as ARef, instead of the 5V to get better precision. The selected output pin which we can designate easily using and the ground both. The analog voltage will range from 0V to 1.75 V and temperature range from -36 to 150 degrees Celsius. The sensor test sketch file allows us to convert the reading values into voltage, which is based off the reference voltage. [Reference the Tempsensor code] The temperature prints out as degrees Celsius and Fahrenheight
-
-
-\subsubsection{Power Supply}
-Due to NASA specifications, we chose an AC/DC power supply. The DC power will supply to the RGB LEDs, GUI, and Programmable Logic Controller. After performing our calculations on our simulated RGB circuit, we realized that necessary current and not voltage would be the greatest design concern. Our new choice for a power supply is a 24-volt DC, we changed the power supply again so that we have a slight change in current and voltage. The power supply that he had before had no case and just came with the printed circuit board, we felt that when powering the power supply there would be no protection for our teammates and the system. We also made a small circuit to step down the voltage from 24 volts to 5 volts, that voltage will be used to power the GUI and Programmable Logic Controller. 
-
-\subsection{Display Model}
-Our original design model was to 3D print a display piece inspired by the Orion spacecraft by NASA. However, we were unable to locate reasonably priced 3D printing services that could accommodate the overall dimensions of our model schematic. A commercial printer, which would be appropriately sized for our model, is not an option as the cost is not within our budget. It was determined as a group that doing so would not be advisable due to time constraints or possible future errors if broken down in parts. As a result, it has been decided to have wood, which would be painted white, as the material used for the display model which will be cost-effective towards our budget.
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.75\textwidth]{"display/display model".png}\par			
-	\vspace{0.1cm}
-	\caption{3D CAD Display Model}
-\end{figure}
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.50\textwidth]{"display/model".png}\par			
-	\vspace{0.1cm}
-	\caption{Display Model}
-\end{figure}
-
-We determined that having an actual 3D printed light fixture would better suit our project, ultimately showcasing as one whole product. We discovered West Houston Institute's 3D printing services with their requirements being that the user is to provide their own materials such 3D filament, and to be a student currently enrolled to Houston Community College. We decided to utilize their services as this was the most cost-effective out of the services we had reached out to, and one of our members, Ezequiel, is a current HCC student.\\ \linebreak
-The process to 3D printing was a bit of a task as none of us were experienced with both drafting a model and the service itself. First, we used Inventor to draft our model and convert the files into .STL, as these are one of the accepted files for 3D-printing use. Second, we chose the Ultimaker 3 3D printer and uploaded our files into its print software, Cura. Essentially that's all Cura is, a way to get a digital file from your computer to the 3D printer in a format that the 3D printing hardware understands.\\ \linebreak
-This is when we ran into some complications. Our uploaded files were scaled down to 10 percent of its original size. We discovered that when converting our drawings into .STL files, we had to indicate and fix the settings with the units set to millimeters, not centimeters. Another obstacle was to pinpoint the fitting and sizes for the printouts as the final product tend to shrink when cooled down. After a few iterations, we have our fixtures printed.\\ \linebreak 
-
-\newpage
-
-\subsection{System Schematics}
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1.2\textwidth, angle = 90]{"imgs/Arduino".png}\par			\vspace{0.1cm}
-	\caption{Central Microprocessor Unit}
-\end{figure}
-\newpage
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1.2\textwidth, angle = 90]{"imgs/4duino".png}\par			\vspace{0.1cm}
-	\caption{Graphical User Interface (Input)}
-\end{figure}
-\newpage
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1.2\textwidth, angle = 90]{"imgs/Infineon".png}\par			\vspace{0.1cm}
-	\caption{Light Module (Single Unit)}
-\end{figure}
-\newpage
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1.2\textwidth, angle = 90]{"imgs/LightSensor".png}\par			\vspace{0.1cm}
-	\caption{Light Sensor Network}
-\end{figure}
-\newpage
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1.2\textwidth, angle = 90]{"imgs/PowerSupply".png}\par			\vspace{0.1cm}
-	\caption{Power Supply and DC Power Circuit}
-\end{figure}
-\newpage
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   DUE FEBRUARY 22nd!
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-
-
-
-%\section{Prototype Design and Fabrication}
-%\blindtext
-%\section{Testing and Validation}
-%\blindtext
-%\section{Manufacturing Methods}
-%\blindtext
-%\section{Broader Impacts of the Project}
-%\blindtext
-%\section{Conclusions}
-%\blindtext
-\setcounter{section}{8}
-\section{References}
-\begingroup
-   \def\chapter*#1{}
-   \bibliography{SeniorDesign}
-	
-\endgroup	
-
- 
-
-%\section{Appendices}
-%\blindtext
-%%Include materials that could not be included in the main body of the report without disrupting its continuity or extending its length to unreasonable limits.  List all of the appendices by title in the table of contents.  
-%
-%%The first page of each appendix is numbered <appendix letter>1, (e.g., 
-%
-%\subsection{Appendix A: Test Protocols}
-%Include written test protocols used for all testing.  The protocols should be given descriptive names. The protocols should include descriptions of how the testing is to be performed and what data are to be collected, and should include sample data collection sheets.\\
-%If the "testing" is to be performed with computer simulation, test protocols must describe such things as a description of the model used in the simulation, the parameters to be varied and their ranges, and the boundary or other environmental conditions applied.\\
-%
-%
-%\subsection{Appendix B: Test Results}
-%Summarize, tabulate, or chart the results of all testing. Results must reference the appropriate test protocols.  All test results must include the name(s) of the person(s) responsible for conducting the tests.\\
-%
-%\subsection{Appendix B: Codes, Standards, Constraints}
-%Use the same table as included in the PDD but now cite the specific Codes and Standards that applied by name and number and state in which sections of the report they were applied.  The blank table is reproduced below.  An entry is required in Table C for each consideration or constraint.  Justifications must be provided for any constraint that is judged to be not applicable.\\
-%
-%\subsection{Appendix (-ices) D -} 
-%Include materials that could not be included in the main body of the report without disrupting its continuity or extending its length to unreasonable limits.  Do not copy manufacturers' entire datasheets to appendices.  
 
 
 
