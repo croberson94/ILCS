@@ -28,7 +28,7 @@ InfineonRGB LEDS;  // Create Object
 //  int sensor_red, int sensor_green, int sensor_blue;
 //  int tempsens1, int tempsens2, int tempsens3, int tempsens4;
 //  int sctr1_addr, sctr2_addr, sctr3_addr, sctr4_addr;
-    int sctr1_addr = 0x15E;
+    int sctr1_addr = 0x15DUL;
     int sctr2_addr = 0x15D;
     int sctr3_addr = 0x15C;
     int sctr4_addr = 0x15B;
@@ -101,7 +101,7 @@ void setup() {
   //attachInterrupt(digitalPinToInterrupt(interruptPin2,isrSector2,RISING));
   //attachInterrupt(digitalPinToInterrupt(interruptPin3,isrSector3,RISING));
   //attachInterrupt(digitalPinToInterrupt(interruptPin4,isrSector4,RISING));
-  Wire.onReceive(GUIhandler);
+  //Wire.onReceive(GUIhandler);
   //
 /*
  * WALKTIME:
@@ -170,8 +170,8 @@ void loop() {
   
 
 }
-
-void GUIhandler(int 1){
+/*
+void GUIhandler(byte 1){
   byte code = Wire.read();
   byte lightcode = code & 0x7;
   switch (lightcode){
@@ -191,17 +191,18 @@ void GUIhandler(int 1){
   
 }
 void isrSector1() {
-  # change or initialize sector1 light fixture
+  // change or initialize sector1 light fixture
 }
 
 void isrSector2() {
-  # change or initialize sector2 light fixture
+  // change or initialize sector2 light fixture
 }
 
 void isrSector3() {
-  # change or initialize sector3 light fixture
+  // change or initialize sector3 light fixture
 }
 
 void isrSector4() {
-  # change or initialize sector4 light fixture
+  // change or initialize sector4 light fixture
 }
+*/
