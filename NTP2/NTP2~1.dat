@@ -1,0 +1,12 @@
+"Winbutton1" 0000 0000 00 96
+"Winbutton2" 1000 0000 64 96
+"Winbutton3" 2000 0000 00 B4
+"Winbutton4" 3000 0000 64 B4
+"Winbutton5" 4000 0000 00 D2
+"Winbutton6" 5000 0000 64 D2
+"Winbutton7" 6000 0000 00 F0
+"Winbutton8" 7000 0000 64 F0
+"Winbutton9" 8000 0000 1E 96
+"Winbutton10" A200 0000 1E B4
+"Winbutton11" C400 0000 1E D2
+"Winbutton12" E600 0000 1E F0
