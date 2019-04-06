@@ -28,7 +28,7 @@ InfineonRGB LEDS;  // Create Object
 //  int sensor_red, int sensor_green, int sensor_blue;
 //  int tempsens1, int tempsens2, int tempsens3, int tempsens4;
 //  int sctr1_addr, sctr2_addr, sctr3_addr, sctr4_addr;
-    int sctr1_addr = 0x15DUL;
+    int sctr1_addr = 0x15E;
     int sctr2_addr = 0x15D;
     int sctr3_addr = 0x15C;
     int sctr4_addr = 0x15B;
@@ -63,8 +63,8 @@ InfineonRGB LEDS;  // Create Object
  * Color intensities will also need to be put in any array, this is more challenging because
  * we will have a 2 dimentional list
  */
-    int day_intense[3] = {0x555,0x555,0x640};
-    int morning_intense[3] = {0x555,0x555,0x3E8};
+    int day_intense[3] = {0x555,0x555,0x555};
+    int morning_intense[3] = {0x555,0x555,0x555};
     int night_intense[3] = {0x0,0x0,0x0};
     int red_intense[10] = {night_intense[0],night_intense[0],night_intense[0],morning_intense[0],morning_intense[0],
     day_intense[0],day_intense[0],day_intense[0],day_intense[0],day_intense[0]};
@@ -125,7 +125,7 @@ void setup() {
    LEDS.I2CWRITE2BYTES(sctr1_addr,CURRENT_RED, 0x2D);
    LEDS.I2CWRITE2BYTES(sctr1_addr,CURRENT_BLUE, 0x2D);
    LEDS.I2CWRITE2BYTES(sctr1_addr,CURRENT_GREEN, 0x2D);
-   LEDS.I2CWRITE2BYTES(sctr1_addr,FADERATE,0xEA6);  // Set faderate
+   LEDS.I2CWRITE2BYTES(sctr1_addr,FADERATE,0xFFFF);  // Set faderate
 
    //set offtime
    LEDS.I2CWRITE2BYTES(sctr1_addr,OFFTIME_RED, 0x28);
