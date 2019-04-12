@@ -28,10 +28,14 @@ unsigned int i_2 = 6;
 unsigned int i_3 = 18;
 unsigned int i_4 = 0;
 byte received;
-byte code;
-byte offset;
+
+
 // Cycle Status Variables
 int cyc_status1 = 0xFF;
+int off_status1 = 0xF;
+int off_status2 = 0xF;
+int off_status3 = 0xF;
+int off_status4 = 0xF;
 
 //Analog Inputs for Temperature sensors
 int LMT86_0 = A0; 
@@ -90,22 +94,49 @@ const int offtime[24] = {0xFF,0xFF,0xFF,0xFF,0x18,0x18,0x18,0x18,0x18,0x18,0x18,
  * either extracts the offset or simply increments i
  */
 
+byte code;
+byte off_code;
+byte offset;
+byte sector;
+
 void GUIhandler(int howMany){
   code = Wire.read();
   // change or initialize sector1 light fixture
   if(code == cyc_status1){
     i_1++;
+    i_2++;
+    i_3++;
+    i_4++;
     if(i_1 == 24){i_1=0;}
+    if(i_2 == 24){i_2=0;}
+    if(i_3 == 24){i_3=0;}
+    if(i_4 == 24){i_4=0;}
   }
   else{
     //decode instructions in variable code
     cyc_status1 = code;
-    offset = code & 0xF;
-    i_1 = 20 - int(offset);
-    if(i_1 == 24){i_1=0;}
+    sector = code & 0x3;
+    offset = code & 0x3C;
+    off_code = code & 0xC0;
+    int selector = sector;
+    switch(sector){
+      case 0:
+      i_1 = 20 - offset;
+      off_status1 = off_code;
+      case 1:
+      i_2 = 20 - offset;
+      off_status2 = off_code;
+      case 2:
+      i_3 = 20 - offset;
+      off_status3 = off_code;
+      case 3:
+      i_4 = 20 - offset;
+      off_status4 = off_code;
+    }
+    }
     
-  }
 }
+
 
 void Set_Current(int address,unsigned int red,unsigned int green, unsigned int blue){
     LEDS.I2CWRITE2BYTES(address,CURRENT_RED, red);
@@ -122,13 +153,14 @@ void Set_Offtime(int address,unsigned int red, unsigned int green, unsigned int 
 void setup() {
   Serial.begin(115200);
   //Initialize I2C bus for 4Duino Communication
-  Wire.begin(11);
+  Wire.begin(8);
   Wire.onReceive(GUIhandler);
   // SECTOR 1 LED DRIVER COMMANDS
     int glob_faderate = 0xEA6;
     int glob_walktime = 0x186;
     int read_faderate_1 = 0;
     int read_walktime_1 = 0;
+    
   //set faderate
   LEDS.I2CWRITE2BYTES(ADDRESS1,FADERATE,glob_faderate); 
   //set walktime
@@ -147,6 +179,7 @@ void setup() {
   }
   else {Serial.println("SECTOR 1 FADERATE initialization FAILED");} 
   delay(100);
+  
   // SECTOR 2 LED DRIVER COMMANDS
     int read_faderate_2 = 0;
     int read_walktime_2 = 0;
@@ -243,7 +276,7 @@ void loop() {
    * SECTOR 1 COMMANDS
    */
   // First thing we check is to see if the light should be off
-  if(code == 192){
+  if(off_status1 == 3){
     /*
     LEDS.I2CWRITE6BYTES(ADDRESS1,INTENSITY_RGB,0x0,0x0,0x0);
     LEDS.I2CWRITE2BYTES(ADDRESS1,DIMMINGLEVEL,0x0);
@@ -266,7 +299,7 @@ void loop() {
    * SECTOR 2 COMMANDS
    */
   // First thing we check is to see if the light should be off
-  if(code == 192){
+  if(off_status2 == 3){
     
     LEDS.I2CWRITE6BYTES(ADDRESS2,INTENSITY_RGB,0x0,0x0,0x0);
     LEDS.I2CWRITE2BYTES(ADDRESS2,DIMMINGLEVEL,0x0);
@@ -286,7 +319,7 @@ void loop() {
    * SECTOR 3 COMMANDS
    */
   // First thing we check is to see if the light should be off
-  if(code == 192){
+  if(off_status1 == 3){
     
     LEDS.I2CWRITE6BYTES(ADDRESS3,INTENSITY_RGB,0x0,0x0,0x0);
     LEDS.I2CWRITE2BYTES(ADDRESS3,DIMMINGLEVEL,0x0);
@@ -307,7 +340,7 @@ void loop() {
    * SECTOR 4 COMMANDS
    */
   // First thing we check is to see if the light should be off
-  if(code == 192){
+  if(off_status4 == 3){
     
     LEDS.I2CWRITE6BYTES(ADDRESS4,INTENSITY_RGB,0x0,0x0,0x0);
     LEDS.I2CWRITE2BYTES(ADDRESS4,DIMMINGLEVEL,0x0);
@@ -326,6 +359,7 @@ void loop() {
   }
   
   //TEST SCRIPT ONLY
+  /*
   i_1++;
   i_2++;
   i_3++;
@@ -334,7 +368,7 @@ void loop() {
   if(i_2 == 24){i_2=0;}
   if(i_3 == 24){i_3=0;}
   if(i_4 == 24){i_4=0;}
-    
+  */ 
   delay(2500);
   Serial.print("The offset is ");
   Serial.println(offset);
