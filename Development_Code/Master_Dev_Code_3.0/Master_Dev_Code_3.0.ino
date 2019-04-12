@@ -17,9 +17,9 @@ ISL29125_SOFT RGB_sensor[2]; // Create RGB Sensor Objects
  */
 
 // RGB Values for light output cycle
-const unsigned int day_int_val[3] = {0xFF0,0xFF0,0xFFF};
-const unsigned int morning_int_val[3] = {0x555,0x555,0x555};
-const unsigned int evening_int_val[3] = {0x5FF,0x555,0x555};
+const unsigned int day_int_val[3] = {0xDD0,0xDD0,0xDDD};
+const unsigned int morning_int_val[3] = {0x5FF,0x555,0x500};
+const unsigned int evening_int_val[3] = {0x5DD,0x555,0x555};
 const unsigned int night_int_val[3] = {0x0,0x0,0x0};
 
 //increment value
@@ -33,6 +33,33 @@ byte offset;
 // Cycle Status Variables
 int cyc_status1 = 0xFF;
 
+//Analog Inputs for Temperature sensors
+int LMT86_0 = A0; 
+int LMT86_1 = A1;
+int LMT86_2 = A2;
+int LMT86_3 = A3;
+int PinA0 = 0;
+int PinA1 = 0;
+int PinA2 = 0;
+int PinA3 = 0;
+float TmpC_0 = 0;
+float TmpC_1 = 0;
+float TmpC_2 = 0;
+float TmpC_3 = 0;
+float TmpF_0 = 0;
+float TmpF_1 = 0;
+float TmpF_2 = 0;
+float TmpF_3 = 0;
+float voltage_0 = 0;
+float voltage_1 = 0;
+float voltage_2 = 0;
+float voltage_3 = 0;
+float mV_0 = 0;
+float mV_1 = 0;
+float mV_2 = 0;
+float mV_3 = 0;
+// mV differrence per degree in Celsius
+const float mV_PerC = 0.01105;
 
 // Arrays for iteration
 const unsigned int dimming_array[24] = {0x0,0x0,0x0,0x0,0x19A,0x4CC,0x665,0x998,0xCCB,0xFFF,0xFFF,0xFFF,0xFFF,0xFFF,0xFFF,
@@ -226,14 +253,12 @@ void loop() {
     */
   }
   else{
-    LEDS.I2CWRITE6BYTES(ADDRESS1,INTENSITY_RGB,0xFFF,0xFFF,0xFFF);
-    /*
     LEDS.I2CWRITE6BYTES(ADDRESS1,INTENSITY_RGB,red_int_val[i_1],green_int_val[i_1],blue_int_val[i_1]);
     LEDS.I2CWRITE2BYTES(ADDRESS1,DIMMINGLEVEL,dimming_array[i_1]);
     Set_Current(ADDRESS1,current[i_1],current[i_1],current[i_1]);
     Set_Offtime(ADDRESS1,offtime[i_1],offtime[i_1],offtime[i_1]);
     Serial.println("LIGHT IS ON");
-    */
+    
   }
 
   
@@ -334,5 +359,73 @@ void loop() {
   Serial.print("Sensor 2 Blue: "); Serial.println(blue_2,HEX);
   Serial.println();
   delay(2000);
+
+    //Temperature Sensor
+  PinA0 = analogRead(LMT86_0);         // read value from pin A0  
+  voltage_0 = PinA0 * (4.9 / 1023.0);
+  mV_0 = 2.1 - voltage_0;              // starting point for temperature 0 celsius 
+  TmpC_0 = mV_0 / mV_PerC;             // temperature conversion for celsius 
+  TmpF_0 = TmpC_0 * 1.8 + 32;          // temperature conversion for farenheit 
+
+  Serial.print("Sensor 1: ");          // print Sensor 1 
+  Serial.print(voltage_0, 4);         // print voltage value for Sensor 1 
+  Serial.print("Vdc");              
+  Serial.print(", ");
+  Serial.print(TmpC_0);               // print temperature in Celsius 
+  Serial.print(" C"); 
+  Serial.print(", ");
+  Serial.print(TmpF_0);              // print temperature in farenheit 
+  Serial.println(" F");
+                         
   
+  PinA1 = analogRead(LMT86_1);       // read value from pin A1
+  voltage_1 = PinA1 * (4.9 / 1023.0);
+  mV_1 = 2.1 - voltage_1;            // starting point for temperature 0 celsius 
+  TmpC_1 = mV_1 / mV_PerC;           // temperature conversion for celsius
+  TmpF_1 = TmpC_1 * 1.8 + 32;       // temperature conversion for farenheit 
+
+  Serial.print("Sensor 2: ");      // print Sensor 2
+  Serial.print(voltage_1, 4);      // print voltage for Sensor 2
+  Serial.print("Vdc");
+  Serial.print(", ");
+  Serial.print(TmpC_1);           // print temperature in Celsius 
+  Serial.print(" C");
+  Serial.print(", ");
+  Serial.print(TmpF_1);           // print temperature in Farenheit 
+  Serial.println(" F");
+                   
+  
+  PinA2 = analogRead(LMT86_2);       // read value from pin A2
+  voltage_2 = PinA2 * (4.9 / 1023.0); 
+  mV_2 = 2.1 - voltage_2;            // starting point for temperature 0 celsius
+  TmpC_2 = mV_2 / mV_PerC;           // temperature conversion for celsius
+  TmpF_2 = TmpC_2 * 1.8 + 32;        // temperature conversion for farenheit
+
+  Serial.print("Sensor 3: ");       // print Sensor 3
+  Serial.print(voltage_2, 4);       // print voltage for Sensor 3
+  Serial.print("Vdc");
+  Serial.print(", ");
+  Serial.print(TmpC_2);            // print Temperature in Celsius
+  Serial.print(" C");
+  Serial.print(", ");
+  Serial.print(TmpF_2);           // print temperature in Farenheit
+  Serial.println(" F");
+ 
+  
+  PinA3 = analogRead(LMT86_3);        // read value from pin A3
+  voltage_3 = PinA3 * (4.9 / 1023.0);
+  mV_3 = 2.1 - voltage_3;            // starting point for temperature 0 celsius
+  TmpC_3 = mV_3 / mV_PerC;           // temperature conversion for celsius
+  TmpF_3 = TmpC_3 * 1.8 + 32;        // temperature conversion for farenheit
+
+  Serial.print("Sensor 4: ");        // print sensor 4 
+  Serial.print(voltage_3, 4);        // pint voltage for Sensor 4
+  Serial.print("Vdc");
+  Serial.print(", ");
+  Serial.print(TmpC_3);              // print Temperature in Celsius 
+  Serial.print(" C");
+  Serial.print(", ");
+  Serial.print(TmpF_3);              // print Temperature in Farenheit
+  Serial.println(" F");
+  delay(1000);
 }
