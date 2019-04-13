@@ -117,21 +117,26 @@ void GUIhandler(int howMany){
     cyc_status1 = code;
     sector = code & 0x3;
     offset = code & 0x3C;
+    offset >> 2;
     off_code = code & 0xC0;
     int selector = sector;
     switch(sector){
       case 0:
-      i_1 = 20 - offset;
-      off_status1 = off_code;
+      i_1 = 20 - int(offset);
+      off_status1 = int(off_code);
+      break;
       case 1:
-      i_2 = 20 - offset;
-      off_status2 = off_code;
+      i_2 = 20 - int(offset);
+      off_status2 = int(off_code);
+      break;
       case 2:
-      i_3 = 20 - offset;
-      off_status3 = off_code;
+      i_3 = 20 - int(offset);
+      off_status3 = int(off_code);
+      break;
       case 3:
-      i_4 = 20 - offset;
-      off_status4 = off_code;
+      i_4 = 20 - int(offset);
+      off_status4 = int(off_code);
+      break;
     }
     }
     
@@ -264,7 +269,33 @@ void setup() {
 
 }
 void loop() {
-
+  //Analog Inputs for Temperature sensors
+  int LMT86_0 = A0; 
+  int LMT86_1 = A1;
+  int LMT86_2 = A2;
+  int LMT86_3 = A3;
+  int PinA0 = 0;
+  int PinA1 = 0;
+  int PinA2 = 0;
+  int PinA3 = 0;
+  float TmpC_0 = 0;
+  float TmpC_1 = 0;
+  float TmpC_2 = 0;
+  float TmpC_3 = 0;
+  float TmpF_0 = 0;
+  float TmpF_1 = 0;
+  float TmpF_2 = 0;
+  float TmpF_3 = 0;
+  float voltage_0 = 0;
+  float voltage_1 = 0;
+  float voltage_2 = 0;
+  float voltage_3 = 0;
+  float mV_0 = 0;
+  float mV_1 = 0;
+  float mV_2 = 0;
+  float mV_3 = 0;
+  // mV differrence per degree in Celsius
+  const float mV_PerC = 0.01105;
   /*
    * Variable State LED Driver commands, state is controlled by isrSector* commands
   */
@@ -272,25 +303,27 @@ void loop() {
   
   Serial.print("The byte sent equals ");
   Serial.println(code);
+   Serial.print("Offcode  equals ");
+  Serial.println(off_code);
    /*
    * SECTOR 1 COMMANDS
    */
   // First thing we check is to see if the light should be off
-  if(off_status1 == 3){
-    /*
+  if(off_status1 == 192){
     LEDS.I2CWRITE6BYTES(ADDRESS1,INTENSITY_RGB,0x0,0x0,0x0);
     LEDS.I2CWRITE2BYTES(ADDRESS1,DIMMINGLEVEL,0x0);
     Set_Current(ADDRESS1,0x0,0x0,0x0);
     Set_Offtime(ADDRESS1,0xFF,0xFF,0xFF);
     Serial.println("LIGHT IS OFF");
-    */
+    
   }
   else{
     LEDS.I2CWRITE6BYTES(ADDRESS1,INTENSITY_RGB,red_int_val[i_1],green_int_val[i_1],blue_int_val[i_1]);
     LEDS.I2CWRITE2BYTES(ADDRESS1,DIMMINGLEVEL,dimming_array[i_1]);
     Set_Current(ADDRESS1,current[i_1],current[i_1],current[i_1]);
     Set_Offtime(ADDRESS1,offtime[i_1],offtime[i_1],offtime[i_1]);
-    Serial.println("LIGHT IS ON");
+    Serial.print("LIGHT IS ON i_1 equals ");
+    Serial.println(i_1);
     
   }
 
@@ -299,7 +332,7 @@ void loop() {
    * SECTOR 2 COMMANDS
    */
   // First thing we check is to see if the light should be off
-  if(off_status2 == 3){
+  if(off_status2 == 192){
     
     LEDS.I2CWRITE6BYTES(ADDRESS2,INTENSITY_RGB,0x0,0x0,0x0);
     LEDS.I2CWRITE2BYTES(ADDRESS2,DIMMINGLEVEL,0x0);
@@ -312,21 +345,22 @@ void loop() {
     LEDS.I2CWRITE2BYTES(ADDRESS2,DIMMINGLEVEL,dimming_array[i_2]);
     Set_Current(ADDRESS1,current[i_2],current[i_2],current[i_2]);
     Set_Offtime(ADDRESS1,offtime[i_2],offtime[i_2],offtime[i_2]);
-    Serial.println("LIGHT IS ON");
+    Serial.print("LIGHT IS ON i_2 equals ");
+    Serial.println(i_2);
   }
 
   /*
    * SECTOR 3 COMMANDS
    */
   // First thing we check is to see if the light should be off
-  if(off_status1 == 3){
+  if(off_status1 == 192){
     
     LEDS.I2CWRITE6BYTES(ADDRESS3,INTENSITY_RGB,0x0,0x0,0x0);
     LEDS.I2CWRITE2BYTES(ADDRESS3,DIMMINGLEVEL,0x0);
     
-    LEDS.I2CWRITE2BYTES(ADDRESS,OFFTIME_RED, 0xFF);
-    LEDS.I2CWRITE2BYTES(ADDRESS,OFFTIME_BLUE, 0xFF);
-    LEDS.I2CWRITE2BYTES(ADDRESS,OFFTIME_GREEN, 0xFF);
+    LEDS.I2CWRITE2BYTES(ADDRESS3,OFFTIME_RED, 0xFF);
+    LEDS.I2CWRITE2BYTES(ADDRESS3,OFFTIME_BLUE, 0xFF);
+    LEDS.I2CWRITE2BYTES(ADDRESS3,OFFTIME_GREEN, 0xFF);
     Serial.println("LIGHT IS OFF");
   }
   else{
@@ -334,13 +368,14 @@ void loop() {
     LEDS.I2CWRITE2BYTES(ADDRESS3,DIMMINGLEVEL,dimming_array[i_3]);
     Set_Current(ADDRESS1,current[i_3],current[i_3],current[i_3]);
     Set_Offtime(ADDRESS1,offtime[i_3],offtime[i_3],offtime[i_3]);
-    Serial.println("LIGHT IS ON");
+    Serial.print("LIGHT IS ON i_3 equals ");
+    Serial.println(i_3);
   }
   /*
    * SECTOR 4 COMMANDS
    */
   // First thing we check is to see if the light should be off
-  if(off_status4 == 3){
+  if(off_status4 == 192){
     
     LEDS.I2CWRITE6BYTES(ADDRESS4,INTENSITY_RGB,0x0,0x0,0x0);
     LEDS.I2CWRITE2BYTES(ADDRESS4,DIMMINGLEVEL,0x0);
@@ -350,12 +385,13 @@ void loop() {
     LEDS.I2CWRITE2BYTES(ADDRESS4,OFFTIME_GREEN, 0xFF);
     Serial.println("LIGHT IS OFF");
   }
-  else{
+  else{ 
     LEDS.I2CWRITE6BYTES(ADDRESS4,INTENSITY_RGB,red_int_val[i_4],green_int_val[i_4],blue_int_val[i_4]);
     LEDS.I2CWRITE2BYTES(ADDRESS4,DIMMINGLEVEL,dimming_array[i_4]);
     Set_Current(ADDRESS1,current[i_4],current[i_4],current[i_4]);
     Set_Offtime(ADDRESS1,offtime[i_4],offtime[i_4],offtime[i_4]);
-    Serial.println("LIGHT IS ON");
+    Serial.print("LIGHT IS ON i_4 equals ");
+    Serial.println(i_4);
   }
   
   //TEST SCRIPT ONLY
