@@ -279,19 +279,6 @@ This is when we ran into some complications. Our uploaded files were scaled down
 \end{figure}
 \newpage
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   DUE FEBRUARY 22nd!
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-
-
-
 \section{Prototype Design and Fabrication}
 Our prototype was designed to be as cost effective as possible. This fast-prototyping approach will make it easy for other research groups who wish to recreate and improve our system. Furthermore, our design can also be scaled to a production level PCB which would combine all of the development board components into a single unit. \\
 \linebreak
@@ -371,8 +358,8 @@ Top housing   & 1d12h           & 4
 
 \subsection*{Prototype vs. Final Design Solution}
 
-%\section{Testing and Validation}
-%\blindtext
+\section{Testing and Validation}
+
 \section{Manufacturing Methods}
 As stated in our earlier encounter of limitation for funds towards 3D printing, the use of a commercial 3D printer, along with a higher quality of filament, would provide a better-quality light fixture. 3D Print Texas provided a quote of \$400 to print one set of the light fixture through printers with enhanced capabilities, such as finer printing and larger dimensions, compared to HCC's provided printers.
 A printed circuit board (PCB) would be the best to handle our breadboard, driver and micro controller needs. The manufactured materials wouldn't have to be on separate boards. In order to save money and space, designing all components onto a single PCB would reduce the amount of individually installed materials. These circuit boards costs range from 50 cents to \$300 to produce, depending on the number of layers, the complexity, and what's mounted on them.
@@ -384,9 +371,14 @@ For example, mid-way through the initial semester, we only had an inkling on the
 Our project was originally derived from the Texas Space Grant Consortium as a design challenge from NASA. NASA is working to make improvements that promote astronaut crew health during space travel. There have been investigations with the quality of astronauts sleep during spaceflight to better understand how sleep disturbances can throw off their circadian rhythms, similar effects from jet lag and shift work. Suggestions include using LED lights to mimic a periodic 24-hour daily cycle to synchronize with the crew's circadian rhythm. This design is meant to replicate the luxuries of Earth to make sure astronauts are more comfortable during space travel and provide efficient schedules to balance the work-sleep times. \\
 Still, more needs to be understood about the limitations of the human body in space. Studying the patterns of sleeping and waking, along with periodic circadian cycles play an important role in daily hormonal and behavioral rhythms. Future improvements to the lighting control system include the investigation of data classification, sensor placement and scale factor learning. Thus, the use of bright light for circadian rhythm sleep disorders is considered exploratory at this stage. 
 
-%\section{Conclusions}
-%\blindtext
-\setcounter{section}{8}
+\section{Conclusions}
+Our design plans were completed in the Fall of 2018. We set out to accomplish a set of goals with the intent on making the most out of our limited budget. Starting in early spring of 2019 we began our testing of the LED modules and Infineon LED driver board. This testing involved pasting commands to the driver from the Arduino and then testing cycles of white light that would replicate the sun rising into daylight and setting into darkness. Once we had a single set of LEDs programmed to cycle through 24 different light intensities we moved onto testing 2 lights. This is where the bulk of our issues came about. The Infineon driver boards were problematic and did not always respond to the commands we sent. In particular, the boards would not accept a different slave address, which rendered our I2C bus useless. Not wanting to fall behind we decided to use a software technique known as "bit banging". This library allowed us to send I2C commands on any two Arduino pins so we could create seperate buses for each light.\\ 
+Not wanting to fall behind we began to run testing on the light and temperature sensors. We also had to utilize a "bit banging" solution for the light sensors because those development boards did not allow the user to change the slave address. It took some time to make the light sensors read the proper values and between the I2C issues with the light drivers and the sensors we were beginning to fall a bit behind our schedule.\\ 
+During this time we were also continually testing the 4duino GUI which would allow our user to control the light fixtures from a central location. At the heart of the GUI is the GMT time clock which is continuously update via WIFI signal. This allows us to have a reliable time source to base our cycles on.\\
+Our issues with the Infineon boards worsened and were the main reason our project fabrication fell so far behind. The 3D printing of our light fixtures and hand wired LEDs also took much longer than originally estimated. We would continually complete testing the light fixtures only to come back the next week and have the board completely malfunction and no longer responding the way we had programmed it. Some boards even stopped working altogether. In the end we were only able to get two lights working properly on our prototype. We also ran out of dynamic memory on the Arduino. When the dynamic memory is maxed out there are no room for local variables and the microprocessor will malfunction. We believe this issue was very detrimental to our system working altogether.\\
+Our main mistake was not spending the money on the proper components that could have allowed us more time to test and accomplish our goal. We should have used a larger microprocessor with expandable memory. We should have also used light modules that were "off the shelf" instead of soldering our own. We tried to build cheep but that just cost us more time in the end. Future projects attempting to build this design would do well to invest the money in components that are more reliable for faster prototyping and more testing time.
+
+ 
 \section{References}
 \begingroup
    \def\chapter*#1{}
@@ -407,14 +399,14 @@ Still, more needs to be understood about the limitations of the human body in sp
 %If the "testing" is to be performed with computer simulation, test protocols must describe such things as a description of the model used in the simulation, the parameters to be varied and their ranges, and the boundary or other environmental conditions applied.\\
 %%
 %%
-%\subsection{Appendix B: Test Results}
+\subsection{Appendix B: Test Results}
 %Summarize, tabulate, or chart the results of all testing. Results must reference the appropriate test protocols.  All test results must include the name(s) of the person(s) responsible for conducting the tests.\\
 %%
 %\subsection{Appendix C: Codes, Standards, Constraints}
 %Use the same table as included in the PDD but now cite the specific Codes and Standards that applied by name and number and state in which sections of the report they were applied.  The blank table is reproduced below.  An entry is required in Table C for each consideration or constraint.  Justifications must be provided for any constraint that is judged to be not applicable.\\
 %
 
-\subsection{Appendix D: 4Duino Code}
+\subsection{Appendix C: 4Duino Code}
 \begin{lstlisting}
 // Filename: ILCS.4Dino
 // Description: 4Duino Display Code
@@ -921,7 +913,7 @@ void loop()
 
 \end{lstlisting}
 
-\subsection{Appendix E: Arduino Code} 
+\subsection{Appendix D: Arduino Code} 
 \begin{lstlisting}
 
 /*
@@ -929,322 +921,593 @@ void loop()
  * Intellegent Lighting Control System Team
  * 
  * Purpose:       This script builds circadian cycles and sends commands
- *                to the infineon RGB LED Lighting shield
+ *                to the infineon RGB LED Lighting shield, it also accepts
+ *				  sensor data and reacts to a command byte sent from the
+ *				  4duino GUI
  *                
  * Author:        Griggs Hutaff
  * 
- * Last Revision: 02/06/2019
+ * Last Revision: 04/15/2019
  * 
  */
 
 
-
-
-
-#include <RGBLEDLighting.h>
+#include <ISL29125_SoftWire.h>
 #include <Wire.h>
+#include <RGBLEDLighting.h>
+
+
+
+#define ADDRESS1   0x100
+#define ADDRESS2   0x152
+#define ADDRESS3   0x154
+#define ADDRESS4   0x156
+
 
 InfineonRGB LEDS;  // Create Object
+ISL29125_SOFT RGB_sensor[2]; // Create RGB Sensor Objects
 
-  //declare all variables needed
 
-//  int intensity_red, intensity_green, intensity_blue;
-//  int current_red, current_green, current_blue;
-//  int sensor_red, int sensor_green, int sensor_blue;
-//  int tempsens1, int tempsens2, int tempsens3, int tempsens4;
-//  int sctr1_addr, sctr2_addr, sctr3_addr, sctr4_addr;
-    int sctr1_addr = 0x15E;
-    int offtime_read;
-/*
- * time_multiplier allows us to quickly adjust the cycle run time,
- * the multipliers will be in orders of 10:
- * 1 = 6sec cycle
- * 10 = 60 sec cycle
- * 100 = 10 minutes
- * 600 = 1 hour
- * 14,400 = 24 hours
- */
-    float time_multiplier1;
 
 /*
- * dimming values will be placed in an array, this array may be prestored during  
- * development OR this array may be generated by an algorithm based on initial conditions
- * and time constraints
+ *Declare All Global Variables
  */
-    int dimming_array[] = {0x19A,0x332,0x4CC,0x665,0x7FF,0x998,0xB31,0xCCB,0xE64,0xFFF};
-    char* percent_array[] = {"10%","20%","30%","40%","50%","60%","70%","80%","90%","100%"};
+
+
+
+// RGB Values for light output cycle
+const unsigned int day_int_val[3] = {0xDD0,0xDD0,0xDDD};
+const unsigned int morning_int_val[3] = {0x5FF,0x555,0x500};
+const unsigned int evening_int_val[3] = {0x5DD,0x555,0x555};
+const unsigned int night_int_val[3] = {0x0,0x0,0x0};
+
+
+
+//increment value
+unsigned int i_1 = 12;
+unsigned int i_2 = 6;
+unsigned int i_3 = 18;
+unsigned int i_4 = 0;
+byte received;
+
+
+
+
+
+// Cycle Status Variables
+int cyc_status1 = 0xFF;
+int off_status1 = 0xF;
+int off_status2 = 0xF;
+int off_status3 = 0xF;
+int off_status4 = 0xF;
+
+
+
+// Arrays for iteration
+
+const unsigned int dimming_array[24] = {0x0,0x0,0x0,0x0,0x19A,0x4CC,0x665,0x998,0xCCB,0xFFF,0xFFF,0xFFF,0xFFF,0xFFF,0xFFF,
+0xCCB,0x998,0x665,0x4CC,0x19A,0x0,0x0,0x0,0x0};
+
+unsigned int red_int_val[24] = {night_int_val[0],night_int_val[0],night_int_val[0],night_int_val[0],morning_int_val[0],
+morning_int_val[0],day_int_val[0],day_int_val[0],day_int_val[0],day_int_val[0],day_int_val[0],
+day_int_val[0],day_int_val[0],day_int_val[0],day_int_val[0],day_int_val[0],day_int_val[0],day_int_val[0],evening_int_val[0],
+evening_int_val[0],night_int_val[0],night_int_val[0],night_int_val[0],night_int_val[0]};
+
+
+
+unsigned int green_int_val[24] = {night_int_val[1],night_int_val[1],night_int_val[1],night_int_val[1],morning_int_val[1],
+morning_int_val[1],day_int_val[1],day_int_val[1],day_int_val[1],day_int_val[1],day_int_val[1],
+day_int_val[1],day_int_val[1],day_int_val[1],day_int_val[1],day_int_val[1],day_int_val[1],day_int_val[1],evening_int_val[1],
+evening_int_val[1],night_int_val[1],night_int_val[1],night_int_val[1],night_int_val[1]};
+
+
+
+unsigned int blue_int_val[24] = {night_int_val[2],night_int_val[2],night_int_val[2],night_int_val[2],morning_int_val[2],
+morning_int_val[2],day_int_val[2],day_int_val[2],day_int_val[2],day_int_val[2],day_int_val[2],
+day_int_val[2],day_int_val[2],day_int_val[2],day_int_val[2],day_int_val[2],day_int_val[2],day_int_val[2],evening_int_val[2],
+evening_int_val[2],night_int_val[2],night_int_val[2],night_int_val[2],night_int_val[2]};
+
+
+
+const int current[24]= {0x0,0x0,0x0,0x0,0x2D,0x2D,0x2D,0x2D,0x64,0x64,0x64,0x64,0x64,0x64,0x64,0x64,0x2D,0x2D,0x2D,0x2D,
+
+  0x0,0x0,0x0,0x0};
+
+
+
+const int offtime[24] = {0xFF,0xFF,0xFF,0xFF,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0x18,0xFF,0xFF,0xFF,0xFF};
+
+
+
+
+
 /*
- * Color intensities will also need to be put in any array, this is more challenging because
- * we will have a 2 dimentional list
+ * This function takes the byte sent by the GUI and
+ * either extracts the offset or simply increments i
  */
-    int day_intense[3] = {0x555,0x555,0x640};
-    int morning_intense[3] = {0x555,0x555,0x3E8};
 
-    int red_intense[10] = {morning_intense[0],morning_intense[0],morning_intense[0],morning_intense[0],morning_intense[0],
-    day_intense[0],day_intense[0],day_intense[0],day_intense[0],day_intense[0]};
-    
-    int green_intense[10] = {morning_intense[1],morning_intense[1],morning_intense[1],morning_intense[1],morning_intense[1],
-    day_intense[1],day_intense[1],day_intense[1],day_intense[1],day_intense[1]};
-    
-    int blue_intense[10] = {morning_intense[2],morning_intense[2],morning_intense[2],morning_intense[2],morning_intense[2],
-    day_intense[2],day_intense[2],day_intense[2],day_intense[2],day_intense[2]};
 
-    //this was a failed attempt to creat a lol for the light intensity values
-//  int (*day_ptr)[3];
-//   for (int i =0;i<3;i++){day_ptr[i]= &day_intense[i]}
-//    int (*morn_ptr)[3];
-////    for (int i =0;i<3;i++){
-////      morn_ptr[i]= &morning_intense[i];
-////      }
-//   
-////    int intensities[] = {morn_ptr,morn_ptr,morn_ptr,morn_ptr,morn_ptr,day_ptr,day_ptr,day_ptr,day_ptr,day_ptr};
-      
- 
+byte code;
+byte off_code;
+byte offset;
+byte sector;
+
+
+
+void GUIhandler(int howMany){
+
+  code = Wire.read();
+
+  // change or initialize sector1 light fixture
+  if(code == cyc_status1){
+    i_1++;
+    i_2++;
+    i_3++;
+    i_4++;
+    if(i_1 == 24){i_1=0;}
+    if(i_2 == 24){i_2=0;}
+    if(i_3 == 24){i_3=0;}
+    if(i_4 == 24){i_4=0;}
+  }
+
+  else{
+    //decode instructions in variable code
+    cyc_status1 = code;
+    sector = code & 0x3;
+    offset = code & 0x3C;
+    offset >> 2;
+    off_code = code & 0xC0;
+    int selector = sector;
+    switch(sector){
+      case 0:
+      	i_1 = 20 - int(offset);
+      	off_status1 = int(off_code);
+      	break;
+      case 1:
+      	i_2 = 20 - int(offset);
+      	off_status2 = int(off_code);
+      	break;
+      case 2:
+      	i_3 = 20 - int(offset);
+      	off_status3 = int(off_code);
+     	 break;
+      case 3:
+      	i_4 = 20 - int(offset);
+      	off_status4 = int(off_code);
+      	break;
+
+    }
+    }
+}
+
+void Set_Current(int address,unsigned int red,unsigned int green, unsigned int blue){
+
+    LEDS.I2CWRITE2BYTES(address,CURRENT_RED, red);
+    LEDS.I2CWRITE2BYTES(address,CURRENT_GREEN, green);
+    LEDS.I2CWRITE2BYTES(address,CURRENT_BLUE, blue);
+
+}
+
+void Set_Offtime(int address,unsigned int red, unsigned int green, unsigned int blue){
+
+    LEDS.I2CWRITE2BYTES(address,OFFTIME_RED, red);
+    LEDS.I2CWRITE2BYTES(address,OFFTIME_GREEN, green);
+    LEDS.I2CWRITE2BYTES(address,OFFTIME_BLUE, blue);
+}
+
+
+
 void setup() {
 
-   Serial.begin(38400); // Starts the serial connection at 38400 baud
-
-/*
- * For now it seems that Wire.begin() is the only usable function to come out of the LEDS.begin() class,
- * as we proceed we may have to look again to see if we need to anything else to the driver initialization
- */
-       
-  Wire.begin();
-  
-/*
- * WALKTIME:
- *The RGB LED Shield calculates the actual linear walktime with the formula:
- *Linear Walk Time = WALKTIME * 0.0124
-  */
-  
-  LEDS.I2CWRITE2BYTES(sctr1_addr,WALKTIME,0x186);  // Set walk time to 2 seconds
-/*
- * DIMMING LEVEL:
- * The curve is quantized into 4095 steps, pseudo exponential curve.
- * *NOTE* The brightness value of a channel = intesity*diming level/4096
- */
-   //LEDS.I2CWRITE2BYTES(sctr1_addr,DIMMINGLEVEL,0x19A); // 10% Brightness
-   //LEDS.I2CWRITE2BYTES(sctr1_addr,DIMMINGLEVEL,0x555); //50% brightness
-   //LEDS.SetDimmingLevel(0x0555);
-
-/* 
- *  Current Level maximum is 0x80
- */
-   LEDS.I2CWRITE2BYTES(sctr1_addr,CURRENT_RED, 0x2D);
-   LEDS.I2CWRITE2BYTES(sctr1_addr,CURRENT_BLUE, 0x2D);
-   LEDS.I2CWRITE2BYTES(sctr1_addr,CURRENT_GREEN, 0x2D);
-   LEDS.I2CWRITE2BYTES(sctr1_addr,FADERATE,0xEA6);  // Set faderate
-
-   //set offtime
-   LEDS.I2CWRITE2BYTES(sctr1_addr,OFFTIME_RED, 0x28);
-   LEDS.I2CWRITE2BYTES(sctr1_addr,OFFTIME_GREEN, 0x28);
-   LEDS.I2CWRITE2BYTES(sctr1_addr,OFFTIME_BLUE, 0x28);
-}
-
-void loop() {
-  Serial.println("The Loop is reset");
-  //LEDS.SetIntensityRGB(0x0555, 0x0555, 0x0555);
-  time_multiplier = 10;
-  for (int i = 0; i<10;i++)
-  {
-    LEDS.SetIntensityRGB(red_intense[i], green_intense[i], blue_intense[i]);
-    LEDS.I2CWRITE2BYTES(sctr1_addr,DIMMINGLEVEL,dimming_array[i]);
-    Serial.print("The Brightness is ");
-    Serial.println(percent_array[i]);
-    Serial.println(dimming_array[i]);
-    offtime_read = LEDS.I2CREAD(sctr1_addr,READ_OFFTIME_RED);
-    Serial.print("The offtime for read channel is ");
-    Serial.println(offtime_read);
-//    Serial.println(local_day[1]);
-//    Serial.println(local_day[2]);
-//    Serial.println(local_day[3]);
-    delay(300*time_multiplier1);
-  }
-  for (int i= 9;i>1;i--)
-  { 
-    LEDS.SetIntensityRGB(red_intense[i], green_intense[i], blue_intense[i]);
-    LEDS.I2CWRITE2BYTES(sctr1_addr,DIMMINGLEVEL,dimming_array[i-1]);
-    Serial.print("The Brightness is ");
-    Serial.println(percent_array[i-1]);
-    Serial.println(dimming_array[i-1]);
-    delay(300*time_multiplier1);
-  }
-  
-
-}
-
-\end{lstlisting}
-
-
-\begin{lstlisting}
- /*
- * The University of Texas at Tyler
- * Intellegent Lighting Control System Team
- * 
- * Purpose:       This script will allow us to test the Master/Slave 
- *                communication between two arduino boards
- *                
- * Author:        Griggs Hutaff 
- * 
- * Other Credits:  Adapted from (https://www.arduino.cc/en/Tutorial/MasterReader)
- *					
- * 
- * Last Revision: 02/13/2019
- * 
- */
-
-#include <Wire.h>
-//int index = 80;
-byte receiveArray[80] = {};
-unsigned int sensorArray[40]={};
-//String labelArray[100]={"Red-Sector-1: ","Green-Sector-1: ","Blue-Sector-1: ",
-//	"Red-Sector-2: ","Green-Sector-2: ","Blue-Sector-2: ",
-//	"Red-Sector-3: ","Green-Sector-3: ","Blue-Sector-3: ",
-//	"Red-Sector-4: ","Green-Sector-4: ","Blue-Sector-4: ",
-//	"Sensor-Red-1: ","Sensor-Green-1: ","Sensor-Blue-1: ",
-//	"Sensor-Red-2: ","Sensor-Green-2: ","Sensor-Blue-2: ",
-//	"Sensor-Red-3: ","Sensor-Green-3: ","Sensor-Blue-3: ",
-//	"Sensor-Red-4: ","Sensor-Green-4: ","Sensor-Blue-4: ",
-//	"Temp-Sensor-1: ","Temp-Sensor-2: ","Temp-Sensor-3: ","Temp-Sensor-4: ",
-//	"Driver_status_s1: ","Driver_status_s2: ","Driver_status_s3: ","Driver_status_s4: ",
-//	"RGBSensor_status_s1: ","RGBSensor_status_s2: ","RGBSensor_status_s3: ","RGBSensor_status_s4: ",
-//	"Temp-Sensor-1: ","Temp-Sensor-2: ","Temp-Sensor-3: ","Temp-Sensor-4: "
-//};
-
-void setup() {
-	Wire.begin();        			// join i2c bus (address optional for master)
-	Serial.begin(115200);  			// start serial for output
-  
-}
-
-void loop() {
-	int i =0;
-	Wire.requestFrom(8, 8);    	// request 6 bytes from slave device #8
-	Serial.println("request was made");
-//  for (int i =0;i<80;i++){
-//    receiveArray[i] = Wire.read();
-//    Serial.println(receiveArray[i]);
-//    Serial.print("wire received ");
-//    Serial.println(i);
-//  }
-  
-	while (Wire.available()) { 		// slave may send less than requested
-		receiveArray[i] = Wire.read(); 		// receive a byte as character
-    Serial.println(String(receiveArray[i],HEX));
-    Serial.print("wire recieved ");
-    Serial.println(i);
-    i++;                  // print the character
-  }
-	for (int j=0; j<6; j++){
-		sensorArray[j] = (receiveArray[(j*2)+1]*256) + receiveArray[j*2];
-	}
-	for (int k=0; k<3; k++){
-		Serial.print(k);
-    Serial.print("->");
-		Serial.println(String(sensorArray[k],HEX));
-	}
-	delay(6000);
-}
- 
- //unsigned int word = high_byte * 256 + low_byte;
-\end{lstlisting}
-
-\begin{lstlisting}
-/*
- * The University of Texas at Tyler
- * Intellegent Lighting Control System Team
- * 
- * Purpose:       This script will allow us to test the Master/Slave 
- *                communication between two arduino boards
- *                
- * Author:        Griggs Hutaff  
- *
- * Other Credits:  Adapted from (https://www.arduino.cc/en/Tutorial/MasterReader)
- *					I2C_Anything library from (https://github.com/nickgammon/I2C_Anything)
- * 
- * Last Revision: 02/13/2019
- * 
- */
-
-#include <Wire.h>
-
-// declare intensity values for all 4 sectors, source: DRIVER
-unsigned int intensity_red_s1, intensity_green_s1, intensity_blue_s1;
-unsigned int intensity_red_s2, intensity_green_s2, intensity_blue_s2;
-unsigned int intensity_red_s3, intensity_green_s3, intensity_blue_s3;
-unsigned int intensity_red_s4, intensity_green_s4, intensity_blue_s4;
-
-//unsigned int current_red, current_green, current_blue; NOT SURE IF WE WILL NEED THIS VALUE
-
-// declare color sensor values for all 4 sectors, source: RGB Sensor
-unsigned int sensor_red_s1, sensor_green_s1, sensor_blue_s1;
-unsigned int sensor_red_s2, sensor_green_s2, sensor_blue_s2;
-unsigned int sensor_red_s3, sensor_green_s3, sensor_blue_s3;
-unsigned int sensor_red_s4, sensor_green_s4, sensor_blue_s4;
-
-// declare temp sensor values for all 4 sectors, source: arduino
-unsigned int sensor_temp_s1, sensor_temp_s2, sensor_temp_s3, sensor_temp_s4;
-
-// declare status/alarms that we will flag during startup and opertaion, source: Arduino
-unsigned int Driver_status_s1,Driver_status_s2,Driver_status_s3,Driver_status_s4; 
-unsigned int RGBsensor_status_s1,RGBsensor_status_s2,RGBsensor_status_s3,RGBsensor_status_s4;
-unsigned int temp_status_s1, temp_status_s2, temp_status_s3, temp_status_s4;
-
-
-
- 
-
-void setup() {
   Serial.begin(115200);
-	Wire.begin(8);                // join i2c bus with address #8
-  Serial.println("Wire.begin Initiated");
-	Wire.onRequest(requestEvent); // register event
-  Serial.println("Wire.onRequest set");
+
+  //Initialize I2C bus for 4Duino Communication
+  Wire.begin(8);
+  Wire.onReceive(GUIhandler);
+
+  // SECTOR 1 LED DRIVER COMMANDS
+
+    int glob_faderate = 0xEA6;
+    int glob_walktime = 0x186;
+    int read_faderate_1 = 0;
+    int read_walktime_1 = 0;
+
+    
+
+  //set faderate
+  LEDS.I2CWRITE2BYTES(ADDRESS1,FADERATE,glob_faderate); 
+
+  //set walktime
+  LEDS.I2CWRITE2BYTES(ADDRESS1,WALKTIME,glob_walktime);
+
+    
+
+  read_walktime_1 = LEDS.I2CREAD(ADDRESS1, READ_WALKTIME);
+  read_faderate_1 = LEDS.I2CREAD(ADDRESS1, READ_FADERATE);
+
+
+
+  if (read_walktime_1 == glob_walktime){
+      Serial.println("SECTOR 1 WALKTIME Successfully initialized");
+  }
+
+  else {Serial.println("SECTOR 1 WALKTIME initialization FAILED");}
+  delay(100);
+
+  if (read_faderate_1 ==  glob_faderate){
+      Serial.println("SECTOR 1 FADERATE Successfully initialized");
+  }
+  else {Serial.println("SECTOR 1 FADERATE initialization FAILED");} 
+
+  delay(100);
+
+  
+
+  // SECTOR 2 LED DRIVER COMMANDS
+    int read_faderate_2 = 0;
+    int read_walktime_2 = 0;
+
+  //set faderate
+  LEDS.I2CWRITE2BYTES(ADDRESS2,FADERATE,glob_faderate); 
+
+  //set walktime
+  LEDS.I2CWRITE2BYTES(ADDRESS2,WALKTIME,glob_walktime);
+  read_walktime_2 = LEDS.I2CREAD(ADDRESS2, READ_WALKTIME);
+  read_faderate_2 = LEDS.I2CREAD(ADDRESS2, READ_FADERATE);
+
+
+
+  if (read_walktime_2 == glob_walktime){
+      Serial.println("SECTOR 2 WALKTIME Successfully initialized");
+  }
+  else {Serial.println("SECTOR 2 WALKTIME initialization FAILED");}
+  delay(100);
+  if (read_faderate_2 ==  glob_faderate){
+      Serial.println("SECTOR 2 FADRATE Successfully initialized");
+  }
+  else {Serial.println("SECTOR 2 FADERATE initialization FAILED");} 
+
+  delay(100);
+
+ // SECTOR 3 LED DRIVER COMMANDS
+    int read_faderate_3 = 0;
+    int read_walktime_3 = 0;
+
+  //set faderate
+  LEDS.I2CWRITE2BYTES(ADDRESS3,FADERATE,glob_faderate); 
+
+  //set walktime
+
+  LEDS.I2CWRITE2BYTES(ADDRESS3,WALKTIME,glob_walktime);
+  read_walktime_3 = LEDS.I2CREAD(ADDRESS3, READ_WALKTIME);
+  read_faderate_3 = LEDS.I2CREAD(ADDRESS3, READ_FADERATE);
+
+
+
+  if (read_walktime_3 == glob_walktime){
+      Serial.println("SECTOR 3 WALKTIME Successfully initialized");
+  }
+  else {Serial.println("SECTOR 3 WALKTIME initialization FAILED");}
+  delay(100);
+
+  if (read_faderate_3 ==  glob_faderate){
+      Serial.println("SECTOR 3 FADRATE Successfully initialized");
+  }
+  else {Serial.println("SECTOR 3 FADERATE initialization FAILED");}  
+  delay(100);
+
+  // SECTOR 4 LED DRIVER COMMANDS
+
+		int read_faderate_4 = 0;
+		int read_walktime_4 = 0;
+
+  //set faderate
+
+  LEDS.I2CWRITE2BYTES(ADDRESS4,FADERATE,glob_faderate); 
+
+  //set walktime
+
+  LEDS.I2CWRITE2BYTES(ADDRESS4,WALKTIME,glob_walktime);
+		
+  read_walktime_4 = LEDS.I2CREAD(ADDRESS4, READ_WALKTIME);
+  read_faderate_4 = LEDS.I2CREAD(ADDRESS4, READ_FADERATE);
+
+
+
+  if (read_walktime_4 == glob_walktime){
+      Serial.println("SECTOR 4 WALKTIME Successfully initialized");
+  }
+
+  else {Serial.println("SECTOR 4 WALKTIME initialization FAILED");}
+  
+  delay(100);
+  
+  if (read_faderate_4 ==  glob_faderate){
+      Serial.println("SECTOR 4 FADRATE Successfully initialized");
+  }
+  else {Serial.println("SECTOR 4 FADERATE initialization FAILED");} 
+  delay(100);
+
+
+
+
+
+// Initialize the ISL29125 with simple configuration so it starts sampling (Pin 2 is SDA, pin 3 is SCL)
+
+  if (RGB_sensor[0].init(2,3)) 
+  {
+    Serial.println("Sensor_1 Initialization Successful\n\r");
+  }
+
+  else {
+    Serial.println("Sensor_1 Initialization Failed\n");
+  }
+
+  // Initialize the ISL29125 with simple configuration so it starts sampling (Pin 2 is SDA, pin 3 is SCL)
+
+  if (RGB_sensor[1].init(4,5)) 
+  {
+    Serial.println("Sensor_2 Initialization Successful\n\r");
+  }
+
+  else{
+    Serial.println("Sensor_2 Initialization Failed\n");
+  }
+
+
+
 }
 
 void loop() {
-	intensity_red_s1 = 0xA4C1; intensity_green_s1= 0xA4C1; intensity_blue_s1 = 0xA4C1;
-	intensity_red_s2, intensity_green_s2, intensity_blue_s2 = 0xFF2;
-	intensity_red_s3, intensity_green_s3, intensity_blue_s3 = 0xFF3;
-	intensity_red_s4, intensity_green_s4, intensity_blue_s4 = 0xFF4;
-	sensor_red_s1, sensor_green_s1, sensor_blue_s1 = 0xFA1;
-	sensor_red_s2, sensor_green_s2, sensor_blue_s2 = 0xFA2;
-	sensor_red_s3, sensor_green_s3, sensor_blue_s3 = 0xFA3;
-	sensor_red_s4, sensor_green_s4, sensor_blue_s4 = 0xFA4;
-	sensor_temp_s1, sensor_temp_s2, sensor_temp_s3, sensor_temp_s4 = 0x1234;
-	Driver_status_s1,Driver_status_s2,Driver_status_s3,Driver_status_s4 = 0x1;
-	RGBsensor_status_s1,RGBsensor_status_s2,RGBsensor_status_s3,RGBsensor_status_s4 = 0x0;
-	temp_status_s1, temp_status_s2, temp_status_s3, temp_status_s4 = 0x1;
-}
 
-// function that executes whenever data is requested by master
-// this function is registered as an event, see setup()
-void requestEvent() {
-  delay(100);
-  Serial.println("requestEvent() was initiated");
-	unsigned int sensorArray[] = {intensity_red_s1, intensity_green_s1, intensity_blue_s1};//,
-//		intensity_red_s2, intensity_green_s2, intensity_blue_s2,
-//		intensity_red_s3, intensity_green_s3, intensity_blue_s3,
-//		intensity_red_s4, intensity_green_s4, intensity_blue_s4,
-//		sensor_red_s1, sensor_green_s1, sensor_blue_s1,
-//		sensor_red_s2, sensor_green_s2, sensor_blue_s2,
-//		sensor_red_s3, sensor_green_s3, sensor_blue_s3,
-//		sensor_red_s4, sensor_green_s4, sensor_blue_s4,
-//		sensor_temp_s1, sensor_temp_s2, sensor_temp_s3, sensor_temp_s4,
-//		Driver_status_s1,Driver_status_s2,Driver_status_s3,Driver_status_s4,
-//		RGBsensor_status_s1,RGBsensor_status_s2,RGBsensor_status_s3,RGBsensor_status_s4,
-//		temp_status_s1, temp_status_s2, temp_status_s3, temp_status_s4};
-  int index = 6;
-	byte sendArray[index] = {};
-  for (int i=0; i<3;i++){
-		sendArray[i*2]= lowByte(sensorArray[i]);
-		sendArray[(i*2)+1]= highByte(sensorArray[i]);
-    Serial.println(sendArray[i]);
+  //Analog Inputs for Temperature sensors
+
+  int LMT86_0 = A0; 
+  int LMT86_1 = A1;
+  int LMT86_2 = A2;
+  int LMT86_3 = A3;
+  int PinA0 = 0;
+  int PinA1 = 0;
+  int PinA2 = 0;
+  int PinA3 = 0;
+  float TmpC_0 = 0;
+  float TmpC_1 = 0;
+  float TmpC_2 = 0;
+  float TmpC_3 = 0;
+  float TmpF_0 = 0;
+  float TmpF_1 = 0;
+  float TmpF_2 = 0;
+  float TmpF_3 = 0;
+  float voltage_0 = 0;
+  float voltage_1 = 0;
+  float voltage_2 = 0;
+  float voltage_3 = 0;
+  float mV_0 = 0;
+  float mV_1 = 0;
+  float mV_2 = 0;
+  float mV_3 = 0;
+  // mV differrence per degree in Celsius
+  const float mV_PerC = 0.01105;
+
+  /*
+   * Variable State LED Driver commands, state is controlled by isrSector* commands
+  */
+
+  Serial.print("The byte sent equals ");
+  Serial.println(code);
+   Serial.print("Offcode  equals ");
+  Serial.println(off_code);
+
+   /*
+   * SECTOR 1 COMMANDS
+   */
+
+  // First thing we check is to see if the light should be off
+  if(off_status1 == 192){
+    LEDS.I2CWRITE6BYTES(ADDRESS1,INTENSITY_RGB,0x0,0x0,0x0);
+    LEDS.I2CWRITE2BYTES(ADDRESS1,DIMMINGLEVEL,0x0);
+    Set_Current(ADDRESS1,0x0,0x0,0x0);
+    Set_Offtime(ADDRESS1,0xFF,0xFF,0xFF);
+    Serial.println("LIGHT IS OFF");
+
   }
-   Serial.println("sendArray size: ");
-   Serial.println(sizeof(sendArray));
-	
-	Wire.write(sendArray,6); 
+
+  else{
+    LEDS.I2CWRITE6BYTES(ADDRESS1,INTENSITY_RGB,red_int_val[i_1],green_int_val[i_1],blue_int_val[i_1]);
+    LEDS.I2CWRITE2BYTES(ADDRESS1,DIMMINGLEVEL,dimming_array[i_1]);
+    Set_Current(ADDRESS1,current[i_1],current[i_1],current[i_1]);
+    Set_Offtime(ADDRESS1,offtime[i_1],offtime[i_1],offtime[i_1]);
+    Serial.print("LIGHT IS ON i_1 equals ");
+    Serial.println(i_1);
+  }
+
+
+
+  
+
+  /*
+   * SECTOR 2 COMMANDS
+   */
+
+  // First thing we check is to see if the light should be off
+  if(off_status2 == 192){
+    LEDS.I2CWRITE6BYTES(ADDRESS2,INTENSITY_RGB,0x0,0x0,0x0);
+    LEDS.I2CWRITE2BYTES(ADDRESS2,DIMMINGLEVEL,0x0);
+    Set_Current(ADDRESS2,0x0,0x0,0x0);
+    Set_Offtime(ADDRESS2,0xFF,0xFF,0xFF);
+    Serial.println("LIGHT IS OFF");
+  }
+  else{
+    LEDS.I2CWRITE6BYTES(ADDRESS2,INTENSITY_RGB,red_int_val[i_2],green_int_val[i_2],blue_int_val[i_2]);
+    LEDS.I2CWRITE2BYTES(ADDRESS2,DIMMINGLEVEL,dimming_array[i_2]);
+    Set_Current(ADDRESS1,current[i_2],current[i_2],current[i_2]);
+    Set_Offtime(ADDRESS1,offtime[i_2],offtime[i_2],offtime[i_2]);
+    Serial.print("LIGHT IS ON i_2 equals ");
+    Serial.println(i_2);
+  }
+
+  /*
+   * SECTOR 3 COMMANDS
+   */
+  // First thing we check is to see if the light should be off
+  if(off_status1 == 192){
+    LEDS.I2CWRITE6BYTES(ADDRESS3,INTENSITY_RGB,0x0,0x0,0x0);
+    LEDS.I2CWRITE2BYTES(ADDRESS3,DIMMINGLEVEL,0x0);
+    LEDS.I2CWRITE2BYTES(ADDRESS3,OFFTIME_RED, 0xFF);
+    LEDS.I2CWRITE2BYTES(ADDRESS3,OFFTIME_BLUE, 0xFF);
+    LEDS.I2CWRITE2BYTES(ADDRESS3,OFFTIME_GREEN, 0xFF);
+    Serial.println("LIGHT IS OFF");
+  }
+
+  else{
+    LEDS.I2CWRITE6BYTES(ADDRESS3,INTENSITY_RGB,red_int_val[i_3],green_int_val[i_3],blue_int_val[i_3]);
+    LEDS.I2CWRITE2BYTES(ADDRESS3,DIMMINGLEVEL,dimming_array[i_3]);
+    Set_Current(ADDRESS1,current[i_3],current[i_3],current[i_3]);
+    Set_Offtime(ADDRESS1,offtime[i_3],offtime[i_3],offtime[i_3]);
+    Serial.print("LIGHT IS ON i_3 equals ");
+    Serial.println(i_3);
+  }
+  /*
+   * SECTOR 4 COMMANDS
+   */
+
+  // First thing we check is to see if the light should be off
+  if(off_status4 == 192){
+    LEDS.I2CWRITE6BYTES(ADDRESS4,INTENSITY_RGB,0x0,0x0,0x0);
+    LEDS.I2CWRITE2BYTES(ADDRESS4,DIMMINGLEVEL,0x0);    
+    LEDS.I2CWRITE2BYTES(ADDRESS4,OFFTIME_RED, 0xFF);
+    LEDS.I2CWRITE2BYTES(ADDRESS4,OFFTIME_BLUE, 0xFF);
+    LEDS.I2CWRITE2BYTES(ADDRESS4,OFFTIME_GREEN, 0xFF);
+    Serial.println("LIGHT IS OFF");
+  }
+  else{ 
+    LEDS.I2CWRITE6BYTES(ADDRESS4,INTENSITY_RGB,red_int_val[i_4],green_int_val[i_4],blue_int_val[i_4]);
+    LEDS.I2CWRITE2BYTES(ADDRESS4,DIMMINGLEVEL,dimming_array[i_4]);
+    Set_Current(ADDRESS1,current[i_4],current[i_4],current[i_4]);
+    Set_Offtime(ADDRESS1,offtime[i_4],offtime[i_4],offtime[i_4]);
+    Serial.print("LIGHT IS ON i_4 equals ");
+    Serial.println(i_4);
+  }
+  //TEST SCRIPT ONLY
+
+  /*
+  i_1++;
+  i_2++;
+  i_3++;
+  i_4++;
+  if(i_1 == 24){i_1=0;}
+  if(i_2 == 24){i_2=0;}
+  if(i_3 == 24){i_3=0;}
+  if(i_4 == 24){i_4=0;}
+  */ 
+
+  delay(2500);
+
+  Serial.print("The offset is ");
+  Serial.println(offset);
+
+
+
+  // Read sensor_1 values (16 bit integers)
+
+  unsigned int red_1 = RGB_sensor[0].readRed();
+  unsigned int green_1 = RGB_sensor[0].readGreen();
+  unsigned int blue_1 = RGB_sensor[0].readBlue();
+
+
+
+  // Read sensor_2 values (16 bit integers)
+
+  unsigned int red_2 = RGB_sensor[1].readRed();
+  unsigned int green_2 = RGB_sensor[1].readGreen();
+  unsigned int blue_2 = RGB_sensor[1].readBlue();
+
+  
+
+  // Print out readings, change HEX to DEC if you prefer decimal output
+
+  Serial.print("Sensor 1 Red: "); Serial.println(red_1,HEX);
+  Serial.print("Sensor 1 Green: "); Serial.println(green_1,HEX);
+  Serial.print("Sensor 1 Blue: "); Serial.println(blue_1,HEX);
+  Serial.println();
+
+  Serial.print("Sensor 2 Red: "); Serial.println(red_2,HEX);
+  Serial.print("Sensor 2 Green: "); Serial.println(green_2,HEX);
+  Serial.print("Sensor 2 Blue: "); Serial.println(blue_2,HEX);
+  Serial.println();
+  delay(2000);
+
+
+
+    //Temperature Sensor
+
+  PinA0 = analogRead(LMT86_0);         // read value from pin A0  
+  voltage_0 = PinA0 * (4.9 / 1023.0);
+  mV_0 = 2.1 - voltage_0;              // starting point for temperature 0 celsius 
+  TmpC_0 = mV_0 / mV_PerC;             // temperature conversion for celsius 
+  TmpF_0 = TmpC_0 * 1.8 + 32;          // temperature conversion for farenheit 
+
+
+
+  Serial.print("Sensor 1: ");          // print Sensor 1 
+  Serial.print(voltage_0, 4);         // print voltage value for Sensor 1 
+  Serial.print("Vdc");              
+  Serial.print(", ");
+  Serial.print(TmpC_0);               // print temperature in Celsius 
+  Serial.print(" C"); 
+  Serial.print(", ");
+  Serial.print(TmpF_0);              // print temperature in farenheit 
+  Serial.println(" F");
+  
+  PinA1 = analogRead(LMT86_1);       // read value from pin A1
+  voltage_1 = PinA1 * (4.9 / 1023.0);
+  mV_1 = 2.1 - voltage_1;            // starting point for temperature 0 celsius 
+  TmpC_1 = mV_1 / mV_PerC;           // temperature conversion for celsius
+  TmpF_1 = TmpC_1 * 1.8 + 32;       // temperature conversion for farenheit 
+
+  Serial.print("Sensor 2: ");      // print Sensor 2
+  Serial.print(voltage_1, 4);      // print voltage for Sensor 2
+  Serial.print("Vdc");
+  Serial.print(", ");
+  Serial.print(TmpC_1);           // print temperature in Celsius 
+  Serial.print(" C");
+  Serial.print(", ");
+  Serial.print(TmpF_1);           // print temperature in Farenheit 
+  Serial.println(" F");
+
+  PinA2 = analogRead(LMT86_2);       // read value from pin A2
+  voltage_2 = PinA2 * (4.9 / 1023.0); 
+  mV_2 = 2.1 - voltage_2;            // starting point for temperature 0 celsius
+  TmpC_2 = mV_2 / mV_PerC;           // temperature conversion for celsius
+  TmpF_2 = TmpC_2 * 1.8 + 32;        // temperature conversion for farenheit
+
+  Serial.print("Sensor 3: ");       // print Sensor 3
+  Serial.print(voltage_2, 4);       // print voltage for Sensor 3
+  Serial.print("Vdc");
+  Serial.print(", ");
+  Serial.print(TmpC_2);            // print Temperature in Celsius
+  Serial.print(" C");
+  Serial.print(", ");
+  Serial.print(TmpF_2);           // print temperature in Farenheit
+  Serial.println(" F");
+
+  PinA3 = analogRead(LMT86_3);        // read value from pin A3
+  voltage_3 = PinA3 * (4.9 / 1023.0);
+  mV_3 = 2.1 - voltage_3;            // starting point for temperature 0 celsius
+  TmpC_3 = mV_3 / mV_PerC;           // temperature conversion for celsius
+  TmpF_3 = TmpC_3 * 1.8 + 32;        // temperature conversion for farenheit
+
+  Serial.print("Sensor 4: ");        // print sensor 4 
+  Serial.print(voltage_3, 4);        // pint voltage for Sensor 4
+  Serial.print("Vdc")
+  Serial.print(", ");
+  Serial.print(TmpC_3);              // print Temperature in Celsius 
+  Serial.print(" C");
+  Serial.print(", ");
+  Serial.print(TmpF_3);              // print Temperature in Farenheit
+  Serial.println(" F");
+  delay(1000);
+
 }
 \end{lstlisting}  
 
