@@ -46,9 +46,10 @@ breaklines=true
 % Bottom of the page
 	{\large \today\par}
 \end{titlepage}
-%\section*{Executive Summary}
+\section*{Executive Summary}
 %\thispagestyle{empty}
-%\blindtext
+Along with water and food, sleep is among the basic necessities for long term human survival. However, we know that astronauts suffer from sleep deprivation during flights. About half of everyone who flies to space relies on sleep medication and astronauts generally get about 6 hours of sleep in orbit despite being allowed 8.5.\cite{spacesleep} The goal of this project is to provide a lighting system which can meet the demands and aid the progression of long-term space flight. Although engineers have been able to overcome most of the immediate dangers of short range space flight we must further develop novel solutions to the issues of long-term confinement in artificial environments. We propose a circadian based lighting system for space flight which will be able to maintain the natural biological rhythm humans experience in their home environment.  \\ \linebreak 
+Our Intelligent Lighting Control System, centrally controlled with sensor feedback and visual status display, is a complete solution for future astronauts and their needs. Our system features an automatic light compensation algorithm, single communication bus capable of addressing each light fixture, and touchscreen user interface for customized sleep cycles. 
 \newpage
 \renewcommand{\thepage}{\roman{page}}
 \tableofcontents
@@ -58,9 +59,8 @@ breaklines=true
 \renewcommand{\thepage}{\arabic{page}}
 \setcounter{page}{1}
 \section{Project Description}
-The goal of this project is to provide a lighting system which can meet the demands and aid the progression of long-term space flight. Although engineers have been able to overcome the immediate dangers of short range space flight we must further develop novel solutions to the issues of long-term confinement in artificial environments. Along with water and food, sleep is among the basic necessities for long term human survival. However, we know that astronauts suffer from sleep deprivation during flights. About half of everyone who flies to space relies on sleep medication and astronauts generally get about 6 hours of sleep in orbit despite being allowed 8.5.\cite{spacesleep}\\ \linebreak 
-For this reason, NASA developed the "Lighting System to Improve Circadian Rhythm Control" to be used on the International Space Station (ISS). \cite{nasapatent} This modular lighting assembly uses a micro controller with power relay to adjust color temperature and perceived intensity. Future spacecrafts will require new and innovative light control methods to improve reliability such as compensating for degrading lighting sources and maintaining the crew's circadian rhythms \cite{tsgc}. \\ \linebreak
-Our Intelligent Lighting Control System, centrally controlled with sensor feedback and visual status display, is a complete solution for future astronauts and their needs. Our system features an automatic light compensation algorithm, single communication bus capable of addressing each light fixture, and touchscreen user interface for customized sleep cycles. 
+Our project was originally a topic for the 2018-2019 Texas Space Grant Consortium Design Challenge. We adopted this topic to fit our own design and specifications.NASA has already developed the "Lighting System to Improve Circadian Rhythm Control" to be used on the International Space Station (ISS). \cite{nasapatent} This modular lighting assembly uses a micro controller with power relay to adjust color temperature and perceived intensity. Future spacecrafts will require new and innovative light control methods to improve reliability such as compensating for degrading lighting sources and maintaining each of the many crew members circadian rhythms \cite{tsgc}. \\ \linebreak
+Our lighting control system is centrally controlled, feedback assisted, and user friendly. We utilize I2C protocol which can transmit master and slave commands over just 2 digital lines. This low overhead communication makes for lightweight cabling saving precious pounds on board a space craft. Our lighting system uses long lasting, low power consumption LED's. Our lighting fixtures are modular, they can be mounted anywhere, however the LED's can be easily removed and replaced in the event of a failure. The lights can be custom set by a biological expert to simulate the solar cycle of earth, thus greatly benefiting the crew's sleep and productivity. We believe our design when implemented on a space craft can drastically improve the quality of life of the crew and ultimately the success of the mission.
 
 
 
