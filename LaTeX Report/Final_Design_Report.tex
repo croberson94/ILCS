@@ -348,6 +348,26 @@ Top housing   & 1d12h           & 4
 \end{figure}
 
 \section{Testing and Validation}
+% Intro Section
+The design requirements for the ILCS system that were tested include the automatic light compensation algorithm, single communication bus interface to address each light fixture, and the graphical user interface. \\
+
+% Verification Section
+%% Automatic Light Compensation Algorithm
+
+%% Single Communication Bus Interface
+The single communication bus interface was tested by connecting the 4Duino graphical user interface, Arduino UNO, and Infineon RGB Driver boards to the SCL and SDA data lines. Communication involved the sending of a single byte between the 4Duino and Arduino devices. The byte can be separated into three categories: sector (bits 0-1), offset (bits 2-5), and offcode (bits 6-7). The Arduino serial monitor provides a visualization of the byte that is sent between the 4Duino and the Arduino UNO, and in testing accounted for correct signals being sent by witnessing the data value through the seria monitor. \\
+
+%% Graphical User Interface
+The current graphical user interface provided by the 4Duino was tested by iterating through several design interface choices based on group feedback. Iterations of graphic design (see appendix A) and the current design (see appendix B) are available for reference. The current design displays to the user the system manufacturer name, user network connection, confirmation of user network connection, GMT timezone and lighting quadrant offset times as plain text. This plain text is updated every 5 seconds as the GMT time is retrieved from the NTP server, confirmed by reading the displayed GMT Time. There are 15 iWinbuttons that act as toggles and are controlled by the user. The 8 offset buttons act as positive (+1) and negative (\-1) for each of the four lighting quadrants. Each quadrant has its own on/off toggle button located in the center of the screen. The profile button works in conjunction with the save button, loading the preserved offsets of the save button. There are a possible of two separate profiles for all four quadrants. The reset button does what it indicates, resetting the byte that is sent and iWinbutton conditions. Placement of the toggle buttons were made to be within 20 pixels for ease of use and placed accordingly on the 240x320 resolution of the 4Duino display. \\
+
+%% Alarm System
+%% Lighting & Temperature Sensors
+The lighting and temperature sensors that regulate the lumen levels and celsius of each lighting quadrant were tested by plugging in the pins to the GPIO pins of the Arduino UNO and reading the values. The testing environment for the sensors was done in a temperate classroom environment. Lighting values to detect the lumens were gathered to be ... Temperatures are noted to be... within this environment, for more results concerning the testing of temperature sensors (see appendix A). \\
+
+%% Power Supply Output/Wiring
+% Strengths and Weaknesses Section
+The main strengths of our design are the ...
+Areas of improvement for future iterations on this design are... \\
 
 \section{Manufacturing Methods}
 As stated in our earlier encounter of limitation for funds towards 3D printing, the use of a commercial 3D printer, along with a higher quality of filament, would provide a better-quality light fixture. 3D Print Texas provided a quote of \$400 to print one set of the light fixture through printers with enhanced capabilities, such as finer printing and larger dimensions, compared to HCC's provided printers.
