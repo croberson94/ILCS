@@ -389,8 +389,11 @@ Our main mistake was not spending the money on the proper components that could 
 %%
 %%
 \subsection{Appendix B: Test Results}
+
 %Summarize, tabulate, or chart the results of all testing. Results must reference the appropriate test protocols.  All test results must include the name(s) of the person(s) responsible for conducting the tests.\\
 %%
+\subsubsection{GUI Control Communication}
+Once we completed assembly of the display model and connected the communication cabling, we were able to test the communication coding which allows the GUI input to control the lighting system. A single byte is sent and from this byte the control system will be able adjust the light cycle of each sector. In the tables below we can see the value of each byte which is sent to control each sector. Our testing involved sending each one of these bytes and making sure the correct response occurred.
 \begin{table}[]
 \begin{tabular}{llllll}
 \begin{tabular}[c]{@{}l@{}}BYTE\\   VALUE\end{tabular} & HEX VALUE & DECIMAL VALUE & SECTOR & OFFSET & OFFCODE \\
