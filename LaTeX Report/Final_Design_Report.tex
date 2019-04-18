@@ -349,9 +349,21 @@ Top housing   & 1d12h           & 4
 
 \section{Testing and Validation}
 % Introduction Section (Requirements)
-The design requirements for the ILCS system that were tested and confirmed as solutions  include the automatic light compensation algorithm, centrally controlled sensor feedback, single communication bus for fixture addressing, visual status display, and touchscreen user interface for customized sleep cycles. \\
+The design requirements for the ILCS system that were tested and confirmed as solutions include the automatic light compensation algorithm, centrally controlled sensor feedback, voltage regulation, single communication bus for fixture addressing, visual status display, and touchscreen user interface for customized sleep cycles. \\
 
-% Verification Steps Section (Requirement, Procedure, Results)
+% Verification Steps Section (Requirement, Procedure/Protocol, Results)
+%% Automatic Light Compensation Algorithm
+
+%% Centrally Controlled Sensor Feedback
+
+%% Voltage Regulation
+
+%% Single Communication Bus for Fixture Addressing
+The single communication bus interface was tested by connecting the 4Duino graphical user interface, Arduino UNO, and Infineon RGB Driver boards to the SCL and SDA data lines. Communication involved the sending of a single byte between the 4Duino and Arduino devices. The byte is comprised of three parts: quadrant sector (bits 0-1), offset (bits 2-5), and offcode (bits 6-7). A masking scheme is used to determine what quadrant sector, offset and offcode (if necessary) is encoded. Four lighting quadrants require only two bits are to manage the switch statements of the Arduino code (see Appendix D). The sleep schedule time set by the user can be an offset value between 0 to 16 hours ahead of the current GMT time, so 4 bits are utilized. Each qudrant can be turned off The Arduino serial monitor provides a visualization of the byte that is sent between the 4Duino and the Arduino UNO, and in testing accounted for correct signals being sent by witnessing the data value through the serial monitor. Two computer setups (one for the Arduino, one for the 4Duino) were needed to realize the byte being sent during communications was equivalent. \\
+
+%% Visual Status Display
+
+%% Touchscreen User Interface for Customized Sleep Cycles
 
 % Strengths and Weaknesses Section (Overall Thoughts, Improvements)
 
