@@ -354,17 +354,25 @@ The design requirements for the ILCS system that were tested and confirmed as so
 %% Automatic Light Compensation Algorithm
 
 %% Centrally Controlled Sensor Feedback
+\subsection{Centrally Controlled Sensor Feedback}
+Testing of the sensors began with simply connecting a single sensor and reading the values. Our temperature sensors were the easiest to configure due to the Arduino's on-board A/D conversion. Configuring the light sensor's I2C communication involved a little more testing. In the case of the light sensors, the A/D conversion takes place on-board the sensor board itself. \\
+The biggest problem we encountered with the light sensors is that the I2C address comes as a fixed value in the microprocessor. This means that we cannot use multiple sensors on the same bus. For this reason, we had to rely on the "bit banging" library which created separate I2C buses on 2 digital pins that we define. The commands are the called in the code using the separate instances we create in a object oriented fashion.\\
+The final testing we did with the sensor data involved transmitting the values from Arduino to GUI. All of the default I2C communication modules we used only send one byte at a time. Since the data type of our sensor data was INT, we had to split up each value into low order and high order bytes before sending to the master, and then piece them back together after receiving from the slave. This was a achieved by a simple loop statement on the arrays (see Appendix B).
 
 %% Voltage Regulation
+\subsection{Voltage Regulation}
 An initial low power supply, comprised of a PCB with industrial components, was chosen that would convert AC voltage to DC with multiple outputs and a high enough current that could power multiple components. A major issue that occurred with this power supply was not the safety concern due to lack of shielding, but low voltage and current levels that proved unsustainable to the devices in our network. A better power supply was later selected as it had a better rating on the voltage and current output. The buck converter in each RGB driver correctly stepped down the voltage while increasing the current, which in turn controlled the dimming and light intensity of the LEDs. Connections to the Arduino and 4Duino required +5V connection and are connected by wiring to the power supply's terminal. The wiring itself required crimping by use of wirecutters and connections to the top of the display requiring compact connectors through quarter inch holes in the display model base. Wire harnesses are used throughout the project so that the prototype has modularity. \\
 
 %% Single Communication Bus for Fixture Addressing
+\subsection{Single Communication Bus for Fixture Addressing}
 The single communication bus interface was tested by connecting the 4Duino graphical user interface, Arduino UNO, and Infineon RGB Driver boards to the SCL and SDA data lines. Communication involved the sending of a single byte between the 4Duino and Arduino devices. The byte is comprised of three parts: quadrant sector (bits 0-1), offset (bits 2-5), and offcode (bits 6-7). A masking scheme is used to determine what quadrant sector, offset and offcode (if necessary) is encoded. Four lighting quadrants require only two bits are to manage the switch statements of the Arduino code (Appendix D). The sleep schedule time set by the user can be an offset value between 0 to 16 hours ahead of the current GMT time, so 4 bits are utilized. Each quadrant can be turned off by making the two most significant bits high. The Arduino serial monitor provides a visualization of the byte that is sent between the 4Duino and the Arduino UNO, and in testing accounted for correct signals being sent by witnessing the data value through the serial monitor. Two computer setups (one for the Arduino, one for the 4Duino) were needed to realize the byte being sent during communications was equivalent. \\
 
 %% Visual Status Display
+\subsection{Visual Status Display}
 Workshop 4 IDE is a software package provided by 4D Systems and is able to act as the interface through serial environment programming. The visual status display works efficiently through its communication of information with text strings. The strings that are displayed include the project name, user network, wifi connection status, and current GMT timezone with aligned quadrant timezones. The project name of "ILCS Systems" describes the project. User network configuration exists within the code, where in order to acquire the GMT timezone to be displayed, both the ESP8266 wifi needs to be enabled during the void setup routine and the choice of what reliable NTP server can be used to connect to. The ESP8266 wifi checks a maximum of 5 times to see if the user network conditions (network name and password) are met. If not met, the user will be asked to check the wifi signal and restart the 4Duino. Restarting the 4Duino can be done externally by using the Atmel, Picaso graphics, and ESP8266 wifi hardware reset buttons (located on the back of the 4Duino). Testing was done by iterating through several versions of source code to find appropriate positions to display the statuses and what NTP server to connect to (Appendix A). \\
 
 %% Touchscreen User Interface for Customized Sleep Cycles
+\subsection{Touchscreen User Interface for Customized Sleep Cycles}
 The Workshop 4 IDE Arduino Extended Graphics 4Duino allows users to write programs using widgets. The widgets used for the touchscreen user interface include 15 fancy buttons setup to be toggles. Of these 15 buttons, 8 are set to be positive and negative offsets with integer increments of 1. This design decision was made for aesthetic reasons and a simple user interface. Four buttons have center alignment and indicate whether each quadrant's lighting fixture is either on or off when selected. The save button is selected for when users want to save the current offset for all quadrants currently, similar to how with thermostats there are day and night settings enabled by the user. There are two profile selections available to the user, and when press take the values recently saved by the save button and apply it to that single profile. The user profile and save button work in conjunction. In the case that a user wants to reset all profiles and offsets but does not want to deactivate the 4Duino device manually, a reset button is provided and functions appropriately. Each button is around 20 pixels apart for ease of use in selection. Previous renditions of the interface can be found in appendices (Appendix A) before the final interface design (Appendix B). \\
 
 % Strengths and Weaknesses Section (Overall Thoughts, Improvements)
@@ -414,7 +422,7 @@ Our main mistake was not spending the money on the proper components that could 
 %%
 \subsubsection{GUI Control Communication}
 Once we completed assembly of the display model and connected the communication cabling, we were able to test the communication coding which allows the GUI input to control the lighting system. A single byte is sent and from this byte the control system will be able adjust the light cycle of each sector. In the tables below we can see the value of each byte which is sent to control each sector. Our testing involved sending each one of these bytes and making sure the correct response occurred.
-\begin{table}[]
+\begin{table}[H]
 \begin{tabular}{llllll}
 \begin{tabular}[c]{@{}l@{}}BYTE\\   VALUE\end{tabular} & HEX VALUE & DECIMAL VALUE & SECTOR & OFFSET & OFFCODE \\
 00000000                                               & 00        & 0             & 1      & 0      & 0       \\
@@ -457,7 +465,7 @@ Once we completed assembly of the display model and connected the communication 
 \end{table}
 
 
-\begin{table}[]
+\begin{table}[H]
 \begin{tabular}{llllll}
 \begin{tabular}[c]{@{}l@{}}BYTE\\   VALUE\end{tabular} & HEX VALUE & DECIMAL VALUE & SECTOR & OFFSET & OFFCODE \\
 00000010                                               & 02        & 2             & 3      & 0      & 0       \\
@@ -498,7 +506,50 @@ Once we completed assembly of the display model and connected the communication 
 \caption{Byte Code Testing Sheet for Sectors 3 and 4} % needs to go inside longtable environment
 \label{tab:Testing Table Sectors 3 and 4}   
 \end{table}
+\subsubsection{Sensor Communication: Splitting Int for Transmssion}
+Since the default I2C functions can only send one byte at a time, we had to test our code to split the int values and send them one byte at a time. The code below split those values before sending to the master.
 
+\begin{lstlisting}
+unsigned int sensorArray[] = {intensity_red_s1, intensity_green_s1, intensity_blue_s1};
+		intensity_red_s2, intensity_green_s2, intensity_blue_s2,
+		intensity_red_s3, intensity_green_s3, intensity_blue_s3,
+		intensity_red_s4, intensity_green_s4, intensity_blue_s4,
+		sensor_red_s1, sensor_green_s1, sensor_blue_s1,
+		sensor_red_s2, sensor_green_s2, sensor_blue_s2,
+		sensor_red_s3, sensor_green_s3, sensor_blue_s3,
+		sensor_red_s4, sensor_green_s4, sensor_blue_s4,
+		sensor_temp_s1, sensor_temp_s2, sensor_temp_s3, sensor_temp_s4,
+		Driver_status_s1,Driver_status_s2,Driver_status_s3,Driver_status_s4,
+		RGBsensor_status_s1,RGBsensor_status_s2,RGBsensor_status_s3,RGBsensor_status_s4,
+		temp_status_s1, temp_status_s2, temp_status_s3, temp_status_s4};
+  int index = 36;
+	byte sendArray[index] = {};
+  for (int i=0; i<3;i++){
+		sendArray[i*2]= lowByte(sensorArray[i]);
+		sendArray[(i*2)+1]= highByte(sensorArray[i]);
+    Serial.println(sendArray[i]);
+  }
+\end{lstlisting}
+
+After receiving the bytes from the slave, the master would then piece them together back into an array which would contain all the int values again. We successfully testing the code below.
+
+\begin{lstlisting}
+	while (Wire.available()) { 		// slave may send less than requested
+		receiveArray[i] = Wire.read(); 		// receive a byte as character
+    Serial.println(String(receiveArray[i],HEX));
+    Serial.print("wire recieved ");
+    Serial.println(i);
+    i++;                  // print the character
+  }
+	for (int j=0; j<6; j++){
+		sensorArray[j] = (receiveArray[(j*2)+1]*256) + receiveArray[j*2];
+	}
+	for (int k=0; k<3; k++){
+		Serial.print(k);
+    Serial.print("->");
+		Serial.println(String(sensorArray[k],HEX));
+	}
+\end{lstlisting}
 %\subsection{Appendix C: Codes, Standards, Constraints}
 %Use the same table as included in the PDD but now cite the specific Codes and Standards that applied by name and number and state in which sections of the report they were applied.  The blank table is reproduced below.  An entry is required in Table C for each consideration or constraint.  Justifications must be provided for any constraint that is judged to be not applicable.\\
 %
@@ -521,10 +572,10 @@ const int NTP_PACKET_SIZE = 48;
 byte packetBuffer[NTP_PACKET_SIZE];
 String ATresponse ;
 word hndl ;
-int GMT0 = 0, GMT1 = 0, GMT2 = 0, GMT3 = 0, GMT4 = 0;
+int GMT0 = 0, GMT1 int iWinbutton1;
+= 0, GMT2 = 0, GMT3 = 0, GMT4 = 0;
 int GMO1 = 0, GMO2 = 0, GMO3 = 0, GMO4 = 0, GMO5 = 0;
 int Wbs1, Wbs3to5;
-int iWinbutton1;
 
 // Define LOG_MESSAGES to a serial port to send SPE errors messages to. Do not use the same Serial port as SPE
 //#define LOG_MESSAGES Serial
