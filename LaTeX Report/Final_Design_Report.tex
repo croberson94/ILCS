@@ -380,6 +380,8 @@ The Workshop 4 IDE Arduino Extended Graphics 4Duino allows users to write progra
 One of the main issues with light fixtures that was noted by our NASA contact, George Salazar, was the yellowing of light diffusing covers over the light sources. The topic description from the TSGC also noted light degradation as an issue which must be addressed by an "intelligent" control system. We propose a light compensating algorithm using a feedback loop between the light driver and light sensor which can offset the loss of intensity over time and loss in color spectrum accuracy due to light cover yellowing.\\
 \subsubsection{Loss of Intensity}
 %describe current correction
+The creation of our automatic light compensation algorithm required sensor feedback from the ISL29125 RGB light sensors. When enabled, our algorithm detects to see if the intensity value received serially decreases or increases over an extendeded period of time within a nominal limit. If the light intensity notably decreases from what its output should be, the current signal sent by the I2C current command changes to its appropriate value. This increase in current generates greater power absorption in the LEDs. There is then a check for this increase in current to ensure that the value increase does not result in hardware failure (burnout) of our LEDs. The flowchart and pseudocode for this corrective algorithm can be seen in later documentation (Appendix B). \\
+
 \subsubsection{Loss of Color Spectrum Accuracy}
 %describe color correction
 
