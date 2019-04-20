@@ -378,13 +378,18 @@ The Workshop 4 IDE Arduino Extended Graphics 4Duino allows users to write progra
 %% Automatic Light Compensation Algorithm
 \subsection{Light Compensation Algorithm}
 One of the main issues with light fixtures that was noted by our NASA contact, George Salazar, was the yellowing of light diffusing covers over the light sources. The topic description from the TSGC also noted light degradation as an issue which must be addressed by an "intelligent" control system. We propose a light compensating algorithm using a feedback loop between the light driver and light sensor which can offset the loss of intensity over time and loss in color spectrum accuracy due to light cover yellowing.\\
+
 \subsubsection{Loss of Intensity}
 %describe current correction
+The creation of our automatic light compensation algorithm required sensor feedback from the ISL29125 RGB light sensors. When enabled, our algorithm detects to see if the intensity value received serially decreases or increases over an extendeded period of time within a nominal limit. If the light intensity notably decreases from what its output should be, the current signal sent by the I2C current command changes to its appropriate value. This increase in current generates greater power absorption in the LEDs. There is then a check for this increase in current to ensure that the value increase does not result in hardware failure (burnout) of our LEDs. The flowchart and pseudocode for this corrective algorithm can be seen in later documentation (Appendix B). \\
+
 \subsubsection{Loss of Color Spectrum Accuracy}
 %describe color correction
-
+Color correction is implemented through reading the color intensity values from the Infineon RGB Driver boards and comparing them to the light sensor color values. A match in values read is what determines if the lighting fixture loses color spectrum accuracy. To manually fix the loss of color spectrum accuracy, a calibration mode has been created for the user to enable from the 4Duino graphical user interface. This calibration mode suspends operation of ongoing processes in order to determine what quadrant and to what degree each lighting fixture needs better accuracy (Appendix B). \\
 
 % Strengths and Weaknesses Section (Overall Thoughts, Improvements)
+The main strengths of our design are the lighting fixture modularity, single communication bus interface, low power consumption LEDs, and circadian rhythm cycling. Modular lighting fixtures allow for the removal and reapplication of new LEDs. 
+Areas of improvement for future iterations on this design are microcontroller selection with greater range of dynamic memory (including external expansion capabilities), physical space for analog push buttons, DNP3 for device communications, and all-in-one PCB desgin for the wiring. A greater dynamic range of memory is necessary for the program that is written, as the amount of global variables needed to carry out the program were seen to reach maximum capacity given the microncontroller we used. Although the 4Duino has not reached memory capacity, the lack of memory with the Arduino Uno caused some features to not be implemented, mainly the color intensity and spectrum accuracy detection. The 4Duino's 240x320 pixel 3.2" TFT-LCD touchscreen display contains 15 graphical buttons, not an analog implementation that would prove more reliable for users. The 4Duino graphical user interface was chosen due to the convenience of materials availabile to us. Communications between the 4Duino, Arduino and Infineon RGB drivers utilize I2C, however, an alternative method of communication would be to use a distributed network protocol such as DNP3 or Modbus. I2C was readily available and used by the devices we have within our network. An all-in-one PCB design would contain traces for the wiring inputs and components that act as our microcontroller. \\
 
 \section{Manufacturing Methods}
 As stated in our earlier encounter of limitation for funds towards 3D printing, the use of a commercial 3D printer, along with a higher quality of filament, would provide a better-quality light fixture. 3D Print Texas provided a quote of \$400 to print one set of the light fixture through printers with enhanced capabilities, such as finer printing and larger dimensions, compared to HCC’s provided printers.
@@ -512,11 +517,69 @@ Once we completed assembly of the display model and connected the communication 
 \caption{Byte Code Testing Sheet for Sectors 3 and 4} % needs to go inside longtable environment
 \label{tab:Testing Table Sectors 3 and 4}   
 \end{table}
+
 \subsection{Appendix B: Test Results}
 
 %Summarize, tabulate, or chart the results of all testing. Results must reference the appropriate test protocols.  All test results must include the name(s) of the person(s) responsible for conducting the tests.\\
 %%
 \subsubsection{GUI Control Communication}
+The GUI Control Communication was tested by checking each of the bytes sent by both the 4Duino and Arduino devices. The code below shows the handling of the offset byte for both the 4Duino an ARduino devices.
+
+\begin{lstlisting}
+  % - snippet -
+  Wire.beginTransmission(8); // we need an address value
+  Wire.write(quad_offset);
+  Wire.endTransmission();
+  delay(500);
+\end{lstlisting}
+
+\begin{lstlisting}
+void GUIhandler(int howMany){
+
+  code = Wire.read();
+
+  // change or initialize sector1 light fixture
+  if(code == cyc_status1){
+    i_1++;
+    i_2++;
+    i_3++;
+    i_4++;
+    if(i_1 == 24){i_1=0;}
+    if(i_2 == 24){i_2=0;}
+    if(i_3 == 24){i_3=0;}
+    if(i_4 == 24){i_4=0;}
+  }
+
+  else{
+    //decode instructions in variable code
+    cyc_status1 = code;
+    sector = code & 0x3;
+    offset = code & 0x3C;
+    offset >> 2;
+    off_code = code & 0xC0;
+    int selector = sector;
+    switch(sector){
+      case 0:
+      	i_1 = 20 - int(offset);
+      	off_status1 = int(off_code);
+      	break;
+      case 1:
+      	i_2 = 20 - int(offset);
+      	off_status2 = int(off_code);
+      	break;
+      case 2:
+      	i_3 = 20 - int(offset);
+      	off_status3 = int(off_code);
+     	 break;
+      case 3:
+      	i_4 = 20 - int(offset);
+      	off_status4 = int(off_code);
+      	break;
+
+    }
+    }
+	}
+\end{lstlisting}
 
 \subsubsection{Sensor Communication: Splitting Int for Transmssion}
 Since the default I2C functions can only send one byte at a time, we had to test our code to split the int values and send them one byte at a time. The code below split those values before sending to the master.
@@ -1671,6 +1734,7 @@ void loop() {
 }
 \end{lstlisting}  
 
+\section{Appendix E: Developmental Stages}
 
 
 
