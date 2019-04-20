@@ -636,10 +636,13 @@ After receiving the bytes from the slave, the master would then piece them toget
 // Description: 4Duino Display Code
 //
 //
+//
+//
 
 // DECLARATIONS
-#define SSID "HCCpublic"
-#define PASSWORD ""
+#include <Wire.h>
+#define SSID "Red Cloud"
+#define PASSWORD "Lawdog01"
 unsigned long epoch, hour_NTP, min_NTP, sec_NTP;
 unsigned long NTPSyncTime;
 unsigned long NTPCalcTime;
@@ -648,10 +651,25 @@ const int NTP_PACKET_SIZE = 48;
 byte packetBuffer[NTP_PACKET_SIZE];
 String ATresponse ;
 word hndl ;
-int GMT0 = 0, GMT1 int iWinbutton1;
-= 0, GMT2 = 0, GMT3 = 0, GMT4 = 0;
+int GMT0 = 0, GMT1 = 0, GMT2 = 0, GMT3 = 0, GMT4 = 0;
 int GMO1 = 0, GMO2 = 0, GMO3 = 0, GMO4 = 0, GMO5 = 0;
-int Wbs1, Wbs3to5;
+int Wbs1 = 0;
+int iWinbutton1, iWinbutton2, iWinbutton3, iWinbutton4;
+int iWinbutton5, iWinbutton6, iWinbutton7, iWinbutton8;
+int iWinbutton9, iWinbutton10, iWinbutton11, iWinbutton12;
+int iWinbutton13, iWinbutton14, iWinbutton15;
+byte quad_offset = B00000000;
+byte quad_offset_2 = B00000000;
+byte quad_offset_3 = B00000000;
+byte quad_offset_4 = B00000000;
+
+// SAVED PARAMETERS
+int SGMT0, SGMT1, SGMT2, SGMT3, SGMT4;
+int SGMO1, SGMO2, SGMO3, SGMO4, SGMO5;
+byte squad_offset;
+byte squad_offset_2;
+byte squad_offset_3;
+byte squad_offset_4;
 
 // Define LOG_MESSAGES to a serial port to send SPE errors messages to. Do not use the same Serial port as SPE
 //#define LOG_MESSAGES Serial
@@ -1004,13 +1022,7 @@ void setup()
   hndl = Display.file_LoadImageControl("NTP2~1.dat", "NTP2~1.gci", 1);
   // put your setup code here, to run once:
 
-  // Button Lineup
-  Wbs1 = 0; // up, set to non zero (specifically 2) when down
-  Display.img_SetWord(hndl, iWinbutton1, IMAGE_INDEX, 2); // Q1M where state is 0 for up and 1 for down
-  Display.img_ClearAttributes(hndl, iWinbutton1, I_TOUCH_DISABLE);
-  Display.img_Show(hndl,iWinbutton1) ;  // Q1M
 
-  Display.touch_Set(TOUCH_ENABLE); // enable the touch screen
 
   // Beginning Text
   Display.txt_FGcolour(BLUE) ;
@@ -1049,10 +1061,50 @@ void setup()
   delay(250);
   ATcmdResp(F("AT+CIPMODE=0\r\n"), 100); //if (!cipmode0()) hang("cipmode0 failed");
   delay(250);
+
+  // Button Lineup
+  Wbs1 = 0; // up, set to non zero (specifically 2) when down
+  Display.img_SetWord(hndl, iWinbutton1, IMAGE_INDEX, 0); // Q1M where state is 0 for up and 1 for down
   Display.img_ClearAttributes(hndl, iWinbutton1, I_TOUCH_DISABLE); // Q1M set to enable touch, only need to do this once
   Display.img_Show(hndl, iWinbutton1);  // Q1M show button, only do this once
   Display.img_ClearAttributes(hndl, iWinbutton2, I_TOUCH_DISABLE); // Q1P set to enable touch, only need to do this once
   Display.img_Show(hndl, iWinbutton2);  // Q1P show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton3, I_TOUCH_DISABLE); // Q2M set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton3);  // Q2M show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton2, I_TOUCH_DISABLE); // Q1P set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton2);  // Q1P show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton3, I_TOUCH_DISABLE); // Q2M set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton3);  // Q2M show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton4, I_TOUCH_DISABLE); // Winbutton4 set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton4);  // Winbutton4 show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton5, I_TOUCH_DISABLE); // Winbutton5 set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton5);  // Winbutton5 show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton6, I_TOUCH_DISABLE); // Winbutton6 set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton6);  // Winbutton6 show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton7, I_TOUCH_DISABLE); // Winbutton7 set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton7);  // Winbutton7 show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton8, I_TOUCH_DISABLE); // Winbutton8 set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton8);  // Winbutton8 show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton9, I_TOUCH_DISABLE); // Winbutton9 set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton9);  // Winbutton9 show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton10, I_TOUCH_DISABLE); // Winbutton10 set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton10);  // Winbutton10 show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton11, I_TOUCH_DISABLE); // Winbutton11 set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton11);  // Winbutton11 show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton12, I_TOUCH_DISABLE); // Winbutton12 set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton12);  // Winbutton12 show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton13, I_TOUCH_DISABLE); // Winbutton13 set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton13);  // Winbutton13 show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton14, I_TOUCH_DISABLE); // Winbutton14 set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton14);  // Winbutton14 show button, only do this once
+  Display.img_ClearAttributes(hndl, iWinbutton15, I_TOUCH_DISABLE); // Winbutton15 set to enable touch, only need to do this once
+  Display.img_Show(hndl, iWinbutton15);  // Winbutton15 show button, only do this once
+  Display.touch_Set(TOUCH_ENABLE); // enable the touch screen
+
+
+  // Wire Communicatoins
+  Wire.begin();
+
 } // end Setup **do not alter, remove or duplicate this line**
 
 void loop()
@@ -1118,6 +1170,62 @@ void loop()
     Display.img_SetWord(hndl, iWinbutton1, IMAGE_INDEX, Wbs1+1);
     Display.img_Show(hndl,iWinbutton1);
   }
+  if (n == iWinbutton2){
+  Display.img_SetWord(hndl, iWinbutton2, IMAGE_INDEX, Wbs1+1);
+  Display.img_Show(hndl, iWinbutton2);
+  }
+  if (n == iWinbutton3){
+  Display.img_SetWord(hndl, iWinbutton3, IMAGE_INDEX, Wbs1+1);
+  Display.img_Show(hndl, iWinbutton3);
+  }
+  if (n == iWinbutton4){
+  Display.img_SetWord(hndl, iWinbutton4, IMAGE_INDEX, Wbs1+1);
+  Display.img_Show(hndl, iWinbutton4);
+  }
+  if (n == iWinbutton5){
+  Display.img_SetWord(hndl, iWinbutton5, IMAGE_INDEX, Wbs1+1);
+  Display.img_Show(hndl, iWinbutton5);
+  }
+  if (n == iWinbutton6){
+  Display.img_SetWord(hndl, iWinbutton6, IMAGE_INDEX, Wbs1+1);
+  Display.img_Show(hndl, iWinbutton6);
+  }
+  if (n == iWinbutton7){
+  Display.img_SetWord(hndl, iWinbutton7, IMAGE_INDEX, Wbs1+1);
+  Display.img_Show(hndl, iWinbutton7);
+  }
+  if (n == iWinbutton8){
+  Display.img_SetWord(hndl, iWinbutton8, IMAGE_INDEX, Wbs1+1);
+  Display.img_Show(hndl, iWinbutton8);
+  }
+  if (n == iWinbutton9){
+  Display.img_SetWord(hndl, iWinbutton9, IMAGE_INDEX, Wbs1+1);
+  Display.img_Show(hndl, iWinbutton9);
+  }
+  if (n == iWinbutton10){
+  Display.img_SetWord(hndl, iWinbutton10, IMAGE_INDEX, Wbs1+1);
+  Display.img_Show(hndl, iWinbutton10);
+  }
+  if (n == iWinbutton11){
+  Display.img_SetWord(hndl, iWinbutton11, IMAGE_INDEX, Wbs1+1);
+  Display.img_Show(hndl, iWinbutton11);
+  }
+  if (n == iWinbutton12){
+  Display.img_SetWord(hndl, iWinbutton12, IMAGE_INDEX, Wbs1+1);
+  Display.img_Show(hndl, iWinbutton12);
+  }
+  if (n == iWinbutton13){
+  Display.img_SetWord(hndl, iWinbutton13, IMAGE_INDEX, Wbs1+1);
+  Display.img_Show(hndl, iWinbutton13);
+  }
+  if (n == iWinbutton14){
+  Display.img_SetWord(hndl, iWinbutton14, IMAGE_INDEX, Wbs1+1);
+  Display.img_Show(hndl, iWinbutton14);
+  }
+  if (n == iWinbutton15){
+  Display.img_SetWord(hndl, iWinbutton15, IMAGE_INDEX, Wbs1+1);
+  Display.img_Show(hndl, iWinbutton15);
+  }
   }
 
   // Released a button?
@@ -1129,11 +1237,287 @@ void loop()
       Wbs1 = 2;
     Display.img_SetWord(hndl, iWinbutton1, IMAGE_INDEX, Wbs1);
     Display.img_Show(hndl, iWinbutton1);
+  // have a counter for the number of times you can go negative
+  if (GMO1 >= -16){
+    GMO1 -= 1;
+    GMT1 -= 1;
+  }
+  if ((GMT1 <= 16) && (GMT1 >= 1)){
+    quad_offset = (byte) GMT1;
+    quad_offset = quad_offset << 2;
+    quad_offset = quad_offset & B00111100;
+  }
+  }
+  if (n == iWinbutton2){
+  if (Wbs1)
+    Wbs1 = 0;
+  else
+    Wbs1 = 2;
+  Display.img_SetWord(hndl, iWinbutton2, IMAGE_INDEX, Wbs1);
+  Display.img_Show(hndl, iWinbutton2);
+  // have a counter for the number of times you can go positive
+  if (GMO1 <= 16){
+    GMO1 += 1;
+    GMT1 += 1;
+  }
+  if ((GMT1 <= 16) && (GMT1 >= 1)){
+    quad_offset = (byte) GMT1;
+    quad_offset = quad_offset << 2;
+    quad_offset = quad_offset & B00111100;
+  }
+  }
+  if (n == iWinbutton3){
+  if (Wbs1)
+    Wbs1 = 0;
+  else
+    Wbs1 = 2;
+  Display.img_SetWord(hndl, iWinbutton3, IMAGE_INDEX, Wbs1);
+  Display.img_Show(hndl, iWinbutton3);
+  // have a counter for the number of times you can go positive
+  if (GMO2 >= -16){
+    GMO2 -= 1;
+    GMT2 -= 1;
+  }
+  if ((GMT2 <= 16) && (GMT2 >= 1)){
+    quad_offset_2 = (byte) GMT2;
+    quad_offset_2 = quad_offset_2 << 2;
+    quad_offset = quad_offset & B00111101;
+  }
+  }
+  if (n == iWinbutton4){
+  if (Wbs1)
+    Wbs1 = 0;
+  else
+    Wbs1 = 2;
+  Display.img_SetWord(hndl, iWinbutton4, IMAGE_INDEX, Wbs1);
+  Display.img_Show(hndl, iWinbutton4);
+  // have a counter for the number of times you can go positive
+  if (GMO2 <= 16){
+    GMO2 += 1;
+    GMT2 += 1;
+  }
+  if ((GMT2 <= 16) && (GMT2 >= 1)){
+    quad_offset_2 = (byte) GMT2;
+    quad_offset_2 = quad_offset_2 << 2;
+    quad_offset = quad_offset & B00111101;
+  }
+  }
+  if (n == iWinbutton5){
+  if (Wbs1)
+    Wbs1 = 0;
+  else
+    Wbs1 = 2;
+  Display.img_SetWord(hndl, iWinbutton5, IMAGE_INDEX, Wbs1);
+  Display.img_Show(hndl, iWinbutton5);
+  // have a counter for the number of times you can go positive
+  if (GMO3 >= -16){
+    GMO3 -= 1;
+    GMT3 -= 1;
+  }
+  if ((GMT3 <= 16) && (GMT3 >= 1)){
+    quad_offset_3 = (byte) GMT3;
+    quad_offset_3 = quad_offset_3 << 2;
+    quad_offset = quad_offset & B00111110;
+  }
+  }
+  if (n == iWinbutton6){
+  if (Wbs1)
+    Wbs1 = 0;
+  else
+    Wbs1 = 2;
+  Display.img_SetWord(hndl, iWinbutton6, IMAGE_INDEX, Wbs1);
+  Display.img_Show(hndl, iWinbutton6);
+  // have a counter for the number of times you can go positive
+  if (GMO3 <= 16){
+    GMO3 += 1;
+    GMT3 += 1;
+  }
+  if ((GMT3 <= 16) && (GMT3 >= 1)){
+    quad_offset_3 = (byte) GMT3;
+    quad_offset_3 = quad_offset_3 << 2;
+    quad_offset = quad_offset & B00111110;
+  }
+  }
+  if (n == iWinbutton7){
+  if (Wbs1)
+    Wbs1 = 0;
+  else
+    Wbs1 = 2;
+  Display.img_SetWord(hndl, iWinbutton7, IMAGE_INDEX, Wbs1);
+  Display.img_Show(hndl, iWinbutton7);
+  // have a counter for the number of times you can go positive
+  if (GMO4 >= -16){
+    GMO4 -= 1;
+    GMT4 -= 1;
+  }
+  if ((GMT4 <= 16) && (GMT4 >= 1)){
+    quad_offset_4 = (byte) GMT4;
+    quad_offset = quad_offset << 2;
+    quad_offset = quad_offset & B00111111;
+  }
+  }
+  if (n == iWinbutton8){
+  if (Wbs1)
+    Wbs1 = 0;
+  else
+    Wbs1 = 2;
+  Display.img_SetWord(hndl, iWinbutton8, IMAGE_INDEX, Wbs1);
+  Display.img_Show(hndl, iWinbutton8);
+  // have a counter for the number of times you can go positive
+  if (GMO4 <= 16){
+    GMO4 += 1;
+    GMT4 += 1;
+  }
+  if ((GMT4 <= 16) && (GMT4 >= 1)){
+    quad_offset_4 = (byte) GMT4;
+    quad_offset = quad_offset << 2;
+    quad_offset = quad_offset & B00111111;
+  }
+  }
+  if (n == iWinbutton9){
+    if (Wbs1){
+        Wbs1 = 0;
+        quad_offset = B00000000;
+        }
+    else{
+        Wbs1 = 2;
+        quad_offset = B11111100;
+        }
+    Display.img_SetWord(hndl, iWinbutton9, IMAGE_INDEX, Wbs1);
+    Display.img_Show(hndl, iWinbutton9);
+    //quad_offset = B11000000;
+  }
+  if (n == iWinbutton10){
+    if (Wbs1){
+        Wbs1 = 0;
+        quad_offset_2 = B00000000;
+        }
+    else{
+        Wbs1 = 2;
+        quad_offset_2 = B11111101;
+        }
+    Display.img_SetWord(hndl, iWinbutton10, IMAGE_INDEX, Wbs1);
+    Display.img_Show(hndl, iWinbutton10);
+  }
+  if (n == iWinbutton11){
+    if (Wbs1){
+        Wbs1 = 0;
+        quad_offset_3 = B00000000;
+        }
+    else{
+        Wbs1 = 2;
+        quad_offset_3 = B11111110;
+        }
+    Display.img_SetWord(hndl, iWinbutton11, IMAGE_INDEX, Wbs1);
+    Display.img_Show(hndl, iWinbutton11);
+  }
+  if (n == iWinbutton12){
+    if (Wbs1){
+        Wbs1 = 0;
+        quad_offset_4 = B00000000;
+        }
+    else{
+        Wbs1 = 2;
+        quad_offset_4 = B11111111;
+        }
+    Display.img_SetWord(hndl, iWinbutton12, IMAGE_INDEX, Wbs1);
+    Display.img_Show(hndl, iWinbutton12);
+  }
+  if (n == iWinbutton13){
+    if (Wbs1){
+        Wbs1 = 0;
+        }
+    else{
+        Wbs1 = 2;
+    GMT0 = 0;
+    GMT1 = 0;
+    GMT2 = 0;
+    GMT3 = 0;
+    GMT4 = 0;
+    GMO1 = 0;
+    GMO2 = 0;
+    GMO3 = 0;
+    GMO4 = 0;
+    GMO5 = 0;
+    byte quad_offset = B00000000;
+    //byte quad_offset_2 = B00000000;
+    //byte quad_offset_3 = B00000000;
+    //byte quad_offset_4 = B00000000;
+        }
+    Display.img_SetWord(hndl, iWinbutton13, IMAGE_INDEX, Wbs1);
+    Display.img_Show(hndl, iWinbutton13);
+  }
+  if (n == iWinbutton14){
+    if (Wbs1){
+        Wbs1 = 0;
+        }
+    else{
+        Wbs1 = 2;
+        SGMT0 = GMT0;
+        SGMT1 = GMT1;
+        SGMT2 = GMT2;
+        SGMT3 = GMT3;
+        SGMT4 = GMT4;
+        SGMO1 = GMO1;
+        SGMO2 = GMO2;
+        SGMO3 = GMO3;
+        SGMO4 = GMO4;
+        SGMO5 = GMO5;
+        squad_offset = quad_offset;
+        //squad_offset_2 = quad_offset_2;
+        //squad_offset_3 = quad_offset_3;
+        //squad_offset_4 = quad_offset_4;
+        }
+    Display.img_SetWord(hndl, iWinbutton14, IMAGE_INDEX, Wbs1);
+    Display.img_Show(hndl, iWinbutton14);
+  }
+  if (n == iWinbutton15){
+    if (Wbs1){
+        Wbs1 = 0;
+        GMT0 = SGMT0;
+        GMT1 = SGMT1;
+        GMT2 = SGMT2;
+        GMT3 = SGMT3;
+        GMT4 = SGMT4;
+        GMO1 = SGMO1;
+        GMO2 = SGMO2;
+        GMO3 = SGMO3;
+        GMO4 = SGMO4;
+        GMO5 = SGMO5;
+        quad_offset = squad_offset;
+        //quad_offset_2 = squad_offset_2;
+        //quad_offset_3 = squad_offset_3;
+        //quad_offset_4 = squad_offset_4;
+        }
+    else{
+        Wbs1 = 2;
+        GMT0 = SGMT0;
+        GMT1 = SGMT1;
+        GMT2 = SGMT2;
+        GMT3 = SGMT3;
+        GMT4 = SGMT4;
+        GMO1 = SGMO1;
+        GMO2 = SGMO2;
+        GMO3 = SGMO3;
+        GMO4 = SGMO4;
+        GMO5 = SGMO5;
+        quad_offset = squad_offset;
+        //quad_offset_2 = squad_offset_2;
+        //quad_offset_3 = squad_offset_3;
+        //quad_offset_4 = squad_offset_4;
+        }
+    Display.img_SetWord(hndl, iWinbutton15, IMAGE_INDEX, Wbs1);
+    Display.img_Show(hndl, iWinbutton15);
+  }
+  }
+  // Send out the byte to the Arduino, in any case
+  Serial.println(quad_offset);
+  Wire.beginTransmission(8); // we need an address value
+  Wire.write(quad_offset);
+  Wire.endTransmission();
+  delay(500);
 
-  }
-  }
 }
-
 
 \end{lstlisting}
 
