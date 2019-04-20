@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.6960 64-bit) (preloaded format=pdflatex 2019.2.15)  25 MAR 2019 18:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.6960 64-bit) (preloaded format=pdflatex 2019.2.26)  19 APR 2019 20:58
 entering extended mode
 **./Final_Design_Report.tex
 (Final_Design_Report.tex
 LaTeX2e <2018-12-01>
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\report.cls"
+("C:\Program Files\MiKTeX 2.9\tex/latex/base\report.cls"
 Document Class: report 2018/09/03 v1.4i Standard LaTeX document class
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\size12.clo"
+("C:\Program Files\MiKTeX 2.9\tex/latex/base\size12.clo"
 File: size12.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
 )
 \c@part=\count80
@@ -20,34 +20,30 @@ File: size12.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-) ("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\inputenc.st
-y"
+)
+("C:\Program Files\MiKTeX 2.9\tex/latex/base\inputenc.sty"
 Package: inputenc 2018/08/11 v1.3c Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
- ("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\latin1.def"
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/base\latin1.def"
 File: latin1.def 2018/08/11 v1.3c Input encoding file
 ))
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometry\geometry.
-sty"
+("C:\Program Files\MiKTeX 2.9\tex/latex/geometry\geometry.sty"
 Package: geometry 2018/04/16 v5.8 Page Geometry
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\keyval.st
-y"
+("C:\Program Files\MiKTeX 2.9\tex/latex/graphics\keyval.sty"
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks16
 )
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/generic/oberdiek\ifpdf.s
-ty"
+("C:\Program Files\MiKTeX 2.9\tex/generic/oberdiek\ifpdf.sty"
 Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
 )
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/generic/oberdiek\ifvtex.
-sty"
+("C:\Program Files\MiKTeX 2.9\tex/generic/oberdiek\ifvtex.sty"
 Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/generic/ifxetex\ifxetex.
-sty"
+("C:\Program Files\MiKTeX 2.9\tex/generic/ifxetex\ifxetex.sty"
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count89
@@ -63,32 +59,25 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen110
 \Gm@dimlist=\toks17
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometry\geometry.
-cfg"))
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsmath.st
-y"
+("C:\Program Files\MiKTeX 2.9\tex/latex/geometry\geometry.cfg"))
+("C:\Program Files\MiKTeX 2.9\tex/latex/amsmath\amsmath.sty"
 Package: amsmath 2018/12/01 v2.17b AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
-
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amstext.st
-y"
+("C:\Program Files\MiKTeX 2.9\tex/latex/amsmath\amstext.sty"
 Package: amstext 2000/06/29 v2.01 AMS text
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsgen.sty
-"
+("C:\Program Files\MiKTeX 2.9\tex/latex/amsmath\amsgen.sty"
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks18
 \ex@=\dimen111
 ))
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsbsy.sty
-"
+("C:\Program Files\MiKTeX 2.9\tex/latex/amsmath\amsbsy.sty"
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen112
 )
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsopn.sty
-"
+("C:\Program Files\MiKTeX 2.9\tex/latex/amsmath\amsopn.sty"
 Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count92
@@ -129,23 +118,20 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 730.
 LaTeX Info: Redefining \[ on input line 2844.
 LaTeX Info: Redefining \] on input line 2845.
 )
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\amsfonts.
-sty"
+("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\amsfonts.sty"
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\amssymb.s
-ty"
+("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\amssymb.sty"
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 )
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/blindtext\blindtex
-t.sty"
+("C:\Program Files\MiKTeX 2.9\tex/latex/blindtext\blindtext.sty"
 Package: blindtext 2012/01/06 V2.0 blindtext-Package
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\xspace.sty"
+("C:\Program Files\MiKTeX 2.9\tex/latex/tools\xspace.sty"
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 )
 \c@blindtext=\count104
@@ -167,31 +153,27 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 \c@blind@pangramcount=\count120
 \c@blind@pangrammax=\count121
 )
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\graphicx.
-sty"
+("C:\Program Files\MiKTeX 2.9\tex/latex/graphics\graphicx.sty"
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\graphics.
-sty"
+("C:\Program Files\MiKTeX 2.9\tex/latex/graphics\graphics.sty"
 Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\trig.sty"
+("C:\Program Files\MiKTeX 2.9\tex/latex/graphics\trig.sty"
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-cfg\graph
-ics.cfg"
+("C:\Program Files\MiKTeX 2.9\tex/latex/graphics-cfg\graphics.cfg"
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-def\pdfte
-x.def"
+("C:\Program Files\MiKTeX 2.9\tex/latex/graphics-def\pdftex.def"
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen120
 \Gin@req@width=\dimen121
 )
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/float\float.sty"
+("C:\Program Files\MiKTeX 2.9\tex/latex/float\float.sty"
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count122
 \float@exts=\toks23
@@ -199,23 +181,20 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks24
 \@floatcapt=\box30
 )
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\indentfirst.
-sty"
+("C:\Program Files\MiKTeX 2.9\tex/latex/tools\indentfirst.sty"
 Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
-) ("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/url\url.sty"
+)
+("C:\Program Files\MiKTeX 2.9\tex/latex/url\url.sty"
 \Urlmuskip=\muskip11
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/caption\subcaption
-.sty"
+("C:\Program Files\MiKTeX 2.9\tex/latex/caption\subcaption.sty"
 Package: subcaption 2018/05/01 v1.1-162 Sub-captions (AR)
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/caption\caption.st
-y"
+("C:\Program Files\MiKTeX 2.9\tex/latex/caption\caption.sty"
 Package: caption 2018/10/06 v3.3-154 Customizing captions (AR)
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/caption\caption3.s
-ty"
+("C:\Program Files\MiKTeX 2.9\tex/latex/caption\caption3.sty"
 Package: caption3 2018/09/12 v1.8c caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 64.
 \captionmargin=\dimen122
@@ -233,8 +212,7 @@ Package caption Info: float package is loaded.
 \c@subfigure=\count125
 \c@subtable=\count126
 )
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\listings.
-sty"
+("C:\Program Files\MiKTeX 2.9\tex/latex/listings\listings.sty"
 \lst@mode=\count127
 \lst@gtempboxa=\box31
 \lst@token=\toks25
@@ -248,19 +226,18 @@ sty"
 \lst@lineno=\count132
 \lst@maxwidth=\dimen132
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstmisc.s
-ty"
-File: lstmisc.sty 2018/09/02 1.7 (Carsten Heinz)
+("C:\Program Files\MiKTeX 2.9\tex/latex/listings\lstmisc.sty"
+File: lstmisc.sty 2019/02/27 1.8b (Carsten Heinz)
 \c@lstnumber=\count133
 \lst@skipnumbers=\count134
 \lst@framebox=\box32
 )
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\listings.
-cfg"
-File: listings.cfg 2018/09/02 1.7 listings configuration
+("C:\Program Files\MiKTeX 2.9\tex/latex/listings\listings.cfg"
+File: listings.cfg 2019/02/27 1.8b listings configuration
 ))
-Package: listings 2018/09/02 1.7 (Carsten Heinz)
- (Final_Design_Report.aux
+Package: listings 2019/02/27 1.8b (Carsten Heinz)
+
+(Final_Design_Report.aux
 
 LaTeX Warning: Label `fig:sub1' multiply defined.
 
@@ -344,9 +321,7 @@ LaTeX Font Info:    ... okay on input line 24.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/context/base\supp-pdf.mk
-ii"
+("C:\Program Files\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count135
 \scratchdimen=\dimen133
@@ -359,46 +334,35 @@ ii"
 \MPnumerator=\count139
 \makeMPintoPDFobject=\count140
 \everyMPtoPDFconversion=\toks27
-)
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/oberdiek\epstopdf-
-base.sty"
+) ("C:\Program Files\MiKTeX 2.9\tex/latex/oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/generic/oberdiek\infware
-rr.sty"
+("C:\Program Files\MiKTeX 2.9\tex/generic/oberdiek\infwarerr.sty"
 Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
 )
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/oberdiek\grfext.st
-y"
+("C:\Program Files\MiKTeX 2.9\tex/latex/oberdiek\grfext.sty"
 Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/generic/oberdiek\kvdefin
-ekeys.sty"
+("C:\Program Files\MiKTeX 2.9\tex/generic/oberdiek\kvdefinekeys.sty"
 Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/generic/oberdiek\ltxcmds
-.sty"
+("C:\Program Files\MiKTeX 2.9\tex/generic/oberdiek\ltxcmds.sty"
 Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 )))
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/oberdiek\kvoptions
-.sty"
+("C:\Program Files\MiKTeX 2.9\tex/latex/oberdiek\kvoptions.sty"
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/generic/oberdiek\kvsetke
-ys.sty"
+("C:\Program Files\MiKTeX 2.9\tex/generic/oberdiek\kvsetkeys.sty"
 Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/generic/oberdiek\etexcmd
-s.sty"
+("C:\Program Files\MiKTeX 2.9\tex/generic/oberdiek\etexcmds.sty"
 Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/generic/oberdiek\ifluate
-x.sty"
+("C:\Program Files\MiKTeX 2.9\tex/generic/oberdiek\ifluatex.sty"
 Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 ))))
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/generic/oberdiek\pdftexc
-mds.sty"
+("C:\Program Files\MiKTeX 2.9\tex/generic/oberdiek\pdftexcmds.sty"
 Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: LuaTeX not detected.
@@ -424,280 +388,333 @@ Package pdftex.def Info: imgs/uttsealgray.png  used on input line 28.
 (pdftex.def)             Requested size: 130.47144pt x 130.45532pt.
  [1
 
-{C:/Users/grigg/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./imgs/utts
-ealgray.png>] (Final_Design_Report.toc
+{C:/Users/Charles/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./imgs/ut
+tsealgray.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 51--53
+
+ []
+
+[1] (Final_Design_Report.toc
 LaTeX Font Info:    Try loading font information for U+msa on input line 1.
 
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
+("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 1.
-("C:\Users\grigg\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ))
 \tf@toc=\write3
 \openout3 = `Final_Design_Report.toc'.
 
- [1
+ [2
 
-] (Final_Design_Report.lof)
+]
+(Final_Design_Report.lof)
 \tf@lof=\write4
 \openout4 = `Final_Design_Report.lof'.
 
- [2
+ [3
 
 ] (Final_Design_Report.lot)
 \tf@lot=\write5
 \openout5 = `Final_Design_Report.lot'.
 
- [3
+ [4
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 61--64
+Underfull \hbox (badness 10000) in paragraph at lines 62--64
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--64
+Underfull \hbox (badness 10000) in paragraph at lines 70--74
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 80--84
+Underfull \hbox (badness 10000) in paragraph at lines 70--74
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 80--84
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 80--84
+Underfull \hbox (badness 10000) in paragraph at lines 70--74
 
  []
 
 [1]
-<"imgs/High Level Design Overview gray".png, id=24, 692.5875pt x 755.82375pt>
+<"imgs/High Level Design Overview gray".png, id=27, 692.5875pt x 755.82375pt>
 File: "imgs/High Level Design Overview gray".png Graphic file (type png)
 <use "imgs/High Level Design Overview gray".png>
 Package pdftex.def Info: "imgs/High Level Design Overview gray".png  used on in
-put line 96.
+put line 86.
 (pdftex.def)             Requested size: 391.40768pt x 427.15654pt.
  [2 <./imgs/High Level Design Overview gray.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 106--108
+Underfull \hbox (badness 10000) in paragraph at lines 96--98
 
  []
 
-<"imgs/Buck".png, id=29, 1023.825pt x 487.8225pt>
+<"imgs/Buck".png, id=33, 1023.825pt x 487.8225pt>
 File: "imgs/Buck".png Graphic file (type png)
 <use "imgs/Buck".png>
-Package pdftex.def Info: "imgs/Buck".png  used on input line 111.
+Package pdftex.def Info: "imgs/Buck".png  used on input line 101.
 (pdftex.def)             Requested size: 326.1753pt x 155.41414pt.
-<"display/Part1revised".png, id=30, 524.86087pt x 330.33412pt>
+<"display/Part1revised".png, id=34, 524.86087pt x 330.33412pt>
 File: "display/Part1revised".png Graphic file (type png)
 <use "display/Part1revised".png>
-Package pdftex.def Info: "display/Part1revised".png  used on input line 125.
+Package pdftex.def Info: "display/Part1revised".png  used on input line 115.
 (pdftex.def)             Requested size: 217.4502pt x 136.85423pt.
-<"display/Part1revisedwire".png, id=31, 549.85425pt x 333.6465pt>
+<"display/Part1revisedwire".png, id=35, 549.85425pt x 333.6465pt>
 File: "display/Part1revisedwire".png Graphic file (type png)
 <use "display/Part1revisedwire".png>
-Package pdftex.def Info: "display/Part1revisedwire".png  used on input line 131
+Package pdftex.def Info: "display/Part1revisedwire".png  used on input line 121
 .
 (pdftex.def)             Requested size: 217.4502pt x 131.94418pt.
-[3 <./imgs/Buck.png>]
-<"display/ledplate".png, id=37, 2094.82625pt x 2094.82625pt>
+<"display/ledplate".png, id=36, 2094.82625pt x 2094.82625pt>
 File: "display/ledplate".png Graphic file (type png)
 <use "display/ledplate".png>
-Package pdftex.def Info: "display/ledplate".png  used on input line 140.
+Package pdftex.def Info: "display/ledplate".png  used on input line 130.
 (pdftex.def)             Requested size: 217.4502pt x 217.42207pt.
-<"display/Part2revised".png, id=38, 455.301pt x 383.93437pt>
+[3 <./imgs/Buck.png>]
+<"display/Part2revised".png, id=41, 455.301pt x 383.93437pt>
 File: "display/Part2revised".png Graphic file (type png)
 <use "display/Part2revised".png>
-Package pdftex.def Info: "display/Part2revised".png  used on input line 148.
+Package pdftex.def Info: "display/Part2revised".png  used on input line 138.
 (pdftex.def)             Requested size: 217.4502pt x 183.36664pt.
-<"display/Part2revisedwire".png, id=39, 489.93037pt x 369.7815pt>
+<"display/Part2revisedwire".png, id=42, 489.93037pt x 369.7815pt>
 File: "display/Part2revisedwire".png Graphic file (type png)
 <use "display/Part2revisedwire".png>
-Package pdftex.def Info: "display/Part2revisedwire".png  used on input line 154
+Package pdftex.def Info: "display/Part2revisedwire".png  used on input line 144
 .
 (pdftex.def)             Requested size: 217.4502pt x 164.12059pt.
-<"display/middle".png, id=40, 2276.505pt x 2276.505pt>
+<"display/middle".png, id=43, 2276.505pt x 2276.505pt>
 File: "display/middle".png Graphic file (type png)
 <use "display/middle".png>
-Package pdftex.def Info: "display/middle".png  used on input line 163.
+Package pdftex.def Info: "display/middle".png  used on input line 153.
 (pdftex.def)             Requested size: 217.4502pt x 217.45126pt.
- [4 <./display/Part1revised.png> <./display/Part1revisedwire.png> <./display/le
-dplate.png>]
-<"display/Part3revised".png, id=48, 472.76625pt x 385.44pt>
+<"display/Part3revised".png, id=44, 472.76625pt x 385.44pt>
 File: "display/Part3revised".png Graphic file (type png)
 <use "display/Part3revised".png>
-Package pdftex.def Info: "display/Part3revised".png  used on input line 171.
+Package pdftex.def Info: "display/Part3revised".png  used on input line 161.
 (pdftex.def)             Requested size: 217.4502pt x 177.2869pt.
-<"display/Part3revisedwire".png, id=49, 476.982pt x 381.52538pt>
+<"display/Part3revisedwire".png, id=45, 476.982pt x 381.52538pt>
 File: "display/Part3revisedwire".png Graphic file (type png)
 <use "display/Part3revisedwire".png>
-Package pdftex.def Info: "display/Part3revisedwire".png  used on input line 177
+Package pdftex.def Info: "display/Part3revisedwire".png  used on input line 167
 .
 (pdftex.def)             Requested size: 217.4502pt x 173.93196pt.
- [5 <./display/Part2revised.png> <./display/Part2revisedwire.png> <./display/mi
-ddle.png>]
-<"imgs/ILCS_Flowchart".png, id=56, 768.8725pt x 1035.87pt>
+ [4 <./display/Part1revised.png> <./display/Part1revisedwire.png> <./display/le
+dplate.png> <./display/Part2revised.png> <./display/Part2revisedwire.png>] [5 <
+./display/middle.png> <./display/Part3revised.png> <./display/Part3revisedwire.
+png>]
+<"imgs/ILCS_Flowchart".png, id=61, 768.8725pt x 1035.87pt>
 File: "imgs/ILCS_Flowchart".png Graphic file (type png)
 <use "imgs/ILCS_Flowchart".png>
-Package pdftex.def Info: "imgs/ILCS_Flowchart".png  used on input line 198.
+Package pdftex.def Info: "imgs/ILCS_Flowchart".png  used on input line 188.
 (pdftex.def)             Requested size: 391.40768pt x 527.33835pt.
- [6 <./display/Part3revised.png> <./display/Part3revisedwire.png>] [7 <./imgs/I
-LCS_Flowchart.png>]
+ [6 <./imgs/ILCS_Flowchart.png>]
 <"imgs/lightsense".png, id=66, 498.86375pt x 523.9575pt>
 File: "imgs/lightsense".png Graphic file (type png)
 <use "imgs/lightsense".png>
-Package pdftex.def Info: "imgs/lightsense".png  used on input line 210.
+Package pdftex.def Info: "imgs/lightsense".png  used on input line 200.
 (pdftex.def)             Requested size: 217.4502pt x 228.38338pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--213
+Underfull \hbox (badness 10000) in paragraph at lines 197--203
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--213
+Underfull \hbox (badness 10000) in paragraph at lines 197--203
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 214--215
+Underfull \hbox (badness 10000) in paragraph at lines 204--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 214--215
+Underfull \hbox (badness 10000) in paragraph at lines 204--205
 
  []
 
-[8 <./imgs/lightsense.png>]
+[7 <./imgs/lightsense.png>]
 <"imgs/tempsense".png, id=71, 642.4pt x 642.4pt>
 File: "imgs/tempsense".png Graphic file (type png)
 <use "imgs/tempsense".png>
-Package pdftex.def Info: "imgs/tempsense".png  used on input line 218.
+Package pdftex.def Info: "imgs/tempsense".png  used on input line 208.
 (pdftex.def)             Requested size: 217.4502pt x 217.45248pt.
-<"display/display model".png, id=72, 462.528pt x 351.41287pt>
+ [8 <./imgs/tempsense.png>]
+<"display/display model".png, id=77, 462.528pt x 351.41287pt>
 File: "display/display model".png Graphic file (type png)
 <use "display/display model".png>
-Package pdftex.def Info: "display/display model".png  used on input line 233.
+Package pdftex.def Info: "display/display model".png  used on input line 223.
 (pdftex.def)             Requested size: 326.1753pt x 247.82652pt.
- [9 <./imgs/tempsense.png>]
 <"display/model".png, id=78, 2274.4975pt x 2275.50125pt>
 File: "display/model".png Graphic file (type png)
 <use "display/model".png>
-Package pdftex.def Info: "display/model".png  used on input line 239.
+Package pdftex.def Info: "display/model".png  used on input line 229.
 (pdftex.def)             Requested size: 217.4502pt x 217.52899pt.
- [10 <./display/display model.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 244--247
+ [9 <./display/display model.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 234--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 244--247
+Underfull \hbox (badness 10000) in paragraph at lines 234--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 244--247
+Underfull \hbox (badness 10000) in paragraph at lines 234--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 244--247
+Underfull \hbox (badness 10000) in paragraph at lines 234--237
 
  []
 
-[11 <./display/model.png>]
+[10 <./display/model.png>]
 <"imgs/Arduino".png, id=87, 2039.36906pt x 1590.69281pt>
 File: "imgs/Arduino".png Graphic file (type png)
 <use "imgs/Arduino".png>
-Package pdftex.def Info: "imgs/Arduino".png  used on input line 253.
+Package pdftex.def Info: "imgs/Arduino".png  used on input line 243.
 (pdftex.def)             Requested size: 521.87914pt x 407.06549pt.
- [12 <./imgs/Arduino.png>]
+ [11 <./imgs/Arduino.png>]
 <"imgs/4duino".png, id=91, 2036.35782pt x 1578.64781pt>
 File: "imgs/4duino".png Graphic file (type png)
 <use "imgs/4duino".png>
-Package pdftex.def Info: "imgs/4duino".png  used on input line 259.
+Package pdftex.def Info: "imgs/4duino".png  used on input line 249.
 (pdftex.def)             Requested size: 521.87914pt x 404.56123pt.
- [13 <./imgs/4duino.png>]
+ [12 <./imgs/4duino.png>]
 <"imgs/Infineon".png, id=95, 2039.36906pt x 1590.69281pt>
 File: "imgs/Infineon".png Graphic file (type png)
 <use "imgs/Infineon".png>
-Package pdftex.def Info: "imgs/Infineon".png  used on input line 265.
+Package pdftex.def Info: "imgs/Infineon".png  used on input line 255.
 (pdftex.def)             Requested size: 521.87914pt x 407.06549pt.
 
-[14 <./imgs/Infineon.png>]
+[13 <./imgs/Infineon.png>]
 <"imgs/LightSensor".png, id=99, 2036.35782pt x 1581.65906pt>
 File: "imgs/LightSensor".png Graphic file (type png)
 <use "imgs/LightSensor".png>
-Package pdftex.def Info: "imgs/LightSensor".png  used on input line 271.
+Package pdftex.def Info: "imgs/LightSensor".png  used on input line 261.
 (pdftex.def)             Requested size: 521.87914pt x 405.33293pt.
- [15 <./imgs/LightSensor.png>]
+ [14 <./imgs/LightSensor.png>]
 <"imgs/PowerSupply".png, id=104, 2039.36906pt x 1581.65906pt>
 File: "imgs/PowerSupply".png Graphic file (type png)
 <use "imgs/PowerSupply".png>
-Package pdftex.def Info: "imgs/PowerSupply".png  used on input line 277.
+Package pdftex.def Info: "imgs/PowerSupply".png  used on input line 267.
 (pdftex.def)             Requested size: 521.87914pt x 404.75371pt.
- [16 <./imgs/PowerSupply.png>]
-Overfull \hbox (3.26126pt too wide) in paragraph at lines 296--299
+ [15 <./imgs/PowerSupply.png>]
+Overfull \hbox (3.26126pt too wide) in paragraph at lines 273--276
 []\OT1/cmr/m/n/12 Our pro-to-type was de-signed to be as cost ef-fec-tive as po
 s-si-ble. This fast-prototyping
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 296--299
+Underfull \hbox (badness 10000) in paragraph at lines 273--276
 
  []
 
-[17]
+[16]
 <"imgs/Part1curaBW".png, id=111, 546.04pt x 600.2425pt>
 File: "imgs/Part1curaBW".png Graphic file (type png)
 <use "imgs/Part1curaBW".png>
-Package pdftex.def Info: "imgs/Part1curaBW".png  used on input line 356.
+Package pdftex.def Info: "imgs/Part1curaBW".png  used on input line 334.
 (pdftex.def)             Requested size: 260.94289pt x 286.84918pt.
 <"imgs/Part2curaBW".png, id=112, 554.07pt x 606.265pt>
 File: "imgs/Part2curaBW".png Graphic file (type png)
 <use "imgs/Part2curaBW".png>
-Package pdftex.def Info: "imgs/Part2curaBW".png  used on input line 362.
+Package pdftex.def Info: "imgs/Part2curaBW".png  used on input line 340.
 (pdftex.def)             Requested size: 260.94289pt x 285.52739pt.
- [18 <./imgs/Part1curaBW.png>]
+ [17 <./imgs/Part1curaBW.png>]
 <"imgs/Part3curaBW".png, id=116, 549.05125pt x 586.19pt>
 File: "imgs/Part3curaBW".png Graphic file (type png)
 <use "imgs/Part3curaBW".png>
-Package pdftex.def Info: "imgs/Part3curaBW".png  used on input line 368.
+Package pdftex.def Info: "imgs/Part3curaBW".png  used on input line 346.
 (pdftex.def)             Requested size: 260.94289pt x 278.5952pt.
- (Final_Design_Report.bbl [19 <./imgs/Part2curaBW.png> <./imgs/Part3curaBW.png>
-]) [20] [21] [22] [23] [24] [25] [26]
-[27] [28] [29] [30] [31] [32] [33] [34] [35] [36] [37] [38]
+
+Underfull \hbox (badness 10000) in paragraph at lines 352--353
+
+ []
+
+[18 <./imgs/Part2curaBW.png> <./imgs/Part3curaBW.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 365--366
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 369--370
+
+ []
+
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 373--374
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 377--378
+
+ []
+
+[20]
+Underfull \hbox (badness 10000) in paragraph at lines 381--382
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 385--386
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 389--390
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 392--394
+
+ []
+
+[21] [22] [23] (Final_Design_Report.bbl)
+Overfull \hbox (10.5668pt too wide) in paragraph at lines 438--475
+[][] 
+ []
+
+[24] [25]
+Overfull \hbox (10.5668pt too wide) in paragraph at lines 481--518
+[][] 
+ []
+
+[26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36] [37] [38] [39] [40]
+[41] [42] [43] [44] [45] [46] [47] [48] [49] [50] [51] [52] [53]
 (Final_Design_Report.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 6086 strings out of 492946
- 90877 string characters out of 3126266
- 313329 words of memory out of 3000000
- 9860 multiletter control sequences out of 15000+200000
+ 6089 strings out of 492946
+ 88838 string characters out of 3135521
+ 303362 words of memory out of 3000000
+ 9863 multiletter control sequences out of 15000+200000
  12295 words of font info for 46 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,8n,40p,1166b,1585s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/grigg/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmbx12.pfb><C:/Users/grigg/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmcsc10.pfb><C:/Users/grigg/AppData/Local/Programs/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmitt10.pfb><C:/Users/grigg/AppData/Local/Progra
-ms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/grigg/AppData/
-Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/gr
-igg/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb
-><C:/Users/grigg/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
-cm/cmtt10.pfb>
-Output written on Final_Design_Report.pdf (42 pages, 12797376 bytes).
+ 42i,14n,40p,1387b,1588s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmitt10.pfb><C:/Program Files/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmtt10.pfb>
+Output written on Final_Design_Report.pdf (58 pages, 12829410 bytes).
 PDF statistics:
- 207 PDF objects out of 1000 (max. 8388607)
+ 258 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  121 words of extra memory for PDF output out of 10000 (max. 10000000)
 

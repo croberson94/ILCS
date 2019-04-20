@@ -5,16 +5,34 @@
 \contentsline {subsubsection}{RGB Light Emitting Diodes}{3}% 
 \contentsline {subsubsection}{RGB LED Driver}{3}% 
 \contentsline {subsubsection}{Light Fixture Housing}{3}% 
-\contentsline {subsection}{\numberline {3.2}Control System}{6}% 
-\contentsline {subsubsection}{Central Microprocessor Unit}{6}% 
-\contentsline {subsubsection}{Graphical User Interface}{7}% 
-\contentsline {subsubsection}{Sensors}{8}% 
-\contentsline {subsubsection}{Power Supply}{9}% 
-\contentsline {subsection}{\numberline {3.3}Display Model}{10}% 
-\contentsline {subsection}{\numberline {3.4}System Schematics}{12}% 
-\contentsline {section}{\numberline {4}Prototype Design and Fabrication}{17}% 
-\contentsline {subsection}{\numberline {4.1}Bill of Materials}{17}% 
-\contentsline {subsection}{\numberline {4.2}Assembly Drawings}{18}% 
-\contentsline {section}{\numberline {9}References}{20}% 
-\contentsline {subsection}{\numberline {9.1}Appendix D: 4Duino Code}{20}% 
-\contentsline {subsection}{\numberline {9.2}Appendix E: Arduino Code}{31}% 
+\contentsline {subsection}{\numberline {3.2}Control System}{5}% 
+\contentsline {subsubsection}{Central Microprocessor Unit}{5}% 
+\contentsline {subsubsection}{Graphical User Interface}{6}% 
+\contentsline {subsubsection}{Sensors}{7}% 
+\contentsline {subsubsection}{Power Supply}{8}% 
+\contentsline {subsection}{\numberline {3.3}Display Model}{9}% 
+\contentsline {subsection}{\numberline {3.4}System Schematics}{11}% 
+\contentsline {section}{\numberline {4}Prototype Design and Fabrication}{16}% 
+\contentsline {subsection}{\numberline {4.1}Bill of Materials}{16}% 
+\contentsline {subsection}{\numberline {4.2}Assembly Drawings}{17}% 
+\contentsline {section}{\numberline {5}Testing and Validation}{19}% 
+\contentsline {subsection}{\numberline {5.1}Centrally Controlled Sensor Feedback}{19}% 
+\contentsline {subsection}{\numberline {5.2}Voltage Regulation}{19}% 
+\contentsline {subsection}{\numberline {5.3}Single Communication Bus for Fixture Addressing}{19}% 
+\contentsline {subsection}{\numberline {5.4}Visual Status Display}{20}% 
+\contentsline {subsection}{\numberline {5.5}Touchscreen User Interface for Customized Sleep Cycles}{20}% 
+\contentsline {subsection}{\numberline {5.6}Light Compensation Algorithm}{21}% 
+\contentsline {subsubsection}{Loss of Intensity}{21}% 
+\contentsline {subsubsection}{Loss of Color Spectrum Accuracy}{21}% 
+\contentsline {section}{\numberline {6}Manufacturing Methods}{22}% 
+\contentsline {section}{\numberline {7}Broader Impacts of the Project}{22}% 
+\contentsline {section}{\numberline {8}Conclusions}{23}% 
+\contentsline {section}{\numberline {9}References}{24}% 
+\contentsline {section}{\numberline {10}Appendices}{25}% 
+\contentsline {subsection}{\numberline {10.1}Appendix A: Test Protocols}{25}% 
+\contentsline {subsection}{\numberline {10.2}Appendix B: Test Results}{27}% 
+\contentsline {subsubsection}{GUI Control Communication}{27}% 
+\contentsline {subsubsection}{Sensor Communication: Splitting Int for Transmssion}{29}% 
+\contentsline {subsection}{\numberline {10.3}Appendix C: 4Duino Code}{30}% 
+\contentsline {subsection}{\numberline {10.4}Appendix D: Arduino Code}{40}% 
+\contentsline {section}{\numberline {11}Appendix E: Concept Art}{53}% 
