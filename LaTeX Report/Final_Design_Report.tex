@@ -640,15 +640,15 @@ After receiving the bytes from the slave, the master would then piece them toget
 \begin{lstlisting}
 // Filename: ILCS.4Dino
 // Description: 4Duino Display Code
-//
+// Author: Charles Roberson
 //
 //
 //
 
 // DECLARATIONS
 #include <Wire.h>
-#define SSID "Red Cloud"
-#define PASSWORD "Lawdog01"
+#define SSID "HCCPublic" // replace with your user network
+#define PASSWORD "" // replace with your password (optional)
 unsigned long epoch, hour_NTP, min_NTP, sec_NTP;
 unsigned long NTPSyncTime;
 unsigned long NTPCalcTime;
