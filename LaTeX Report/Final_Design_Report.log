@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.6960 64-bit) (preloaded format=pdflatex 2019.2.26)  19 APR 2019 20:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.6960 64-bit) (preloaded format=pdflatex 2019.2.26)  19 APR 2019 22:51
 entering extended mode
 **./Final_Design_Report.tex
 (Final_Design_Report.tex
@@ -390,6 +390,10 @@ Package pdftex.def Info: imgs/uttsealgray.png  used on input line 28.
 
 {C:/Users/Charles/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./imgs/ut
 tsealgray.png>]
+
+LaTeX Warning: Citation `spacesleep' on page 1 undefined on input line 51.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 51--53
 
  []
@@ -424,6 +428,13 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  [4
 
 ]
+
+LaTeX Warning: Citation `nasapatent' on page 1 undefined on input line 62.
+
+
+LaTeX Warning: Citation `tsgc' on page 1 undefined on input line 62.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 62--64
 
  []
@@ -646,75 +657,87 @@ Underfull \hbox (badness 10000) in paragraph at lines 365--366
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 369--370
+Underfull \hbox (badness 10000) in paragraph at lines 367--368
 
  []
 
 [19]
-Underfull \hbox (badness 10000) in paragraph at lines 373--374
+Underfull \hbox (badness 10000) in paragraph at lines 371--372
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 377--378
+Underfull \hbox (badness 10000) in paragraph at lines 375--376
 
  []
 
 [20]
-Underfull \hbox (badness 10000) in paragraph at lines 381--382
+Underfull \hbox (badness 10000) in paragraph at lines 379--380
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 385--386
+Underfull \hbox (badness 10000) in paragraph at lines 383--384
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 389--390
+Underfull \hbox (badness 10000) in paragraph at lines 387--388
+
+ []
+
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 391--392
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 392--394
+Underfull \hbox (badness 10000) in paragraph at lines 395--396
 
  []
 
-[21] [22] [23] (Final_Design_Report.bbl)
-Overfull \hbox (10.5668pt too wide) in paragraph at lines 438--475
+
+Underfull \hbox (badness 10000) in paragraph at lines 398--400
+
+ []
+
+[22] [23] [24] (Final_Design_Report.bbl)
+Overfull \hbox (10.5668pt too wide) in paragraph at lines 444--481
 [][] 
  []
 
-[24] [25]
-Overfull \hbox (10.5668pt too wide) in paragraph at lines 481--518
+[25]
+Overfull \hbox (10.5668pt too wide) in paragraph at lines 487--524
 [][] 
  []
 
 [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36] [37] [38] [39] [40]
-[41] [42] [43] [44] [45] [46] [47] [48] [49] [50] [51] [52] [53]
-(Final_Design_Report.aux)
+[41] [42] [43] [44] [45] [46] [47] [48] [49] [50] [51] [52] [53] [54] [55]
+[56] [57] [58] [59] [60] [61] (Final_Design_Report.aux)
+
+LaTeX Warning: There were undefined references.
+
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 6089 strings out of 492946
- 88838 string characters out of 3135521
- 303362 words of memory out of 3000000
- 9863 multiletter control sequences out of 15000+200000
- 12295 words of font info for 46 fonts, out of 3000000 for 9000
+ 6084 strings out of 492946
+ 88785 string characters out of 3135521
+ 333353 words of memory out of 3000000
+ 9859 multiletter control sequences out of 15000+200000
+ 12127 words of font info for 45 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,14n,40p,1387b,1588s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,14n,40p,1448b,1588s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmitt10.pfb><C:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmtt10.pfb>
-Output written on Final_Design_Report.pdf (58 pages, 12829410 bytes).
+iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmtt10.pfb>
+Output written on Final_Design_Report.pdf (66 pages, 12827620 bytes).
 PDF statistics:
- 258 PDF objects out of 1000 (max. 8388607)
+ 279 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  121 words of extra memory for PDF output out of 10000 (max. 10000000)
 

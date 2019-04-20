@@ -17,22 +17,22 @@
 \contentsline {subsection}{\numberline {4.2}Assembly Drawings}{17}% 
 \contentsline {section}{\numberline {5}Testing and Validation}{19}% 
 \contentsline {subsection}{\numberline {5.1}Centrally Controlled Sensor Feedback}{19}% 
-\contentsline {subsection}{\numberline {5.2}Voltage Regulation}{19}% 
-\contentsline {subsection}{\numberline {5.3}Single Communication Bus for Fixture Addressing}{19}% 
-\contentsline {subsection}{\numberline {5.4}Visual Status Display}{20}% 
-\contentsline {subsection}{\numberline {5.5}Touchscreen User Interface for Customized Sleep Cycles}{20}% 
-\contentsline {subsection}{\numberline {5.6}Light Compensation Algorithm}{21}% 
-\contentsline {subsubsection}{Loss of Intensity}{21}% 
-\contentsline {subsubsection}{Loss of Color Spectrum Accuracy}{21}% 
-\contentsline {section}{\numberline {6}Manufacturing Methods}{22}% 
-\contentsline {section}{\numberline {7}Broader Impacts of the Project}{22}% 
-\contentsline {section}{\numberline {8}Conclusions}{23}% 
-\contentsline {section}{\numberline {9}References}{24}% 
+\contentsline {subsection}{\numberline {5.2}Alarm System}{19}% 
+\contentsline {subsection}{\numberline {5.3}Voltage Regulation}{20}% 
+\contentsline {subsection}{\numberline {5.4}Single Communication Bus for Fixture Addressing}{20}% 
+\contentsline {subsection}{\numberline {5.5}Visual Status Display}{21}% 
+\contentsline {subsection}{\numberline {5.6}Touchscreen User Interface for Customized Sleep Cycles}{21}% 
+\contentsline {subsection}{\numberline {5.7}Light Compensation Algorithm}{21}% 
+\contentsline {subsubsection}{Loss of Intensity}{22}% 
+\contentsline {subsubsection}{Loss of Color Spectrum Accuracy}{22}% 
+\contentsline {section}{\numberline {6}Manufacturing Methods}{23}% 
+\contentsline {section}{\numberline {7}Broader Impacts of the Project}{23}% 
+\contentsline {section}{\numberline {8}Conclusions}{24}% 
+\contentsline {section}{\numberline {9}References}{25}% 
 \contentsline {section}{\numberline {10}Appendices}{25}% 
 \contentsline {subsection}{\numberline {10.1}Appendix A: Test Protocols}{25}% 
 \contentsline {subsection}{\numberline {10.2}Appendix B: Test Results}{27}% 
 \contentsline {subsubsection}{GUI Control Communication}{27}% 
 \contentsline {subsubsection}{Sensor Communication: Splitting Int for Transmssion}{29}% 
 \contentsline {subsection}{\numberline {10.3}Appendix C: 4Duino Code}{30}% 
-\contentsline {subsection}{\numberline {10.4}Appendix D: Arduino Code}{40}% 
-\contentsline {section}{\numberline {11}Appendix E: Concept Art}{53}% 
+\contentsline {subsection}{\numberline {10.4}Appendix D: Arduino Code}{48}% 

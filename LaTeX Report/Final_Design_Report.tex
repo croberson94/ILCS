@@ -349,7 +349,7 @@ Top housing   & 1d12h           & 4
 
 \section{Testing and Validation}
 % Introduction Section (Requirements)
-The design requirements for the ILCS system that were tested and confirmed as solutions include the automatic light compensation algorithm, centrally controlled sensor feedback, voltage regulation, single communication bus for fixture addressing, visual status display, and touchscreen user interface for customized sleep cycles. \\
+The design requirements for the ILCS system that were tested and confirmed as solutions include the automatic light compensation algorithm, centrally controlled sensor feedback, alarm system, voltage regulation, single communication bus for fixture addressing, visual status display, and touchscreen user interface for customized sleep cycles. \\
 
 % Verification Steps Section (Requirement, Procedure/Protocol, Results)
 
@@ -359,6 +359,12 @@ The design requirements for the ILCS system that were tested and confirmed as so
 Testing of the sensors began with simply connecting a single sensor and reading the values. Our temperature sensors were the easiest to configure due to the Arduino's on-board A/D conversion. Configuring the light sensor's I2C communication involved a little more testing. In the case of the light sensors, the A/D conversion takes place on-board the sensor board itself. \\
 The biggest problem we encountered with the light sensors is that the I2C address comes as a fixed value in the microprocessor. This means that we cannot use multiple sensors on the same bus. For this reason, we had to rely on the "bit banging" library which created separate I2C buses on 2 digital pins that we define. The commands are the called in the code using the separate instances we create in a object oriented fashion.\\
 The final testing we did with the sensor data involved transmitting the values from Arduino to GUI. All of the default I2C communication modules we used only send one byte at a time. Since the data type of our sensor data was INT, we had to split up each value into low order and high order bytes before sending to the master, and then piece them back together after receiving from the slave. This was a achieved by a simple loop statement on the arrays (see Appendix B).
+
+\subsection{Alarm System}
+%% Alarm System
+The alarm system determines any incorrect sensor input in for our system. It will trigger when there is light degradation, or temperature and alert the user for correction. The design was made using the Adafruit FX mini sound board along with an operational amplifier using the LM386 class AB audio amplifier IC to build a simple mono 1W audio amplifier. Both are individually powered by the 5V power supply and the sound board allowed for a simple and dependable way to add audio effects to our project. The audio uses compressed Ogg files or uncompressed WAV files that is easy to install. The sound board has many features, for instances five different trigger effects like looping or latching but all we used it for was basic trigger function. Basic triggering happens as the matching trigger pin is connected to ground, and in return the stored audio file plays. \\
+
+The design was simple but getting the results we wanted was not. We began by copying audio files over to the Sound Board then powered the board by connecting the 5V to Vin and ground to ground. The LM386 amplifier used two 100uF capacitors and one 1000uF capacitor with two 1K Ohm resistors. The issues we ran into was in the output of the amplifier. With a multimeter we determined that 5V were being supplying but the output was lower than that and no sounds was being produced. We concluded that the 5V was too little to supply the amp and it needed more voltage. Rather than having different voltage sources, we decided to select more simplistic alternative with the Texas Instrument TPA2005D1 mono class-D audio amplifier. It can drive an 8 Ohm speaker at up to 1.4W. This device contains a PWM signal clocked at 250kHz which is much higher than the frequencies being encoded at less than 20kHz. Finally, after applying the 5V from the source to the sound board and the amplifier, we connected the audio output R and GND pins of the sound board to the IN positive and negative terminals respectively of the TPA2005D1 amp, and the OUT terminals are connected to the terminals of the 4-Ohm speaker we are using. The results from this device were successful and efficient for the alarm system, we were able to trigger the pin and set the alarm to output the sound we wanted at the specific time of an analog input. \\
 
 %% Voltage Regulation
 \subsection{Voltage Regulation}
@@ -2118,9 +2124,5 @@ void loop() {
 
 }
 \end{lstlisting}  
-
-\section{Appendix E: Concept Art}
-
-
 
 \end{document}
